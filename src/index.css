@@ -1,13 +1,20 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* latin */
+@font-face {
+    font-family: 'Lusitana';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('./assets/fonts/Lusitana-Regular.ttf') format('woff2');
+  }
+  /* latin */
+@font-face {
+    font-family: 'Lusitana';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url('./assets/fonts/Lusitana-Bold.ttf') format('woff2');
 }
