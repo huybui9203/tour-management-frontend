@@ -1,5 +1,171 @@
-.heading {
-    color: orange;
+.headerContainer {
+    display: flex;
+    transition: height 0.3s ease;
+    align-items: center;
+    padding: 0px 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    justify-content: space-around;
+    z-index: 2;
+}
+
+.logo {
+    width: 150px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+.menuButton {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.2rem; /* Sử dụng rem để co giãn linh hoạt */
+    cursor: pointer;
+    position: absolute;
+    margin-right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navLinks {
+    display: flex;
+    gap: 3vw; /* Sử dụng vw để khoảng cách giữa các link co giãn theo chiều rộng màn hình */
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.navLink {
+    text-decoration: none;
+    color: #000;
+    font-size: 1rem; /* Sử dụng rem để co giãn theo kích thước gốc của font chữ */
+    font-family: Arial, Helvetica, sans-serif;
+    flex-shrink: 0;
 }
 
 
+.activeLink {
+    color: #eb2424;
+    font-size: 1rem; /* Sử dụng rem thay vì px */
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.show {
+    display: flex;
+}
+
+.icon {
+    font-size: 2rem; /* Sử dụng rem để co giãn */
+    margin-right: 10px;
+}
+
+.navLinks .navLink:nth-child(2)::after {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+.navLinks .navLink:last-child {
+    background: #f85959;
+    color: white;
+    padding: 0.5rem 20px;
+    border-radius: 25px;
+    flex-shrink: 0;
+}
+
+/* about */
+.navLink:nth-child(2) {
+    position: relative;
+}
+
+.navLink_items {
+    display: none;
+    position: absolute;
+    background: #fff;
+    padding: 5px 0;
+    top: 100%;
+    left: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 2;
+    flex-basis: auto;
+}
+
+.navLink:nth-child(2):hover .navLink_items{
+    display: block;
+}
+
+.navLink_item {
+    padding: 5px 35px 5px 20px 
+}
+
+.navLink_item:hover {
+    background: #e7e5e5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 990px) {
+
+    .headerContainer {
+        display: block;
+    }
+    
+    .logo {
+        width: 120px;
+        margin-left: 20px;
+    }
+
+    .menuButton {
+        display: block;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    .navLinks {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        position: absolute;
+        top: 72px;
+        right: 0;
+        width: 100%; /* Co giãn theo chiều rộng của màn hình */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .navLinks .navLink:first-child, .navLinks .activeLink:first-child { 
+        margin-top: 10px;
+    }
+
+    .navLink, .activeLink {
+        width: 100%;
+        margin: 0px 20px;
+        padding: 0 20px;
+    }
+
+    .navLinks .navLink:last-child {
+        margin: 0px 20px;
+    }
+
+    .show {
+        display: flex;
+    }
+
+    .navLink {
+        font-size: 1.1rem; /* Điều chỉnh kích thước linh hoạt với rem */
+    }
+
+    .navLink_items {
+        display: block;
+        position: relative;
+        width: 100%;
+        box-shadow: none;
+    }
+}

@@ -4,8 +4,8 @@ const Example = () => {
     return (
         <div>
             {/* code html here */}
-            <h1 className="font-bold text-3xl underline">This line use tailwindcss</h1> 
-            <h1 className={styles.example}>This line use css - not tailwind</h1>
+            <h1 className="font-bold text-3xl underline bg-slate-200">This line use tailwindcss</h1> 
+            <h1 className={`${styles.example} ${styles.exam}`}>This line use css - not tailwind</h1>
         </div>
     )
 }
