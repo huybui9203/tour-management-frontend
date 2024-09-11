@@ -42,7 +42,7 @@ const TourItemH = () => {
                     <div className=" md:w-7/12 p-3">
                         <div>
                         <h3 className="line-clamp-2 lg:text-2xl text-xl font-bold">
-                            <a className="">
+                            <a href='#'>
                                 Thái Lan: Bangkok - Pattaya - Một điểm đến thú vị cho mọi du khách Thái Lan: Bangkok - Pattaya - Một điểm đến thú vị cho mọi du khách
                             </a>
                         </h3>
