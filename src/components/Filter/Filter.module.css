@@ -108,3 +108,7 @@ input[type="range"]::-ms-thumb {
   border-radius: 25px;
   cursor: pointer;
 }
+
+.chose_vehicle {
+  margin-bottom: -10px !important;
+}

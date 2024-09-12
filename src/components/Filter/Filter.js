@@ -84,7 +84,7 @@ const Filter = () => {
                                 </div>
                                 <div className="form-group">
                                     <div className="relative">
-                                        <select className="w-full px-4 py-2 border border-gray-300 rounded bg-white outline-none">
+                                        <select className="form-control border border-gray-300 rounded block outline-none w-full p-2.5 text-black">
                                             <option value="">Chọn địa điểm</option>
                                             <option value="">San Francisco USA</option>
                                             <option value="">Berlin Germany</option>
@@ -101,7 +101,8 @@ const Filter = () => {
                                     <input type="date" name="arrival" className="w-full px-4 py-2 border border-gray-300 rounded outline-none"
                                         placeholder="Ngày đến" data-toggle="datepicker"/>
                                 </div>
-                                <div className="form-group flex space-x-4">
+                                <div className="!mt-3"><label >Chọn phương tiện</label></div>
+                                <div className="form-group flex space-x-4 !mt-2">
                                     <div className="flex items-center space-x-2">
                                         <input type="radio" id="radio01" name="radio" className="form-radio h-4 w-4 text-blue-600 outline-none"/>
                                         <label htmlFor="radio01" className="ml-2">Xe bus</label>
@@ -114,7 +115,7 @@ const Filter = () => {
                                 <div className="form-group range-slider" ref={rangeRef}>
                                     <div className="flex space-x-2">
                                         <input id="minValueInput" type="number" value={minValue} min="0" max="20000000" readOnly
-                                            className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-4 py-1 rounded outline-none" style={{ backgroundColor: "#f8faff" }}/> - 
+                                            className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-0 py-1 rounded outline-none" style={{ backgroundColor: "#f8faff" }}/> - 
                                         <input id="maxValueInput" type="number" value={maxValue} min="0" max="20000000" readOnly
                                             className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-4 py-1 rounded outline-none" style={{ backgroundColor: "#f8faff" }}/>
                                     </div>
@@ -126,7 +127,7 @@ const Filter = () => {
                                             min="0"
                                             max="20000000"
                                             step="500000"
-                                            className="w-full h-2 bg-blue-300 rounded outline-none absolute top-0 left-0"
+                                            className="w-full h-2 bg-blue-300 rounded outline-none absolute ml-0 top-0 left-0"
                                         />
                                         <input
                                             id="maxRange"
