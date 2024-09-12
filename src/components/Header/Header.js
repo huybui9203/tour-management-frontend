@@ -31,7 +31,7 @@ const Header = () => {
                 <NavLink to={'/restaurant'} className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}>Hotels</NavLink>
                 <NavLink to={'/login'} className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}>Blogs</NavLink>
                 <NavLink to={'/register'} className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}>Contact</NavLink>
-                <NavLink to={'/register'} className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}><span>Add listing</span></NavLink>
+                
             </div>
         </div>
     );
