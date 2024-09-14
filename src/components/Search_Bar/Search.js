@@ -11,9 +11,9 @@ const SearchBar = () => {
     return (
     <div className="">
       <div className="pb-0 container mx-auto">
-        <div className="mx-auto md:max-w-4xl sm:max-w-md w-10/12">
+        <div className="">
           <form className="w-full md:flex md:space-x-2 mb-2" action='#' method="GET">
-          <div className="md:w-1/4 relative  mt-1">
+          <div className="md:w-1/4 w-[172px] relative  mt-1">
             <input className="w-full h-16 py-3 px-6 pr-12 border border-gray-300" name="tour-search" type="text" placeholder="Keywords"value={inputValue}
         onChange={handleInputChange}/>
                 <div className="absolute inset-y-0 right-0 pr-3 flex items-center ">

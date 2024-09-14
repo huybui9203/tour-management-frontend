@@ -4,11 +4,13 @@ import { PiMapPinAreaLight } from "react-icons/pi";
 import { GiAlarmClock } from "react-icons/gi";
 import { PiAirplaneTakeoffLight } from "react-icons/pi";
 import { LuCalendarDays } from "react-icons/lu";
+import { useNavigate } from 'react-router-dom';
 
 const TourItemH = () => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [maxScroll, setMaxScroll] = useState(0);
     const carouselInnerRef = useRef(null);
+    const navigate = useNavigate()
 
     // Thiết lập chiều rộng tối đa để dịch chuyển dựa trên tổng số item
     useEffect(() => {
@@ -29,10 +31,10 @@ const TourItemH = () => {
 
     return (
         <div>
-            <div className="md:flex w-5/6 mx-auto">
-                <div className="md:w-1/3"> left</div>
-                <div className="md:w-2/3 md:flex   border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                    <div className="md:w-5/12 h-44 md:h-full flex items-center  ">
+            <div className="flex py-4">
+                {/* <div className="md:w-1/3"> left</div> */}
+                <div className="flex border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <div className="md:w-5/12 h-44 md:h-full flex items-center">
                         <img 
                             src="https://media.travel.com.vn/Destination/tf_220325053535_471620.jpg" 
                             className="w-full h-full  "
@@ -111,7 +113,7 @@ const TourItemH = () => {
                                 Giá từ: <span className="ml-1  text-2xl lg:text-2xl md:text-xl font-bold text-red-600">6,990,000 đ</span>
                             </div>
                             <div className="my-3 md:my-6">
-                                <button className="bg-red-500 text-white px-4 py-2  md:px-2 md:py-1  rounded hover:bg-red-600 lg:text-base md:text-sm">
+                                <button className="bg-red-500 text-white px-4 py-2  md:px-2 md:py-1  rounded hover:bg-red-600 lg:text-base md:text-sm" onClick={() => navigate('/tour/example')}>
                                     Xem chi tiết 
                                 </button>
                             </div>

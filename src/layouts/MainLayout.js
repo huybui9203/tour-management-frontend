@@ -5,9 +5,9 @@ import AuthGuard from "../components/Guard/AuthGuard"
 
 const MainLayout = () => {
     return (
-        <div>
+        <div className="">
             <Header/>
-            <div className="main">
+            <div className="main flex justify-center mt-[68px]">
                 <AuthGuard>
                     <Outlet />
                 </AuthGuard>

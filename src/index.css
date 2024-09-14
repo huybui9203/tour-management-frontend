@@ -18,3 +18,10 @@
     font-display: swap;
     src: url('./assets/fonts/Lusitana-Bold.ttf') format('woff2');
 }
+
+input,
+select,
+button {
+  outline: none;
+
+}

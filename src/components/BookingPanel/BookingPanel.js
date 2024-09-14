@@ -10,7 +10,6 @@ const BookingPanel = () => {
         <div className="md:w-11/12  mx-auto md:flex ">
             {/* Phần bên trái */}
             <div className="md:w-2/3 border border-red-500 ">
-                Left
                 <div className='h-96'>1</div>
                 <div className='h-96'>1</div>
                 <div className='h-96'>1</div>
