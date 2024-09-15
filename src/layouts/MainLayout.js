@@ -1,20 +1,22 @@
-import { Outlet } from "react-router-dom"
-import Footer from "../components/Footer/Footer"
-import Header from "../components/Header/Header"
-import AuthGuard from "../components/Guard/AuthGuard"
+import { Outlet } from "react-router-dom";
+import Footer from "../components/Footer/Footer";
+import Header from "../components/Header/Header";
+import AuthGuard from "../components/Guard/AuthGuard";
 
 const MainLayout = () => {
     return (
-        <div className="">
-            <Header/>
-            <div className="main flex justify-center mt-[68px]">
+        <div>
+            <Header />
+            <div className="main">
                 <AuthGuard>
-                    <Outlet />
+                    <main className="md:px-10 xl:px-24 px-8 pt-6 pb-16">
+                        <Outlet />
+                    </main>
                 </AuthGuard>
             </div>
-            <Footer/>
+            <Footer />
         </div>
-    )
-}
+    );
+};
 
-export default MainLayout
+export default MainLayout;
