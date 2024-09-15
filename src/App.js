@@ -8,6 +8,8 @@ import TourDetail from "./pages/Tour/TourDetail";
 import Booking from "./pages/Booking/Booking";
 import AuthGuard from "./components/Guard/AuthGuard";
 import HomeLayout from "./layouts/HomeLayout";
+import Dashboard from "./pages/Admin/Dashboard";
+import DashboardLayout from "./layouts/DashboardLayout";
 function App() {
     return (
         <BrowserRouter>
@@ -25,7 +27,11 @@ function App() {
                         </AuthGuard>
                     } />
                 </Route>
-
+                <Route path="/" element={<DashboardLayout/>}>
+                    <Route path="/dashboard" element={<Dashboard />}></Route>
+                    <Route path="/bookings" element={<h1>Table booking</h1>}></Route>
+                    <Route path="/accounts" element={<h1>Table account</h1>}></Route>
+                </Route>
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<h1>Register Page</h1>} /> 
                 <Route path="/*" element={<NotFound />} />

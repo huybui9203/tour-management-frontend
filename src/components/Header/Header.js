@@ -39,6 +39,7 @@ const Header = () => {
                     >
                         Điểm đến
                     </NavLink>
+                    <a href="/dashboard">Admin</a>
                     <NavLink
                         to={"/login"}
                         className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}
