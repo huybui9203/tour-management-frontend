@@ -9,19 +9,8 @@ const BookingPanel = () => {
 
     const navigate = useNavigate()
     return (
-        <div className="md:flex ">
-            {/* Phần bên trái */}
-            <div className="md:w-2/3 border border-red-500 ">
-                <div className='h-96'>1</div>
-                <div className='h-96'>1</div>
-                <div className='h-96'>1</div>
-                <div className='h-96'>1</div>
-                <div className='h-96'>1</div>
-                <div className='h-96'>1</div>
-                <div className='h-96'>1</div>
-            </div>
-            
-            {/* Phần bên phải */}
+       
+           
             <div className="w-full max-w-[350px] mx-auto md:max-w-none md:w-1/3 flex flex-col sticky right-0 top-20 self-start ">
 
 
@@ -64,7 +53,6 @@ const BookingPanel = () => {
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 

@@ -58,7 +58,7 @@ const Slider = () => {
     };
 
     return (
-        <div id="controls-carousel" className="relative w-1/2 mx-auto" data-carousel="static">
+        <div id="controls-carousel" className="relative w-full" data-carousel="static">
             <div
                 className="relative h-96 overflow-hidden"
                 style={{ height: '600px' }}

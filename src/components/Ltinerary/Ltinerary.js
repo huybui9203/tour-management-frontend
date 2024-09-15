@@ -35,7 +35,7 @@ const Ltinerary = () => {
     };
 
     return (
-        <div className="p-10">
+        <div className="">
             {data.map((item) => (
                 <div key={item.id} className="cursor-pointer mb-1">
                     <h4
