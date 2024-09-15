@@ -73,7 +73,7 @@ const Filter = () => {
     return (
         <div className="container mx-auto max-w-screen-xl">
             <div className="flex flex-wrap">
-                <div className="lg:w-1/4 sm:w-full w-full w-screen-full p-4 animate-fadeIn">
+                <div className="w-full w-screen-full py-4 animate-fadeIn">
                     <div className="bg-white rounded p-6 animate-fadeIn border" style={{ backgroundColor: "#f8faff" }}>
                         <h3 className="text-xl font-semibold mb-4">BỘ LỌC TÌM KIẾM</h3>
                         <form action="#">

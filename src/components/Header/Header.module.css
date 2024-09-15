@@ -5,14 +5,17 @@
     padding: 0px 20px;
     background-color: #fff;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    justify-content: space-around;
+    height: 68px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    justify-content: center;
     z-index: 2;
 }
 
 .logo {
     width: 150px;
-    height: 70px;
+    /* height: 70px; */
     flex-shrink: 0;
 }
 
@@ -60,7 +63,7 @@
 }
 
 .navLinks .navLink:nth-child(2)::after {
-    display: inline-block;
+    /* display: inline-block;
     width: 0;
     height: 0;
     margin-left: 0.255em;
@@ -69,7 +72,7 @@
     border-top: 0.3em solid;
     border-right: 0.3em solid transparent;
     border-bottom: 0;
-    border-left: 0.3em solid transparent;
+    border-left: 0.3em solid transparent; */
 }
 
 .navLinks .navLink:last-child {
@@ -114,7 +117,8 @@
 @media (max-width: 990px) {
 
     .headerContainer {
-        display: block;
+        display: flex;
+        align-items: center;
     }
     
     .logo {

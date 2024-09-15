@@ -2,19 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body,
+#root,
+.app {
+    height: 100%;
+    width: 100%;
+}
+
 /* latin */
 @font-face {
-    font-family: 'Lusitana';
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('./assets/fonts/Lusitana-Regular.ttf') format('woff2');
-  }
-  /* latin */
+    src: url("./assets/fonts/OpenSans-Regular.ttf") format("woff2");
+}
+/* latin */
 @font-face {
-    font-family: 'Lusitana';
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 300;
+    font-display: swap;
+    src: url("./assets/fonts/OpenSans-Light.ttf") format("woff2");
+}
+@font-face {
+    font-family: "Open Sans";
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url('./assets/fonts/Lusitana-Bold.ttf') format('woff2');
+    src: url("./assets/fonts/OpenSans-Bold.ttf") format("woff2");
+}
+
+@font-face {
+    font-family: "Open Sans";
+    font-style: normal;
+    font-weight: 600;
+    font-display: swap;
+    src: url("./assets/fonts/OpenSans-SemiBold.ttf") format("woff2");
+}
+
+input,
+select,
+button {
+    outline: none;
+}
+.no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
 }
