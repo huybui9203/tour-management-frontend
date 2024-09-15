@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 import logo from "../../assets/images/logo-primary.png";
 import { FaBeer } from "react-icons/fa";
@@ -14,7 +14,7 @@ const Header = () => {
     return (
         <div className={styles.headerContainer}>
             <div className="flex justify-between items-center w-[1156px]">
-                <img className={styles.logo} src={logo} alt="logo" />
+                <Link to={'/'}><img className={styles.logo} src={logo} alt="logo"/></Link>
                 <button className={styles.menuButton} onClick={toggleMenu}>
                     Menu
                 </button>

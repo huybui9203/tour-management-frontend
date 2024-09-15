@@ -3,16 +3,17 @@ import { FaArrowLeftLong, FaCircleUser, FaRightLong } from "react-icons/fa6";
 import FormIcon from "./svg/FormIcon";
 import PayIcon from "./svg/PayIcon";
 import ConfirmIcon from "./svg/ConfirmIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import FormBooking from "./components/FormBooking";
 import BookingSummary from "./components/BookingSummary";
 
 function Booking() {
+    const navigate = useNavigate()
     return (
         <div>
             <div className="flex justify-start items-center gap-2">
                 <FaArrowLeftLong />
-                <h3>Quay lại</h3>
+                <h3 className="cursor-pointer py-4" onClick={() => navigate(-1)}>Quay lại</h3>
             </div>
 
             <h1 className="font-bold text-center text-2xl uppercase text-blue-800 py-5">Đặt tour</h1>

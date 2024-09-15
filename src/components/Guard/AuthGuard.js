@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom"
 
 const AuthGuard = ({children}) => {
-    const isAuthenticated = 1
+    const isAuthenticated = 0
     if(!isAuthenticated) {
         return <Navigate to={'/login'} replace />
     } 

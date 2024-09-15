@@ -6,7 +6,7 @@ import Pagination from "../../components/Pagination/Pagination"
 
 const Tour = () => {
     return (
-        <div className="w-[1156px] flex gap-4">
+        <div className="flex gap-4">
             <div className="w-1/4">
                     <Filter />
             </div>

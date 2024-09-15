@@ -7,12 +7,12 @@ const MainLayout = () => {
     return (
         <div>
             <Header />
-            <div className="main">
-                <AuthGuard>
-                    <main className="md:px-10 xl:px-24 px-8 pt-6 pb-16">
+            <div className="main flex justify-center mt-[68px]">
+                {/* <AuthGuard> */}
+                    <main className="w-[1156px] max-w-full max-xl:px-16 max-md:px-8 max-sm:px-2">
                         <Outlet />
                     </main>
-                </AuthGuard>
+                {/* </AuthGuard> */}
             </div>
             <Footer />
         </div>

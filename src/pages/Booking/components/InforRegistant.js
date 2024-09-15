@@ -133,7 +133,7 @@ function InforRegistant({ age }) {
                     </div>
 
                     {age === "ADULT" && (
-                        <div className="text-center">
+                        <div className="text-center md:text-left sm:text-left">
                             <h1 className="font-bold text-sm">Phòng đơn</h1>
                             <label className="relative inline-block w-10 h-5 cursor-pointer">
                                 <input

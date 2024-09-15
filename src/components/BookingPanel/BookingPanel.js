@@ -3,11 +3,13 @@ import { PiMapPinAreaLight } from "react-icons/pi";
 import { FaRegClock } from "react-icons/fa";
 import { FiUsers } from "react-icons/fi";
 import { LuCalendarDays } from "react-icons/lu";
+import { useNavigate } from 'react-router-dom';
 
 const BookingPanel = () => {
 
+    const navigate = useNavigate()
     return (
-        <div className="md:w-11/12  mx-auto md:flex ">
+        <div className="md:flex ">
             {/* Phần bên trái */}
             <div className="md:w-2/3 border border-red-500 ">
                 <div className='h-96'>1</div>
@@ -20,7 +22,7 @@ const BookingPanel = () => {
             </div>
             
             {/* Phần bên phải */}
-            <div className="w-full max-w-[350px] mx-auto md:max-w-none md:w-1/3 flex flex-col p-4 sticky right-0 top-20 self-start ">
+            <div className="w-full max-w-[350px] mx-auto md:max-w-none md:w-1/3 flex flex-col sticky right-0 top-20 self-start ">
 
 
                 <div className="animate-slideInUp shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 rounded-lg">
@@ -57,8 +59,8 @@ const BookingPanel = () => {
                     </div>
 
                     <div className="flex space-x-4 mt-6">
-                        <button className="bg-white border  sm:text-base text-sm border-red-500 text-red-500 sm:rounded-lg rounded-md px-2 py-1 sm:px-4 sm:py-2 w-1/3" type="button" aria-label="Ngày khác">Ngày khác</button>
-                        <button className="bg-red-500  sm:text-base text-sm text-white sm:rounded-lg rounded-md hover:bg-red-600  px-2 py-1 sm:px-4 sm:py-2 w-2/3" type="button" aria-label="Đặt tour">Đặt tour</button>
+                        <button className="bg-white border  sm:text-base text-sm border-red-500 text-red-500 sm:rounded-lg rounded-md px-2 py-1 sm:px-4 sm:py-2" type="button" aria-label="Ngày khác">Ngày khác</button>
+                        <button onClick={() => navigate('/booking/example')} className="bg-red-500  sm:text-base text-sm text-white sm:rounded-lg rounded-md hover:bg-red-600  px-2 py-1 sm:px-4 sm:py-2" type="button" aria-label="Đặt tour">Đặt tour</button>
                     </div>
                 </div>
             </div>
