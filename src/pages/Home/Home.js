@@ -5,15 +5,12 @@ import SearchBar from "../../components/Search_Bar/Search";
 import TourItemH from "../../components/TourItem/TourItemHorizonal";
 import Pagination from "../../components/Pagination/Pagination";
 import banner from "../../assets/images/bgtravel.jpg";
+import AccountsTable from "../../components/Table/AccountTable";
 
 const Home = () => {
     return (
         <div>
-            <div className="grid grid-cols-3 gap-4">
-                <TourItemH />
-                <TourItemH />
-                <TourItemH />
-            </div>
+            <AccountsTable/>
         </div>
     );
 };
