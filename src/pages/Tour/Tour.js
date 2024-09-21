@@ -2,6 +2,7 @@
 import TourItemH from "../../components/TourItem/TourItemHorizonal"
 import Filter from "../../components/Filter/Filter"
 import Pagination from "../../components/Pagination/Pagination"
+import Sort from "../../components/Filter/Sort"
 
 
 const Tour = () => {
@@ -11,7 +12,7 @@ const Tour = () => {
                     <Filter />
             </div>
             <div className="w-3/4">
-                <div className="bg-orange-400 mt-4">filter here</div>
+                <Sort/>
                 <div>
                     <TourItemH />
                     <TourItemH />

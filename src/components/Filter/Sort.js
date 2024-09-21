@@ -1,0 +1,23 @@
+import { FaChevronDown} from "react-icons/fa";
+const Sort = () => {
+
+    return (
+        <div class="flex items-center justify-end  py-3  ">
+        <span class="mr-2">Sắp xếp theo:</span>
+        <div class="relative ">
+            <select className="w-full rounded py-2 pr-10 pl-4 border border-gray-300 appearance-none " >
+                <option value="all">Tất cả</option>
+                <option value="asc_price">Giá tăng dần</option>
+                <option value="desc_price">Giá giảm dần</option>
+                <option value="latest">Ngày khởi hành gần nhất</option>
+            </select>
+          <div className="absolute inset-y-0 right-0 pr-3 flex items-center ">
+           <FaChevronDown className="h-5 w-5 text-gray-400" />
+        </div>
+           
+        </div>
+    </div>
+    );
+} ;
+
+export default Sort
