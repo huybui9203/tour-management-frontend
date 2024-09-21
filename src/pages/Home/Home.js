@@ -6,6 +6,7 @@ import TourItemH from "../../components/TourItem/TourItemHorizonal";
 import Pagination from "../../components/Pagination/Pagination";
 import banner from "../../assets/images/bgtravel.jpg";
 import AccountsTable from "../../components/Table/AccountTable";
+import Modal from "../../components/Modal/Modal";
 
 const Home = () => {
     return (
@@ -51,6 +52,7 @@ const Home = () => {
 
             <div>
                 <AccountsTable />
+                <Modal/>
             </div>
         </>
     );
