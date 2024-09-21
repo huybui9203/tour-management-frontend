@@ -44,7 +44,7 @@ const Header = () => {
                         to={"/login"}
                         className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}
                     >
-                        Log in
+                        Đăng nhập
                     </NavLink>
                 </div>
             </div>
