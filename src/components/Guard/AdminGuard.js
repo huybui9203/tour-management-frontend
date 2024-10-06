@@ -1,14 +1,14 @@
 import { useContext } from "react"
-import { Navigate } from "react-router-dom"
 import { AuthContext } from "../../context/Auth"
+import { Navigate } from "react-router-dom"
 import { ROLES } from "../../utils/constants"
 
-const AuthGuard = ({children}) => {
+const AdminGuard = ({children}) => {
     const {user} = useContext(AuthContext)
     if(user?.role === ROLES.ADMIN) {
-        return <Navigate to={'/login'} replace />
-    } 
-    return <>{children}</>
+        return <>{children}</>
+    }
+    return <Navigate to='/'/>
 }
 
-export default AuthGuard
+export default AdminGuard

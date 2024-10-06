@@ -12,6 +12,8 @@ import Dashboard from "./pages/Admin/Dashboard";
 import DashboardLayout from "./layouts/DashboardLayout";
 import LoginPage from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
+import BookingAdmin from "./pages/Admin/Booking/Booking";
+import Account from "./pages/Admin/Account";
 function App() {
     return (
         <BrowserRouter>
@@ -32,10 +34,10 @@ function App() {
                         }
                     />
                 </Route>
-                <Route path="/" element={<DashboardLayout />}>
-                    <Route path="/dashboard" element={<Dashboard />}></Route>
-                    <Route path="/bookings" element={<h1>Table booking</h1>}></Route>
-                    <Route path="/accounts" element={<h1>Table account</h1>}></Route>
+                <Route path="/admin/" element={<DashboardLayout />}>
+                    <Route path="dashboard" element={<Dashboard />}></Route>
+                    <Route path="bookings" element={<BookingAdmin />}></Route>
+                    <Route path="accounts" element={<Account />}></Route>
                 </Route>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<Signup />} />
