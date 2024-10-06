@@ -6,7 +6,7 @@ import { FaBeer } from "react-icons/fa";
 import { AuthContext } from "../../context/Auth";
 import avtTest from "../../assets/images/bg_1.jpg";
 import { ROLES } from "../../utils/constants";
-
+import { MdMenu } from "react-icons/md";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,16 +24,17 @@ const Header = () => {
           <img className={styles.logo} src={logo} alt="logo" />
         </Link>
         <button className={styles.menuButton} onClick={toggleMenu}>
-          Menu
+          <MdMenu className="md:text-3xl text-2xl"/>
         </button>
         <div className={`${styles.navLinks} ${isOpen ? styles.show : ""}`}>
           <NavLink
             to={"/"}
             className={({ isActive }) =>
-              isActive ? styles.activeLink : styles.navLink
-            }
+              `${isActive ? `${styles.activeLink}` : `${styles.navLink} hover:text-red-500`}`
+            } 
+            
           >
-            Home
+            Trang chủ
           </NavLink>
           {/* <NavLink to={'/tour'} className={({ isActive }) => (isActive ? styles.activeLink : styles.navLink)}> */}
           {/* About
@@ -46,7 +47,7 @@ const Header = () => {
           <NavLink
             to={"/tour"}
             className={({ isActive }) =>
-              isActive ? styles.activeLink : styles.navLink
+               `${isActive ? `${styles.activeLink}` : `${styles.navLink} hover:text-red-500`}`
             }
           >
             Tour
@@ -54,7 +55,7 @@ const Header = () => {
           <NavLink
             to={"/destinations"}
             className={({ isActive }) =>
-              isActive ? styles.activeLink : styles.navLink
+                `${isActive ? `${styles.activeLink}` : `${styles.navLink} hover:text-red-500`}`
             }
           >
             Điểm đến

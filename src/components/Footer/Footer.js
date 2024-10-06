@@ -60,8 +60,8 @@ const Footer = () => {
               </div>
             </div>
           </div>
-          <div className="text-center  text-gray-400">
-            <p className='items-center'>
+          <div className="md:text-center  text-gray-400">
+            <p className='md:items-center'>
               &copy; All rights reserved | This template is made with <FaHeart  className='inline items-center text-red-500 mb-2'/> by <a>UTC</a>
             </p>
           </div>
