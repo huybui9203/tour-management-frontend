@@ -252,7 +252,7 @@ export default function Information() {
                 const isAvailable = availableDays.includes(day.toString());
 
                 return (
-                  <div
+                    <div
                     className={`flex flex-col items-center p-2 border rounded transition ${
                       isPast
                         ? 'bg-gray-300 text-gray-600 cursor-default'
@@ -261,22 +261,19 @@ export default function Information() {
                         : 'bg-gray-200 cursor-default'
                     }`}
                     key={day}
+                    onClick={() => !isPast && isAvailable && setSelectedDay(day)} // Di chuyển logic onClick ra ngoài
+                    style={{ cursor: isPast || !isAvailable ? 'default' : 'pointer' }} // Thay đổi con trỏ nếu không khả dụng
                   >
-                    <button
-                      className={`w-full py-2 text-lg font-semibold text-center ${
-                        isPast || !isAvailable ? 'cursor-default' : ''
-                      }`}
-                      onClick={() => !isPast && isAvailable && setSelectedDay(day)}
-                      disabled={isPast || !isAvailable}
-                    >
+                    <div className="w-full py-2 text-lg font-semibold text-center">
                       {day}
-                    </button>
+                    </div>
                     {isAvailable && (
                       <span className="text-sm text-red-600 mt-1">
                         {travelInfo[day].price.adult} {/* Hiển thị giá cho người lớn */}
                       </span>
                     )}
                   </div>
+                  
                 );
               })}
             </div>
