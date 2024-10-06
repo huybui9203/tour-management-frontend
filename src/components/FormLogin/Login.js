@@ -2,15 +2,18 @@ import { FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import GoogleAuth from "../GoogleAuth/GoogleAuth";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import FacebookAuth from "../FacebookAuth/FacebookAuth";
+import { AuthContext } from "../../context/Auth";
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+
+  const { setUser } = useContext(AuthContext);
 
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -54,15 +57,17 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/auth/login",
+        process.env.REACT_APP_URL + "/auth/login",
         formData,
         {
           withCredentials: true,
         }
       );
+
       if (res.status !== 200) {
         console.log(res.message);
       }
+      setUser(res.data);
       navigate("/");
     } catch (error) {
       console.log(error);

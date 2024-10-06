@@ -13,13 +13,13 @@ const StarRatingOption = ({ id, starsFilled, totalStars = 5 }) => {
                         {Array(starsFilled)
                             .fill()
                             .map((_, index) => (
-                                <FaStar key={index} className="text-red-500 mx-2" />
+                                <FaStar key={index} className="text-red-500 mx-1" />
                             ))}
                         {/* Hiển thị số ngôi sao rỗng */}
                         {Array(totalStars - starsFilled)
                             .fill()
                             .map((_, index) => (
-                                <FaRegStar key={index} className="text-red-500 mx-2" />
+                                <FaRegStar key={index} className="text-red-500 mx-1" />
                             ))}
                     </span>
                 </p>
@@ -69,7 +69,7 @@ const Filter = () => {
     }, []);
 
     return (
-        <div className="container mx-auto max-w-screen-xl">
+        <div className="container mx-auto ">
             <div className="flex flex-wrap">
                 <div className="w-full w-screen-full py-4 animate-fadeIn">
                     <div className="bg-white rounded p-6 animate-fadeIn border" style={{ backgroundColor: "#f8faff" }}>
@@ -196,11 +196,11 @@ const Filter = () => {
                     </div>
 
                     <div
-                        className="sidebar-wrap bg-gray-100 p-6 animate__animated animate__fadeIn border"
+                        className="sidebar-wrap bg-gray-100 p-6 animate__animated animate__fadeIn border hidden md:block"
                         style={{ backgroundColor: "#f8faff" }}
                     >
                         <h3 className="text-lg font-semibold mb-4">Star Rating</h3>
-                        <form method="post" className="space-y-2 form-group">
+                        <form method="post" className="space-y-1 md:space-y-2 form-group">
                             <StarRatingOption id="star1" starsFilled={5} />
                             <StarRatingOption id="star2" starsFilled={4} />
                             <StarRatingOption id="star3" starsFilled={3} />

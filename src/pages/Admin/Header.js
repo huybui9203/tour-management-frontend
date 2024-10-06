@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
+import logo from '../../assets/images/logo-primary.png'
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -24,34 +25,34 @@ const Header = () => {
 
     return (
         <div>
-            <nav className="bg-gray-800">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <nav className="bg-blue-800">
+                <div className="mx-auto max-w-full w-[1156px]">
                     <div className="flex h-16 items-center justify-between">
                         <div className="flex items-center">
-                            <div className="flex-shrink-0">
+                            <div>
                                 <img
-                                    className="h-8 w-8"
-                                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                    className=""
+                                    src={logo}
                                     alt="Your Company"
                                 />
                             </div>
                             <div className="hidden md:block">
                                 <div className="ml-10 flex items-baseline space-x-4">
-                                    <NavLink to="/dashboard" className={({ isActive }) =>
+                                    <NavLink to="/admin/dashboard" className={({ isActive }) =>
                                         isActive
                                             ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                                             : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                                     }>
                                         Dashboard
                                     </NavLink>
-                                    <NavLink to="/bookings" className={({ isActive }) =>
+                                    <NavLink to="/admin/bookings" className={({ isActive }) =>
                                         isActive
                                             ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                                             : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                                     }>
-                                        Bookings
+                                        Booking
                                     </NavLink>
-                                    <NavLink to="/accounts" className={({ isActive }) =>
+                                    <NavLink to="/admin/accounts" className={({ isActive }) =>
                                         isActive
                                             ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                                             : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
@@ -92,8 +93,8 @@ const Header = () => {
                 </div>
             </nav>
             <header className="bg-white shadow">
-                <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
+                <div className="mx-auto max-w-full w-[1156px] py-6">
+                    <h1 className="text-3xl font-bold tracking-tight text-gray-900">Xin chào Admin!</h1>
                 </div>
             </header>
         </div>

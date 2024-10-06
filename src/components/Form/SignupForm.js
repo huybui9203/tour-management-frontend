@@ -34,7 +34,6 @@ const SignupForm = () => {
 
   const handleSubmitSignup = async (e) => {
     e.preventDefault();
-
     const newErrors = {};
     if (!formData.email) {
       newErrors.email = "Email không được để trống.";
@@ -54,16 +53,16 @@ const SignupForm = () => {
 
     setErrors(newErrors);
 
+    // Nếu có lỗi, không gửi form
     if (Object.keys(newErrors).length > 0) {
       return;
     }
 
     try {
-      const res = await axios.post("http://localhost:8000/api/auth/signup", {
-        ...formData,
-        list_id: 1,
-        ele_id: 1,
-      });
+      const res = await axios.post(
+        process.env.REACT_APP_URL + "/auth/signup",
+        formData
+      );
       if (res.status !== 200) {
         console.log(res.message);
       }
