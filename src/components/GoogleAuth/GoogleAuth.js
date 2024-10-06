@@ -31,7 +31,7 @@ function GoogleAuth() {
             <img
                 src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png"
                 alt="Google"
-                className="w-8 h-8 p-0 rounded-full"
+                className="w-10 h-10 p-0 rounded-full"
             />
         </div>
     );
