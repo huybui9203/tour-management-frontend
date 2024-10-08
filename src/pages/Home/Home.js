@@ -13,37 +13,37 @@ const Home = () => {
             <div className="grid grid-cols-3 grid-rows-5 md:grid-cols-5 md:grid-rows-4 gap-3 w-full mt-5 h-screen">
                 <div className="col-span-2 row-span-2 rounded-md overflow-hidden">
                     <img
-                        src="https://media.travel.com.vn/destination/dg_240726_'Eiffel%20Tower.jpg"
+                        src="https://media.travel.com.vn/Tour/tfd_240723062121_604898_LANG%20HO%20CHU%20TICH.jpg"
                         className="h-full w-full object-cover"
                     />
                 </div>
                 <div className="rounded-md overflow-hidden">
                     <img
-                        src="https://media.travel.com.vn/destination/dg_240726_'Eiffel%20Tower.jpg"
+                        src="https://media.travel.com.vn/Tour/tfd_240723062121_604898_LANG%20HO%20CHU%20TICH.jpg"
                         className="h-full w-full object-cover"
                     />
                 </div>
                 <div className="md:col-span-2 rounded-md overflow-hidden">
                     <img
-                        src="https://media.travel.com.vn/destination/dg_240726_'Eiffel%20Tower.jpg"
+                        src="https://media.travel.com.vn/Tour/tfd_240723062121_604898_LANG%20HO%20CHU%20TICH.jpg"
                         className="h-full w-full object-cover"
                     />
                 </div>
                 <div className="col-span-2 rounded-md overflow-hidden">
                     <img
-                        src="https://media.travel.com.vn/destination/dg_240726_'Eiffel%20Tower.jpg"
+                        src="https://media.travel.com.vn/Tour/tfd_240723062121_604898_LANG%20HO%20CHU%20TICH.jpg"
                         className="h-full w-full object-cover"
                     />
                 </div>
                 <div className="rounded-md overflow-hidden">
                     <img
-                        src="https://media.travel.com.vn/destination/dg_240726_'Eiffel%20Tower.jpg"
+                        src="https://media.travel.com.vn/Tour/tfd_240723062121_604898_LANG%20HO%20CHU%20TICH.jpg"
                         className="h-full w-full object-cover"
                     />
                 </div>
                 <div className="col-span-3 md:col-span-5 row-span-2 rounded-md overflow-hidden">
                     <img
-                        src="https://media.travel.com.vn/destination/dg_240726_'Eiffel%20Tower.jpg"
+                        src="https://media.travel.com.vn/Tour/tfd_240723062121_604898_LANG%20HO%20CHU%20TICH.jpg"
                         className="h-full w-full object-cover"
                     />
                 </div>
