@@ -12,7 +12,7 @@ const HomeLayout = () => {
             <div className="main flex flex-col items-center mt-[68px]">
                 <div className="relative">
                     <img src={banner} alt="banner" />
-                    <div className="absolute bottom-16 left-2/4 translate-x-[-50%]">
+                    <div className=" sm:absolute bottom-16 left-2/4 sm:translate-x-[-50%] translate-x-[0]  sm:w-4/5 xl:w-auto w-full">
                         <SearchBar />
                     </div>
                 </div>

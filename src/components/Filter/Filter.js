@@ -199,7 +199,7 @@ const Filter = () => {
                         className="sidebar-wrap bg-gray-100 p-6 animate__animated animate__fadeIn border hidden md:block"
                         style={{ backgroundColor: "#f8faff" }}
                     >
-                        <h3 className="text-lg font-semibold mb-4">Star Rating</h3>
+                        <h3 className="text-lg font-semibold mb-4">Đánh giá</h3>
                         <form method="post" className="space-y-1 md:space-y-2 form-group">
                             <StarRatingOption id="star1" starsFilled={5} />
                             <StarRatingOption id="star2" starsFilled={4} />

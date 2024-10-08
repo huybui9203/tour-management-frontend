@@ -20,7 +20,7 @@ const Tour = () => {
         <div className="sm:container relative">
             <Sort /> 
             {showFilter && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden" onClick={handleOverlayClick}></div>
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-20 lg:hidden" onClick={handleOverlayClick}></div>
             )}
             <div className="md:flex gap-4">
                 {showFilter && (
@@ -28,7 +28,7 @@ const Tour = () => {
                         <Filter />
                     </div>
                 )}
-                <div className="md:w-3/4">
+                <div className="lg:w-3/4 md:w-full">
                     <div>
                         <TourItemH />
                         <TourItemH />
