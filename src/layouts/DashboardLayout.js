@@ -10,7 +10,7 @@ const DashboardLayout = () => {
             <Header />
             <div className="main flex justify-center bg-[#f8f8f8]">
                 <AdminGuard>
-                    <main className="w-[1156px] max-w-full max-xl:px-16 max-md:px-8 max-sm:px-2">
+                    <main className="w-[1156px] max-w-full h-screen max-xl:px-16 max-md:px-8 max-sm:px-2">
                         <Outlet />
                     </main>
                 </AdminGuard>

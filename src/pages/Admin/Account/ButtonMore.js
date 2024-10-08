@@ -1,14 +1,14 @@
 import { useContext, useEffect, useRef, useState } from "react";
 import { FaEllipsisH } from "react-icons/fa";
-import EditBookingStatus from "./EditBookingStatus";
 import DeleteDialog from "../../../components/Dialog";
 import axios from "axios";
-import { BookingContext } from "./Booking";
+import { AccountContext } from "./Account";
+import EditAccount from "./CreateEditAccount";
 
 const ButtonMore = ({
-  orderId,
+  id,
   options = [
-    { type: "edit", label: "cập nhật trạng thái" },
+    { type: "edit", label: "Sửa" },
     { type: "delete", label: "xóa" },
   ],
 }) => {
@@ -16,20 +16,20 @@ const ButtonMore = ({
     type: undefined,
     isOpen: false,
   });
-  const reloadData = useContext(BookingContext)
+
+  const [reloadData] = useContext(AccountContext);
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(process.env.REACT_APP_URL+'/admin/bookings/' + orderId, {
+      await axios.delete(process.env.REACT_APP_URL + "/admin/accounts/" + id, {
         withCredentials: true,
-      })
-      reloadData(true)
-      alert('Đã xóa thành công!')
+      });
+      reloadData(true);
+      alert("Đã xóa thành công!");
     } catch (error) {
-      console.log(error)
-      alert('Đã xảy ra lỗi!')
+      console.log(error);
+      alert("Đã xảy ra lỗi");
     }
-    setForm((prev) => ({ ...prev, isOpen: false }))
-
+    setForm((prev) => ({ ...prev, isOpen: false }));
   };
   return (
     <div>
@@ -51,12 +51,12 @@ const ButtonMore = ({
       </div>
 
       {form.type === "edit" ? (
-        <EditBookingStatus
+        <EditAccount
           open={form.isOpen}
-          orderId={orderId}
+          id={id}
           onClose={() => setForm((prev) => ({ ...prev, isOpen: false }))}
         />
-      ) : (
+      ) :  (
         <DeleteDialog
           msg={"Xac nhan xoa?"}
           open={form.isOpen}

@@ -45,6 +45,13 @@ const Header = () => {
                                     }>
                                         Dashboard
                                     </NavLink>
+                                    <NavLink to="/admin/tours" className={({ isActive }) =>
+                                        isActive
+                                            ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                                            : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                                    }>
+                                        Tour
+                                    </NavLink>
                                     <NavLink to="/admin/bookings" className={({ isActive }) =>
                                         isActive
                                             ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
@@ -57,7 +64,7 @@ const Header = () => {
                                             ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
                                             : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
                                     }>
-                                        Accounts
+                                        Account
                                     </NavLink>
                                 </div>
                             </div>

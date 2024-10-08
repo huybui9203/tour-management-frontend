@@ -51,6 +51,7 @@ const customStyles = {
     // responsiveWrapper: {
     //     style: {
     //         overflow: 'visible',
+    //         width: ''
     //         // borderRadius: '12px'
     //     }
     // },

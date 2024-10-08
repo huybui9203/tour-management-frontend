@@ -8,12 +8,13 @@ import TourDetail from "./pages/Tour/TourDetail";
 import Booking from "./pages/Booking/Booking";
 import AuthGuard from "./components/Guard/AuthGuard";
 import HomeLayout from "./layouts/HomeLayout";
-import Dashboard from "./pages/Admin/Dashboard";
+import Dashboard from "./pages/Admin/Dashboard/Dashboard";
 import DashboardLayout from "./layouts/DashboardLayout";
 import LoginPage from "./pages/Login/Login";
 import Signup from "./pages/Signup/Signup";
 import BookingAdmin from "./pages/Admin/Booking/Booking";
-import Account from "./pages/Admin/Account";
+import Account from "./pages/Admin/Account/Account";
+import TourAdmin from "./pages/Admin/Tour/Tour";
 function App() {
     return (
         <BrowserRouter>
@@ -36,6 +37,7 @@ function App() {
                 </Route>
                 <Route path="/admin/" element={<DashboardLayout />}>
                     <Route path="dashboard" element={<Dashboard />}></Route>
+                    <Route path="tours" element={<TourAdmin />}></Route>
                     <Route path="bookings" element={<BookingAdmin />}></Route>
                     <Route path="accounts" element={<Account />}></Route>
                 </Route>

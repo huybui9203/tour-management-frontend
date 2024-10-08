@@ -4,11 +4,14 @@ import axios from "axios";
 import LabelBookingStatus from '../../../components/LabelBookingStatus';
 import Table from '../../../components/Table'
 import ButtonMore from './ButtonMore';
+import ButtonView from './ButtonView';
 const columns = [
     {
         name: "Id đơn đặt",
         selector: (row) => row.orderId,
         sortable: true,
+        button: true,
+		cell: (row) => <ButtonView orderId={row.orderId} label={row.orderId}/>
     },
     {
         name: "Khách hàng",
@@ -54,23 +57,26 @@ export const BookingContext = createContext()
 const Booking = () => {
     const [listBookings, setListBookings] = useState([])
     const [stale, setStale] = useState(false)
+    const [tab, setTab] = useState(0)
 
     const getTableData = useMemo(() => {
         const tableData = []
         listBookings.map(item => {
-            const record = {
-                orderId: item.id,
-                customerName: item.customer.name,
-                tourName: item.tour_day.tour.name,
-                orderDate: item.order_date,
-                paymentDate: item.pay_date,
-                orderStatus: <LabelBookingStatus label={item.status.ele_name} statusCode={item.status.ele_id}/>,
+            if(item.status.ele_id == tab || tab == 0) {
+                const record = {
+                    orderId: item.id,
+                    customerName: item.customer.name,
+                    tourName: item.tour_day.tour.name,
+                    orderDate: item.order_date,
+                    paymentDate: item.pay_date,
+                    orderStatus: <LabelBookingStatus label={item.status.ele_name} statusCode={item.status.ele_id}/>,
+                }
+                tableData.push(record)
             }
-
-            tableData.push(record)
+            
         }) 
         return tableData
-    }, [listBookings])
+    }, [listBookings, tab])
 
 
     useEffect(() => {
@@ -90,7 +96,14 @@ const Booking = () => {
 
     return (
         <BookingContext.Provider value={setStale}>
-            <Table columns={columns} data={getTableData} />
+            <div className='relative'>
+                <ul className='flex absolute left-0 top-1'>
+                    {['Tất cả', 'Đang chờ', 'Đã thanh toán', 'Đã hủy', 'Đền bù'].map((label, index) => {
+                        return <li key={index} className={`mx-1 font-bold border-neutral-950 ${tab == index ? 'border-b-2 text-neutral-950' : 'text-neutral-500'}`} onClick={() => setTab(index)}>{label}</li>
+                    })}
+                </ul>
+                <Table columns={columns} data={getTableData} />
+            </div>
         </BookingContext.Provider>
     )
 }

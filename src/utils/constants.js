@@ -10,3 +10,8 @@ export const ORDER_STATUS_CODE = {
     REFUND: 4,
 }
 
+export const VEH = {
+    NONE: 0,
+    PLANE: 1,
+    BUS: 2,
+}
