@@ -36,18 +36,36 @@ const EditBookingStatus = ({open, onClose, orderId}) => {
 
     return (
         <Modal open={open} onClose={() => onClose()}>
-            <div className="h-60 p-2">
-                <h1 className="font-bold text-lg">Cập nhật trạng thái đơn đặt</h1>
-                <select onChange={(e) => setStatus(e.target.value)}>
+            <div className=" p-4 bg-white rounded-lg shadow-lg mx-auto max-w-md">
+                <h1 className="font-bold text-xl text-gray-800 mb-4">Cập nhật trạng thái đơn đặt</h1>
+                <select 
+                    onChange={(e) => setStatus(e.target.value)} 
+                    className="w-full p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none "
+                >
                     <option value={ORDER_STATUS_CODE.NONE}>--Chọn trạng thái--</option>
                     <option value={ORDER_STATUS_CODE.PENDING}>Đang chờ xử lý</option>
                     <option value={ORDER_STATUS_CODE.SUCCESSFUL}>Đã thanh toán</option>
                     <option value={ORDER_STATUS_CODE.CANCELED}>Đã hủy</option>
                     <option value={ORDER_STATUS_CODE.REFUND}>Đền bù</option>
                 </select>
-                <button onClick={() => onClose()}>Hủy</button>
-                <button disabled={status == ORDER_STATUS_CODE.NONE} onClick={handleUpDate}>Xác nhận</button>
-            </div>
+
+                <div className="flex justify-end space-x-3">
+                    <button 
+                    className="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" 
+                    onClick={() => onClose()}
+                    >
+                    Hủy
+                    </button>
+                    <button 
+                    className={`px-4 py-2 rounded-lg text-white ${status === ORDER_STATUS_CODE.NONE ? 'bg-gray-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`} 
+                    onClick={handleUpDate} 
+                    disabled={status === ORDER_STATUS_CODE.NONE}
+                    >
+                    Xác nhận
+                    </button>
+                </div>
+</div>
+
         </Modal>
     )
 }

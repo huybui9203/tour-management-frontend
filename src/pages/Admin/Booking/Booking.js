@@ -99,7 +99,7 @@ const Booking = () => {
             <div className='relative'>
                 <ul className='flex absolute left-0 top-1'>
                     {['Tất cả', 'Đang chờ', 'Đã thanh toán', 'Đã hủy', 'Đền bù'].map((label, index) => {
-                        return <li key={index} className={`mx-1 font-bold border-neutral-950 ${tab == index ? 'border-b-2 text-neutral-950' : 'text-neutral-500'}`} onClick={() => setTab(index)}>{label}</li>
+                        return <li key={index} className={`mx-2 font-bold cursor-pointer border-neutral-950  ${tab == index ? 'border-b-2 text-neutral-950' : 'text-neutral-500'}`} onClick={() => setTab(index)}>{label}</li>
                     })}
                 </ul>
                 <Table columns={columns} data={getTableData} />

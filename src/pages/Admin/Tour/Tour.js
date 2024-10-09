@@ -118,7 +118,7 @@ const Tour = () => {
             return (
               <li
                 key={index}
-                className={`mx-1 font-bold border-neutral-950 ${
+                className={`mx-2 font-bold cursor-pointer border-neutral-950 ${
                   tab == index
                     ? "border-b-2 text-neutral-950"
                     : "text-neutral-500"
