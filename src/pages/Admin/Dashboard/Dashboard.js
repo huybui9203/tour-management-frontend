@@ -41,7 +41,7 @@ function Dashboard() {
           return (
             <li
               key={index}
-              className={`mx-1 font-bold border-neutral-950 ${
+              className={`mx-2 cursor-pointer font-bold border-neutral-950 ${
                 tab == index
                   ? "border-b-2 text-neutral-950"
                   : "text-neutral-500"
@@ -103,41 +103,48 @@ function Dashboard() {
           </main>
         </div>
       ) : (
-        <div>
-          <div>
-            <label>Tháng</label>
-            <select
-              value={monthYear.month}
-              onChange={(e) =>
-                setMonthYear((prev) => ({ ...prev, month: e.target.value }))
-              }
-            >
-              {Array(12)
-                .fill()
-                .map((item, index) => (
-                  <option key={index} value={index + 1}>
-                    {index + 1}
-                  </option>
-                ))}
-            </select>
-            <label>Năm</label>
-            <select
-              value={monthYear.year}
-              onChange={(e) =>
-                setMonthYear((prev) => ({ ...prev, year: e.target.value }))
-              }
-            >
-              {Array(20)
-                .fill()
-                .map((item, index) => (
-                  <option key={index} value={new Date().getFullYear() - index}>
-                    {new Date().getFullYear() - index}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <ChartRevenueMonthly month={monthYear.month} year={monthYear.year} />
-        </div>
+        <div className="p-4 bg-gray-100 rounded-lg shadow-md">
+  <div className="flex items-center space-x-4 mb-4">
+    <div className="flex flex-col">
+      <label className="font-semibold mb-1">Tháng</label>
+      <select
+        value={monthYear.month}
+        onChange={(e) =>
+          setMonthYear((prev) => ({ ...prev, month: e.target.value }))
+        }
+        className="p-2 border border-gray-300 rounded-md focus:outline-none"
+      >
+        {Array(12)
+          .fill()
+          .map((item, index) => (
+            <option key={index} value={index + 1}>
+              {index + 1}
+            </option>
+          ))}
+      </select>
+    </div>
+    <div className="flex flex-col">
+      <label className="font-semibold mb-1">Năm</label>
+      <select
+        value={monthYear.year}
+        onChange={(e) =>
+          setMonthYear((prev) => ({ ...prev, year: e.target.value }))
+        }
+        className="p-2 border border-gray-300 rounded-md focus:outline-none scroll-t "
+      >
+        {Array(20)
+          .fill()
+          .map((item, index) => (
+            <option key={index} value={new Date().getFullYear() - index}>
+              {new Date().getFullYear() - index}
+            </option>
+          ))}
+      </select>
+    </div>
+  </div>
+  <ChartRevenueMonthly month={monthYear.month} year={monthYear.year} />
+</div>
+
       )}
     </div>
   );

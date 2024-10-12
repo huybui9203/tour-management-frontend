@@ -8,8 +8,8 @@ import { BookingContext } from "./Booking";
 const ButtonMore = ({
   orderId,
   options = [
-    { type: "edit", label: "cập nhật trạng thái" },
-    { type: "delete", label: "xóa" },
+    { type: "edit", label: "Cập nhật trạng thái" },
+    { type: "delete", label: "Xóa" },
   ],
 }) => {
   const [form, setForm] = useState({
@@ -33,15 +33,17 @@ const ButtonMore = ({
   };
   return (
     <div>
-      <div className="relative group">
-        <button className="px-1 py-1">
-          <FaEllipsisH />
+       <div className="relative group">
+        <button className="px-2 py-1 rounded-md hover:bg-gray-100 focus:outline-none">
+          <FaEllipsisH className="text-gray-600" />
         </button>
-        <ul className="w-[140px] group-hover:block hidden absolute bg-white shadow-lg rounded-xl right-3 bottom-3 z-[10] overflow-hidden">
+
+        <ul className="w-[180px] group-hover:block hidden absolute bg-white shadow-lg rounded-lg right-0 bottom-[-100%] z-[20] overflow-hidden transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
           {options.map((option, index) => (
             <li
               key={index}
-              className="h-[28px] pl-2 leading-[28px] hover:bg-gray-200"
+              className={`px-4 py-2 cursor-pointer hover:bg-gray-200 text-gray-800 text-sm 
+                          ${index === 1 ? 'border-t border-gray-200 text-red-500' : ''}`}
               onClick={() => setForm({ type: option.type, isOpen: true })}
             >
               {option.label}
@@ -58,7 +60,7 @@ const ButtonMore = ({
         />
       ) : (
         <DeleteDialog
-          msg={"Xac nhan xoa?"}
+          msg={"Xác nhận xóa?"}
           open={form.isOpen}
           onClose={() => setForm((prev) => ({ ...prev, isOpen: false }))}
           onConfirm={handleConfirmDelete}

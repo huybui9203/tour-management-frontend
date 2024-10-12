@@ -4,7 +4,6 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import React, { Suspense, useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import FacebookAuth from "../FacebookAuth/FacebookAuth";
 import { AuthContext } from "../../context/Auth";
 const Login = () => {
     const GoogleAuth = React.lazy(() => import("../GoogleAuth/GoogleAuth"));
@@ -34,8 +33,8 @@ const Login = () => {
         }));
     };
 
-    const handleSubmitLogin = async (e) => {
-        e.preventDefault();
+  const handleSubmitLogin = async (e) => {
+    e.preventDefault();
 
         const newErrors = {};
         if (!formData.email) {
@@ -71,9 +70,9 @@ const Login = () => {
         }
     };
 
-    const handleShowPassword = () => {
-        setShowPassword((prev) => !prev);
-    };
+  const handleShowPassword = () => {
+    setShowPassword((prev) => !prev);
+  };
 
     return (
         <div className="my-20">
