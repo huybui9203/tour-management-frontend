@@ -33,17 +33,17 @@ const TourItemH = () => {
         <div>
             <div className="flex py-4">
                 {/* <div className="md:w-1/3"> left</div> */}
-                <div className="flex border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                <div className="md:flex border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
                     <div className="md:w-5/12 h-44 md:h-full flex items-center">
                         <img
-                            src="https://media.travel.com.vn/Destination/tf_220325053535_471620.jpg"
+                            src="https://vnpay.vn/s1/statics.vnpay.vn/2023/11/0d79ij9ruoja1698812184967.jpg"
                             className="w-full h-full  "
                             alt="Tour"
                         />
                     </div>
                     <div className="md:w-7/12 p-3">
                         <div>
-                            <h3 className="line-clamp-2 lg:text-2xl text-xl font-bold">
+                            <h3 className="line-clamp-2 lg:text-2xl md:text-xl text-base font-bold">
                                 <a href="#">
                                     Thái Lan: Bangkok - Pattaya - Một điểm đến thú vị cho mọi du khách Thái Lan: Bangkok
                                     - Pattaya - Một điểm đến thú vị cho mọi du khách
@@ -55,12 +55,12 @@ const TourItemH = () => {
                             <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
                                 <IoTicketOutline className="text-xl mr-1 w-5" />
                                 <span className="lg:text-base md:text-sm">Mã:</span>
-                                <span className="ml-1 font-bold lg:text-base md:text-sm">NDSG063</span>
+                                <span className="ml-1 font-bold lg:text-base md:text-sm ">NDSG063</span>
                             </div>
                             <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
                                 <PiMapPinAreaLight className="text-xl mr-1" />
                                 <span className="lg:text-base md:text-sm">Khởi hành:</span>
-                                <span className="ml-1 text-blue-700 font-bold lg:text-base md:text-sm truncate">
+                                <span className="ml-1 text-blue-700 font-bold lg:text-base md:text-sm  truncate">
                                     TP. Hồ Chí Minh{" "}
                                 </span>
                             </div>

@@ -12,7 +12,7 @@ const SearchBar = () => {
             <div className="pb-0 container mx-auto">
                 <div className="">
                     <form className="w-full md:flex md:space-x-2 mb-2" action="#" method="GET">
-                        <div className="md:w-1/4 w-[172px] relative  mt-1">
+                        <div className="md:w-1/4 relative mt-1">
                             <input
                                 className="w-full h-16 py-3 px-6 pr-12 border border-gray-300"
                                 name="tour-search"

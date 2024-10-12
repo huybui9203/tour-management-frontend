@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-function InforRegistant({ age }) {
+import React, { useEffect, useState } from "react";
+function InforRegistant({ age, index, handleSetInforRegistant, price }) {
     const [maxDay, setMaxDay] = useState(() => {
         if (age === "ADULT") {
             return new Date(new Date().setFullYear(new Date().getFullYear() - 12)).toISOString().split("T")[0];
@@ -8,7 +8,10 @@ function InforRegistant({ age }) {
         } else return new Date(new Date().setFullYear(new Date().getFullYear() - 2)).toISOString().split("T")[0];
     });
     const [formData, setFormData] = useState({
+        index: index,
         name: "",
+        type: age,
+        price: price,
         sex: "",
         birthday: "",
         isBookingSingleRoom: false,
@@ -18,8 +21,12 @@ function InforRegistant({ age }) {
         birthday: "",
     });
 
+    useEffect(() => {
+        handleSetInforRegistant(formData);
+    }, [formData]);
+
     const validateBirthday = (id, value, max) => {
-        console.log(value, max);
+        // console.log(value, max);
         if (new Date(value).getFullYear() > new Date(max).getFullYear()) {
             setFormError((prev) => ({
                 ...prev,
@@ -45,7 +52,7 @@ function InforRegistant({ age }) {
             [e.target.id]: "",
         }));
     };
-    console.log(formData);
+    // console.log(formData);
 
     const handleChange = (e) => {
         setFormData((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -70,7 +77,8 @@ function InforRegistant({ age }) {
                 )}
             </h1>
 
-            <form
+            <div
+                
                 className={`border border-gray-200 p-3 rounded-lg mt-3 grid grid-cols-1 ${
                     age === "ADULT" ? "md:grid-cols-2 xl:grid-cols-3" : "xl:grid-cols-2"
                 } items-center gap-3`}
@@ -98,11 +106,7 @@ function InforRegistant({ age }) {
                         age === "ADULT" ? "md:grid-cols-1 xl:grid-cols-3 md:col-span-2 xl:col-span-2" : ""
                     } gap-3`}
                 >
-                    <div
-                        className={`grid grid-cols-2 ${
-                            age === "ADULT" ? "xl:col-span-2" : ""
-                        } gap-3 items-start`}
-                    >
+                    <div className={`grid grid-cols-2 ${age === "ADULT" ? "xl:col-span-2" : ""} gap-3 items-start`}>
                         {/* Sex */}
                         <div className="flex flex-col gap-2 border-r">
                             <label className="font-bold">
@@ -143,6 +147,7 @@ function InforRegistant({ age }) {
                                     onChange={(e) =>
                                         setFormData((prev) => ({
                                             ...prev,
+                                            price: e.target.checked ? prev.price + 300 : prev.price - 300,
                                             [e.target.id]: e.target.checked,
                                         }))
                                     }
@@ -155,7 +160,7 @@ function InforRegistant({ age }) {
                         </div>
                     )}
                 </div>
-            </form>
+            </div>
         </div>
     );
 }

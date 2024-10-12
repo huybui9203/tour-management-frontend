@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     FacebookAuthProvider,
     fetchSignInMethodsForEmail,
@@ -10,7 +10,9 @@ import app from "../../firebase/index.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { EmailAuthProvider } from "firebase/auth/web-extension";
+import { AuthContext } from "../../context/Auth";
 function FacebookAuth() {
+    const { setUser } = useContext(AuthContext);
     const navigate = useNavigate();
     const handleLoginWithFacebook = async () => {
         try {
@@ -21,11 +23,20 @@ function FacebookAuth() {
             const result = await signInWithPopup(auth, provider);
             console.log(result);
 
-            const res = await axios.post("http://localhost:8000/api/auth/facebook", {
-                email: result.user.email,
-                username: result.user.displayName,
-            });
+            const res = await axios.post(
+                process.env.REACT_APP_URL + "/auth/facebook",
+                {
+                    email: result.user.email,
+                    username: result.user.displayName,
+                },
+                {
+                    withCredentials: true,
+                }
+            );
             if (res.status === 200) {
+                // console.log(res.data);
+
+                setUser(res.data);
                 navigate("/");
             } else {
                 console.log(res.data.message);
@@ -44,11 +55,18 @@ function FacebookAuth() {
                 // Kiểm tra xem tài khoản đã được tạo với một phương thức khác
                 const auth = getAuth(app);
                 const methods = await fetchSignInMethodsForEmail(auth, email);
-                const res = await axios.post("http://localhost:8000/api/auth/facebook", {
-                    email: email,
-                    username: username,
-                });
+                const res = await axios.post(
+                    process.env.REACT_APP_URL + "/auth/facebook",
+                    {
+                        email: email,
+                        username: username,
+                    },
+                    {
+                        withCredentials: true,
+                    }
+                );
                 if (res.status === 200) {
+                    setUser(res.data);
                     navigate("/");
                 } else {
                     console.log(res.data.message);
@@ -62,11 +80,18 @@ function FacebookAuth() {
                         const userCredential = await auth.signInWithEmailAndPassword(email, password);
                         // Liên kết thông tin đăng nhập Facebook với tài khoản hiện tại
                         await linkWithCredential(userCredential.user, pendingCredential);
-                        const res = await axios.post("http://localhost:8000/api/auth/facebook", {
-                            email: email,
-                            username: username,
-                        });
+                        const res = await axios.post(
+                            process.env.REACT_APP_URL + "/auth/facebook",
+                            {
+                                email: email,
+                                username: username,
+                            },
+                            {
+                                withCredentials: true,
+                            }
+                        );
                         if (res.status === 200) {
+                            setUser(res.data);
                             navigate("/");
                         } else {
                             console.log(res.data.message);

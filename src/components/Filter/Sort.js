@@ -2,9 +2,9 @@ import { FaChevronDown} from "react-icons/fa";
 const Sort = () => {
 
     return (
-        <div class="flex items-center justify-end  py-3  ">
-        <span class="mr-2">Sắp xếp theo:</span>
-        <div class="relative ">
+        <div className="flex items-center justify-end  py-3  ">
+        <span className="mr-2">Sắp xếp theo:</span>
+        <div className="relative ">
             <select className="w-full rounded py-2 pr-10 pl-4 border border-gray-300 appearance-none " >
                 <option value="all">Tất cả</option>
                 <option value="asc_price">Giá tăng dần</option>

@@ -11,7 +11,7 @@ const BookingPanel = () => {
     return (
        
            
-            <div className="w-full max-w-[350px] mx-auto md:max-w-none md:w-1/3 flex flex-col sticky right-0 top-20 self-start ">
+            <div className="w-full lg:max-w-[350px] mx-auto md:max-w-none flex flex-col sticky right-0 top-20 self-start ">
 
 
                 <div className="animate-slideInUp shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 rounded-lg">

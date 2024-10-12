@@ -6,25 +6,34 @@ import { MdOutlineDiscount } from "react-icons/md";
 import { SlLocationPin } from "react-icons/sl";
 import { TiGroupOutline } from "react-icons/ti";
 
-function BookingSummary() {
+function BookingSummary({ formData, handleShowModal }) {
     const [isHidden, setHidden] = useState(true);
+
+    const handleCreateOrder = async () => {
+        handleShowModal();
+    };
+
     return (
-        <div className="shadow-slate-950 shadow-2xl bg-white md:col-span-2 fixed bottom-0 inset-x-0 z-50 p-6 rounded-t-3xl md:grid-cols-2 md:static md:z-0 md:rounded-lg md:shadow-md md:border">
+        <div className="shadow-slate-950 shadow-2xl bg-white lg:col-span-2 fixed bottom-0 inset-x-0 z-50 p-6 rounded-t-3xl lg:grid-cols-2 lg:static lg:z-0 lg:rounded-lg lg:shadow-md lg:border">
             <div className="flex justify-between items-center border-b pb-1">
                 <span className="font-bold text-lg text-blue-800">TÓM TẮT CHUYẾN ĐI</span>
                 {isHidden ? (
                     <FaChevronUp
-                        className="text-sm text-gray-800 cursor-pointer md:hidden"
+                        className="text-sm text-gray-800 cursor-pointer lg:hidden"
                         onClick={() => setHidden(!isHidden)}
                     />
                 ) : (
                     <FaChevronDown
-                        className="text-sm text-gray-800 cursor-pointer md:hidden"
+                        className="text-sm text-gray-800 cursor-pointer lg:hidden"
                         onClick={() => setHidden(!isHidden)}
                     />
                 )}
             </div>
-            <div className={`mt-6 ${!isHidden && "hidden md:block "} transition-all duration-700 max-h-[300px] md:max-h-none overflow-auto no-scrollbar`}>
+            <div
+                className={`mt-6 ${
+                    !isHidden && "hidden lg:block "
+                } transition-all duration-700 max-h-[300px] lg:max-h-none overflow-auto no-scrollbar`}
+            >
                 <div className="flex gap-3 items-center border-b pb-6">
                     <div className="w-[600px] h-[100px] rounded-md overflow-hidden">
                         <img
@@ -37,7 +46,7 @@ function BookingSummary() {
                         thức buffet tối trên Du thuyền 5 sao & cafe máy bay Boeing 747)
                     </h1>
                 </div>
-                <div className="flex md:flex-col md:items-start xl:flex-row gap-4 items-center mt-3 border-b pb-3">
+                <div className="flex lg:flex-col lg:items-start xl:flex-row gap-4 items-center mt-3 border-b pb-3">
                     <h1 className="flex gap-1 items-center">
                         <SlLocationPin className="text-2xl" />
                         <span>Khởi hành: TP. Hồ Chí Minh</span>
@@ -84,7 +93,7 @@ function BookingSummary() {
                     <MdOutlineDiscount />
                     <span className="text-sm font-semibold">Sử dụng mã ưu đãi</span>
                 </h1>
-                <form className="grid grid-cols-2 md:grid-cols-1 xl:grid-cols-2 items-center gap-4 mt-3">
+                <form className="grid grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 items-center gap-4 mt-3">
                     <input type="text" className="border border-blue-800 py-2 px-3 rounded-lg outline-none" />
                     <button type="submit" className="p-3 text-white bg-blue-800 rounded-lg text-xs">
                         ÁP DỤNG
@@ -96,7 +105,9 @@ function BookingSummary() {
                 <h1 className="font-bold text-red-600 text-xl">9,990,000 đ</h1>
             </div>
 
-            <button className="bg-blue-800 w-full py-2 text-white mt-2 rounded-lg">ĐẶT TOUR</button>
+            <button className="bg-blue-800 w-full py-2 text-white mt-2 rounded-lg" onClick={handleCreateOrder}>
+                ĐẶT TOUR
+            </button>
         </div>
     );
 }
