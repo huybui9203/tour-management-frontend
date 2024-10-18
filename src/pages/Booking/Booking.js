@@ -3,25 +3,19 @@ import { FaArrowLeftLong, FaCircleUser, FaRightLong } from "react-icons/fa6";
 import FormIcon from "./svg/FormIcon";
 import PayIcon from "./svg/PayIcon";
 import ConfirmIcon from "./svg/ConfirmIcon";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FormBooking from "./components/FormBooking";
-import BookingSummary from "./components/BookingSummary";
-import ModalPayment from "./components/ModalPayment";
 
 function Booking() {
     const navigate = useNavigate();
-    const [isShowModal, setShowModal] = useState(false);
+    const { title } = useParams();
+   
 
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
     return (
         <div>
-            <div className="flex justify-start items-center gap-2">
+            <div className="flex justify-start items-center gap-2" onClick={() => navigate(-1)}>
                 <FaArrowLeftLong />
-                <h3 className="cursor-pointer py-4" onClick={() => navigate(-1)}>
-                    Quay lại
-                </h3>
+                <h3 className="cursor-pointer py-4">Quay lại</h3>
             </div>
 
             <h1 className="font-bold text-center text-2xl uppercase text-blue-800 py-5">Đặt tour</h1>
@@ -68,8 +62,8 @@ function Booking() {
                 </div>
                 <h3 className="text-sm font-bold mt-4">THÔNG TIN LIÊN LẠC</h3>
 
-                <FormBooking handleShowModal={() => setShowModal(true)} />
-                <ModalPayment total={100000} hidden={isShowModal} onClose={handleCloseModal} />
+                <FormBooking title={title} />
+                
             </div>
         </div>
     );

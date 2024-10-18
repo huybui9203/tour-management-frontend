@@ -2,8 +2,10 @@ import React, { useCallback, useEffect, useState } from "react";
 import InforRegistant from "./InforRegistant";
 import QuantityRegistant from "./QuantityRegistant";
 import BookingSummary from "./BookingSummary";
+import ModalPayment from "./ModalPayment";
+import axios from "axios";
 
-function FormBooking({ handleShowModal }) {
+function FormBooking({ handleShowModal, title }) {
     const [formData, setFormData] = useState({
         deposit: 0,
         name: "",
@@ -21,6 +23,11 @@ function FormBooking({ handleShowModal }) {
         phone: "",
         email: "",
     });
+
+    const [isShowModal, setShowModal] = useState(false);
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
     const validatePhone = (id, value) => {
         const phoneRegex = /^0\d{9}$/;
@@ -131,6 +138,11 @@ function FormBooking({ handleShowModal }) {
             };
         });
     }, []);
+
+    const handleSubmit = async () => {
+        // const res = await axios.post(process.env.REACT_APP_URL + '/order/create-order')
+        console.log(formData);
+    };
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 mt-3">
@@ -282,7 +294,8 @@ function FormBooking({ handleShowModal }) {
                     ></textarea>
                 </div>
             </div>
-            <BookingSummary formData={formData} handleShowModal={handleShowModal} />
+            <BookingSummary formData={formData} handleShowModal={() => setShowModal(true)} title={title} />
+            <ModalPayment hidden={isShowModal} onClose={handleCloseModal} formData={formData} />
         </div>
     );
 }

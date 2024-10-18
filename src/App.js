@@ -27,7 +27,7 @@ function App() {
                     <Route path="/destinations" element={<h1>List destinations page</h1>} />
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route
-                        path="/booking/:id"
+                        path="/booking/:title"
                         element={
                             <AuthGuard>
                                 <Booking />

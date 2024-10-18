@@ -1,17 +1,49 @@
-import React, { useState } from "react";
+import axios from "axios";
+import { formatNumber } from "chart.js/helpers";
+import React, { useEffect, useState } from "react";
 import { BsTrainFront } from "react-icons/bs";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa6";
 import { GiAlarmClock } from "react-icons/gi";
 import { MdOutlineDiscount } from "react-icons/md";
 import { SlLocationPin } from "react-icons/sl";
 import { TiGroupOutline } from "react-icons/ti";
+import formatPrice from "../../../utils/formatPrice";
 
-function BookingSummary({ formData, handleShowModal }) {
+function BookingSummary({ formData, handleShowModal, title }) {
     const [isHidden, setHidden] = useState(true);
-
+    const [tour, setTour] = useState({});
+    const [singleRoom, setSingleRoom] = useState(0);
+    const fetchData = async () => {
+        const res = await axios.get(`${process.env.REACT_APP_URL}/tour/get-details/${title}`);
+        if (res.status !== 200) {
+            console.log(res.data.message);
+            return;
+        }
+        setTour(res.data.tour);
+    };
     const handleCreateOrder = async () => {
         handleShowModal();
     };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+    useEffect(() => {
+        setSingleRoom(() => {
+            return (
+                formData.adults &&
+                formData.adults.length > 0 &&
+                formData.adults.reduce((acc, person) => {
+                    if (person.isBookingSingleRoom === true) {
+                        console.log(person);
+                        acc++;
+                    }
+                    return acc;
+                }, 0)
+            );
+        });
+    }, [formData.adults]);
 
     return (
         <div className="shadow-slate-950 shadow-2xl bg-white lg:col-span-2 fixed bottom-0 inset-x-0 z-50 p-6 rounded-t-3xl lg:grid-cols-2 lg:static lg:z-0 lg:rounded-lg lg:shadow-md lg:border">
@@ -35,25 +67,24 @@ function BookingSummary({ formData, handleShowModal }) {
                 } transition-all duration-700 max-h-[300px] lg:max-h-none overflow-auto no-scrollbar`}
             >
                 <div className="flex gap-3 items-center border-b pb-6">
-                    <div className="w-[600px] h-[100px] rounded-md overflow-hidden">
+                    <div className="w-[120px] h-[100px] rounded-md overflow-hidden">
                         <img
                             src="https://media.travel.com.vn/Tour/tfd__230505093419_958252.jpg"
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <h1 className="font-bold text-justify line-clamp-4 self-start">
-                        Thái Lan: Bangkok - Pattaya - Ayutthaya (Khách sạn 5*, Làng Nong Nooch, Chợ nổi Bốn miền, Thưởng
-                        thức buffet tối trên Du thuyền 5 sao & cafe máy bay Boeing 747)
-                    </h1>
+                    <h1 className="font-bold text-justify line-clamp-4 self-start">{tour.name}</h1>
                 </div>
                 <div className="flex lg:flex-col lg:items-start xl:flex-row gap-4 items-center mt-3 border-b pb-3">
                     <h1 className="flex gap-1 items-center">
                         <SlLocationPin className="text-2xl" />
-                        <span>Khởi hành: TP. Hồ Chí Minh</span>
+                        <span>Khởi hành: {tour.departure_point}</span>
                     </h1>
                     <h1 className="flex gap-1 items-center">
                         <GiAlarmClock className="text-2xl" />
-                        <span>Thời gian: 5N4Đ</span>
+                        <span>
+                            Thời gian: {tour.total_day}N{tour.total_day - 1}D
+                        </span>
                     </h1>
                 </div>
                 <div className="flex flex-col gap-2 mt-3 border-b pb-3">
@@ -61,7 +92,7 @@ function BookingSummary({ formData, handleShowModal }) {
                         <BsTrainFront className="text-2xl" />
                         <span className="font-bold text-sm">Phương tiện di chuyển</span>
                     </h1>
-                    <h1 className="flex gap-1 items-center">Máy bay, Xe du lịch</h1>
+                    <h1 className="flex gap-1 items-center">{tour?.veh?.ele_name}</h1>
                 </div>
                 <div className="border-b pb-3">
                     <h1 className="flex items-center gap-1 mt-3">
@@ -71,20 +102,27 @@ function BookingSummary({ formData, handleShowModal }) {
                     <div className="mt-3">
                         <h1 className="flex items-center justify-between">
                             <span className="font-bold text-sm">Người lớn</span>
-                            <span className="font-bold text-sm text-red-600">1 x 10,990,000 đ</span>
+                            <span className="font-bold text-sm text-red-600">
+                                {formData.adult_quantity} x {formatNumber(tour.price)} đ
+                            </span>
                         </h1>
-                        <h1 className="flex items-center justify-between mt-2">
-                            <span className="font-bold text-sm">Phụ thu phòng đơn</span>
-                            <span className="font-bold text-sm text-red-600">1,500,000 đ</span>
-                        </h1>
+                        {singleRoom > 0 && (
+                            <h1 className="flex items-center justify-between mt-2">
+                                <span className="font-bold text-sm">Phụ thu phòng đơn</span>
+                                <span className="font-bold text-sm text-red-600">{singleRoom} x 1,500,000 đ</span>
+                            </h1>
+                        )}
                     </div>
-
-                    <div className="mt-3">
-                        <h1 className="flex items-center justify-between">
-                            <span className="font-bold text-sm">Trẻ em</span>
-                            <span className="font-bold text-sm text-red-600">1 x 10,990,000 đ</span>
-                        </h1>
-                    </div>
+                    {formData.child_quantity > 0 && (
+                        <div className="mt-3">
+                            <h1 className="flex items-center justify-between">
+                                <span className="font-bold text-sm">Trẻ em</span>
+                                <span className="font-bold text-sm text-red-600">
+                                    {formData.child_quantity} x {formatNumber(tour.price)} đ
+                                </span>
+                            </h1>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -102,7 +140,14 @@ function BookingSummary({ formData, handleShowModal }) {
             </div>
             <div className="flex justify-between items-center">
                 <h1 className="font-bold">Tổng tiền</h1>
-                <h1 className="font-bold text-red-600 text-xl">9,990,000 đ</h1>
+                <h1 className="font-bold text-red-600 text-xl">
+                    {formatPrice(
+                        formData.child_quantity * tour.price +
+                            formData.adult_quantity * tour.price +
+                            singleRoom * 1500000
+                    )}{" "}
+                    đ
+                </h1>
             </div>
 
             <button className="bg-blue-800 w-full py-2 text-white mt-2 rounded-lg" onClick={handleCreateOrder}>

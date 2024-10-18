@@ -5,8 +5,9 @@ import { GiAlarmClock } from "react-icons/gi";
 import { PiAirplaneTakeoffLight } from "react-icons/pi";
 import { LuCalendarDays } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
+import formatPrice from "../../utils/formatPrice";
 
-const TourItemH = () => {
+const TourItemH = ({ tour }) => {
     const [scrollPosition, setScrollPosition] = useState(0);
     const [maxScroll, setMaxScroll] = useState(0);
     const carouselInnerRef = useRef(null);
@@ -44,10 +45,7 @@ const TourItemH = () => {
                     <div className="md:w-7/12 p-3">
                         <div>
                             <h3 className="line-clamp-2 lg:text-2xl md:text-xl text-base font-bold">
-                                <a href="#">
-                                    Thái Lan: Bangkok - Pattaya - Một điểm đến thú vị cho mọi du khách Thái Lan: Bangkok
-                                    - Pattaya - Một điểm đến thú vị cho mọi du khách
-                                </a>
+                                <a href="#">{tour.name}</a>
                             </h3>
                         </div>
 
@@ -61,7 +59,7 @@ const TourItemH = () => {
                                 <PiMapPinAreaLight className="text-xl mr-1" />
                                 <span className="lg:text-base md:text-sm">Khởi hành:</span>
                                 <span className="ml-1 text-blue-700 font-bold lg:text-base md:text-sm  truncate">
-                                    TP. Hồ Chí Minh{" "}
+                                    {tour.departure_point}
                                 </span>
                             </div>
                         </div>
@@ -69,12 +67,14 @@ const TourItemH = () => {
                             <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
                                 <GiAlarmClock className="text-xl mr-1" />
                                 <span className="lg:text-base md:text-sm">Thời gian:</span>
-                                <span className="ml-1 lg:text-base md:text-sm"> 4N3D </span>
+                                <span className="ml-1 lg:text-base md:text-sm">
+                                    {tour.total_day}N{tour.total_day - 1}D
+                                </span>
                             </div>
                             <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
                                 <PiAirplaneTakeoffLight className="text-xl mr-1" />
                                 <span className="lg:text-base md:text-sm">Phương tiện:</span>
-                                <span className="ml-1 lg:text-base md:text-sm">Máy bay</span>
+                                <span className="ml-1 lg:text-base md:text-sm">{tour?.veh?.ele_name}</span>
                             </div>
                         </div>
                         <div className="flex items-center">
@@ -140,13 +140,13 @@ const TourItemH = () => {
                             <div className="my-3 md:my-6">
                                 Giá từ:{" "}
                                 <span className="ml-1  text-2xl lg:text-2xl md:text-xl font-bold text-red-600">
-                                    6,990,000 đ
+                                    {formatPrice(tour.price)} đ
                                 </span>
                             </div>
                             <div className="my-3 md:my-6">
                                 <button
                                     className="bg-red-500 text-white px-4 py-2  md:px-2 md:py-1  rounded hover:bg-red-600 lg:text-base md:text-sm"
-                                    onClick={() => navigate("/tour/example")}
+                                    onClick={() => navigate(`/tour/${tour.id}`)}
                                 >
                                     Xem chi tiết
                                 </button>
