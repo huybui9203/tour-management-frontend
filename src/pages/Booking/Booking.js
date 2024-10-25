@@ -9,7 +9,7 @@ import { AuthContext } from "../../context/Auth";
 
 function Booking() {
     const navigate = useNavigate();
-    const { title } = useParams();
+    const { id } = useParams();
     const { user } = useContext(AuthContext);
     return (
         <div>
@@ -63,7 +63,7 @@ function Booking() {
                
                 <h3 className="text-sm font-bold mt-4">THÔNG TIN LIÊN LẠC</h3>
 
-                <FormBooking title={title} />
+                <FormBooking title={id} />
             </div>
         </div>
     );

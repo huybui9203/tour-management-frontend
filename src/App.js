@@ -28,6 +28,8 @@ function App() {
                 </Route>
                 <Route path="/" element={<MainLayout />}>
                     <Route path="/tour" element={<Tour />} />
+                    <Route path="/payment-success" element={<Success />} />
+                    <Route path="/payment-failed" element={<Failed />} />
                     <Route path="/destinations" element={<h1>List destinations page</h1>} />
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route

@@ -14,9 +14,9 @@ function BookingSummary({ formData, tour }) {
     const [isHidden, setHidden] = useState(true);
     const [singleRoom, setSingleRoom] = useState(0);
     const navigate = useNavigate();
-    const { title } = useParams();
+    const { id } = useParams();
     const handleCreateOrder = async () => {
-        const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${title}`, formData, {
+        const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${id}`, formData, {
             withCredentials: true,
         });
         if (res.status === 200) {
