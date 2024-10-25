@@ -26,9 +26,6 @@ function Dashboard() {
         return;
       }
       setMonthRevenueData(data);
-      // if(stale) {
-      //     setStale(false)
-      // }
     };
 
     getMonthlyRevenue();
@@ -36,12 +33,12 @@ function Dashboard() {
 
   return (
     <div className="">
-      <ul className="flex">
+      <ul className="flex my-3">
         {["Doanh thu hàng tháng", "Chi tiết"].map((label, index) => {
           return (
             <li
               key={index}
-              className={`mx-2 cursor-pointer font-bold border-neutral-950 ${
+              className={`mr-2 cursor-pointer font-bold border-neutral-950 ${
                 tab == index
                   ? "border-b-2 text-neutral-950"
                   : "text-neutral-500"

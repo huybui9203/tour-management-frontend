@@ -5,10 +5,11 @@ import { ROLES } from "../../utils/constants"
 
 const AdminGuard = ({children}) => {
     const {user} = useContext(AuthContext)
-    if(user?.role === ROLES.ADMIN) {
+    if(user?.role == ROLES.ADMIN || user?.role == ROLES.S_ADMIN) {
         return <>{children}</>
     }
-    return <Navigate to='/'/>
+
+    return <Navigate to='/admin/login'/>
 }
 
 export default AdminGuard

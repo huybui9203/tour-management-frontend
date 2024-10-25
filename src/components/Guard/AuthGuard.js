@@ -5,7 +5,7 @@ import { ROLES } from "../../utils/constants"
 
 const AuthGuard = ({children}) => {
     const {user} = useContext(AuthContext)
-    if(user?.role === ROLES.ADMIN) {
+    if(user?.role !== ROLES.USER) {
         return <Navigate to={'/login'} replace />
     } 
     return <>{children}</>

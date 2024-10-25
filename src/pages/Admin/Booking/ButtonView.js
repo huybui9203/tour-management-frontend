@@ -1,29 +1,35 @@
-import { useEffect, useState } from "react"
-import Modal from "../../../components/Modal/Modal"
-import axios from "axios"
+import { useEffect, useState } from "react";
+import Modal from "../../../components/Modal/Modal";
+import axios from "axios";
 
+const ButtonView = ({ orderId, label }) => {
+  const [isShowView, setShowView] = useState(false);
+  const [bookingData, setBookingData] = useState(null);
 
-const ButtonView = ({orderId, label}) => {
-    const [isShowView, setShowView] = useState(false)
-    const [bookingData, setBookingData] = useState(null)
-
-    const handleView = async () => {
-        setShowView(true)
-        try {
-            const res = await axios.get(process.env.REACT_APP_URL + '/admin/bookings/' + orderId, {withCredentials: true})
-            if(res?.data) {
-                setBookingData(res.data)
-            }
-        } catch (error) {
-            alert('Đã xảy ra lỗi!')
-        }
+  const handleView = async () => {
+    setShowView(true);
+    try {
+      const res = await axios.get(
+        process.env.REACT_APP_URL + "/admin/bookings/" + orderId,
+        { withCredentials: true }
+      );
+      if (res?.data) {
+        setBookingData(res.data);
+      }
+    } catch (error) {
+      alert("Đã xảy ra lỗi!");
     }
+  };
 
-    console.log(bookingData)
-    return (
-        <div>
-            <button className='text-blue-500 font-bold decoration-solid' onClick={handleView}>{'#' +label}</button>
-            <Modal open={isShowView} onClose={() => setShowView(false)}>
+  return (
+    <div>
+      <button
+        className="text-blue-500 font-bold decoration-solid"
+        onClick={handleView}
+      >
+        {"#" + label}
+      </button>
+      {/* <Modal open={isShowView} onClose={() => setShowView(false)}>
                 <h1 className="font-bold text-2xl">Chi tiết đơn đặt #{orderId}</h1>
                 {bookingData && (
                     <div>
@@ -37,11 +43,92 @@ const ButtonView = ({orderId, label}) => {
                         <p>Trạng thái: {bookingData?.status.ele_name}</p>
                         <p>Tổng tiền: {bookingData.total_price} VNĐ</p>
                         <p>Ngày thanh toán: {bookingData.order_date}</p>
+
                     </div>
                 )}
-            </Modal>
-        </div>
-    )
-}
+            </Modal> */}
+      <Modal open={isShowView} onClose={() => setShowView(false)} size="m-xl">
+        <div className="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-4xl">
+          <h1 className="font-bold text-2xl text-gray-800 mb-4">
+            Chi tiết đơn đặt #{orderId}
+          </h1>
+          {bookingData && (
+            <div className="space-y-2">
+              <p className="text-base text-gray-600">
+                Khách hàng:{" "}
+                <span className="font-semibold text-gray-900">
+                #{bookingData?.customer.id}: {bookingData?.customer.name}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Đặt tour:{" "}
+                <span className="font-semibold text-gray-900">
+                {bookingData?.tour_day.tour.name}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Ngày đặt:{" "}
+                <span className="font-semibold text-gray-900">
+                {bookingData.order_date.slice(0,10) + ' ' + bookingData.order_date.slice(11,19) }
+                </span>
+              </p>
+              
+              <p className="text-base text-gray-600">
+              Số người tham gia:
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.number_of_people}
+                </span>
+              </p>
 
-export default ButtonView
+              
+
+              <p className="text-base text-gray-600">
+              Số người lớn::
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.adults_count}
+                </span>
+              </p>
+              {/* <p className="text-base text-gray-600">Giá người lớn: <span className="font-semibold text-gray-900">{tourData.adultPrice}</span></p>
+                        <p className="text-base text-gray-600">Giá trẻ em: <span className="font-semibold text-gray-900">{tourData.childPrice}</span></p> */}
+              <p className="text-base text-gray-600">
+                Số trẻ em:
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.children_count}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Số phòng đơn:
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.rooms_count}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Trạng thái:
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData?.status.ele_name}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Tổng tiền:
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.total_price} VNĐ
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+              Ngày thanh toán: 
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.pay_date.slice(0,10) + ' ' + bookingData.pay_date.slice(11,19) }
+                </span>
+              </p>
+
+              
+            </div>
+
+          )}
+        </div>
+      </Modal>
+    </div>
+  );
+};
+
+export default ButtonView;

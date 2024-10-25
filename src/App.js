@@ -15,37 +15,42 @@ import Signup from "./pages/Signup/Signup";
 import BookingAdmin from "./pages/Admin/Booking/Booking";
 import Account from "./pages/Admin/Account/Account";
 import TourAdmin from "./pages/Admin/Tour/Tour";
+import LoginAdmin from "./pages/Admin/Login";
 function App() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomeLayout />}>
-                    <Route path="/" element={<Home />} />
-                </Route>
-                <Route path="/" element={<MainLayout />}>
-                    <Route path="/tour" element={<Tour />} />
-                    <Route path="/destinations" element={<h1>List destinations page</h1>} />
-                    <Route path="/tour/:title" element={<TourDetail />} />
-                    <Route
-                        path="/booking/:title"
-                        element={
-                            <AuthGuard>
-                                <Booking />
-                            </AuthGuard>
-                        }
-                    />
-                </Route>
-                <Route path="/admin/" element={<DashboardLayout />}>
-                    <Route path="dashboard" element={<Dashboard />}></Route>
-                    <Route path="tours" element={<TourAdmin />}></Route>
-                    <Route path="bookings" element={<BookingAdmin />}></Route>
-                    <Route path="accounts" element={<Account />}></Route>
-                </Route>
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<Signup />} />
-                <Route path="/*" element={<NotFound />} />
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomeLayout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="/tour" element={<Tour />} />
+          <Route
+            path="/destinations"
+            element={<h1>List destinations page</h1>}
+          />
+          <Route path="/tour/:title" element={<TourDetail />} />
+          <Route
+            path="/booking/:id"
+            element={
+              <AuthGuard>
+                <Booking />
+              </AuthGuard>
+            }
+          />
+        </Route>
+        <Route path="/admin/" element={<DashboardLayout />}>
+          <Route path="dashboard" element={<Dashboard />}></Route>
+          <Route path="tours" element={<TourAdmin />}></Route>
+          <Route path="bookings" element={<BookingAdmin />}></Route>
+          <Route path="accounts" element={<Account />}></Route>
+        </Route>
+        <Route path="/admin/login" element={<LoginAdmin />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 export default App;

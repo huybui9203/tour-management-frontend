@@ -19,10 +19,10 @@ const ButtonMore = ({
     type: undefined,
     isOpen: false,
   });
-  const reloadData = useContext(TourContext);
+  const [reloadData] = useContext(TourContext);
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(process.env.REACT_APP_URL + "/admin/accounts/" + id, {
+      await axios.delete(process.env.REACT_APP_URL + "/admin/tours/" + id, {
         withCredentials: true,
       });
       reloadData(true);

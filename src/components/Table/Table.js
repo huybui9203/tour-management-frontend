@@ -2,41 +2,7 @@ import React, { useEffect, useState } from "react";
 import DataTable from 'react-data-table-component'
 import { BiBorderRadius } from "react-icons/bi";
 import LabelBookingStatus from "../LabelBookingStatus";
-// const columns = [
-//     {
-//         name: "Họ và tên (KH||NV)",
-//         selector: (row) => row.name,
-//         sortable: true,
-//     },
-//     {
-//         name: "Tên đăng nhập",
-//         selector: (row) => row.username,
-//         sortable: true,
-//     },
-//     {
-//         name: "Quyền",
-//         selector: (row) => row.role,
-//         sortable: true,
-//     },
-// ];
 
-// const data = [
-//     { id: 1, name: "Lục Thanh Phong", username: "lucthanhphong", role: <LabelBookingStatus label='pending' statusCode={2}/> },
-//     { id: 2, name: "Nguyễn Văn An", username: "nguyenvanan", role: "Admin" },
-//     { id: 3, name: "Trần Thị Mai", username: "tranthimai", role: "Khách hàng" },
-//     { id: 4, name: "Lê Hoàng Nam", username: "lehoangnam", role: "Khách hàng" },
-//     { id: 5, name: "Phạm Minh Khang", username: "phamminhkhang", role: "Khách hàng" },
-//     { id: 6, name: "Nguyễn Thị Hằng", username: "nguyenthihang", role: "Khách hàng" },
-//     { id: 7, name: "Vũ Văn Bình", username: "vuvanbinh", role: "Admin" },
-//     { id: 8, name: "Hoàng Văn Tú", username: "hoangvantu", role: "Nhân viên" },
-//     { id: 9, name: "Đỗ Thị Hạnh", username: "dothihanh", role: "Khách hàng" },
-//     { id: 10, name: "Phan Minh Hải", username: "phanminhhai", role: "Nhân viên" },
-//     { id: 11, name: "Trần Minh Tuấn", username: "tranminhtuan", role: "Khách hàng" },
-//     { id: 12, name: "Lý Nhật Nam", username: "lynhatnam", role: "Khách hàng" },
-//     { id: 13, name: "Lê Thị Hà", username: "lethihaha", role: "Nhân viên" },
-//     { id: 14, name: "Nguyễn Hoàng Anh", username: "nguyenhoanganh", role: "Nhân viên" },
-//     { id: 15, name: "Phạm Văn Đức", username: "phamvanduc", role: "Khách hàng" },
-// ];
 
 const customStyles = {
     // header: {
@@ -93,12 +59,12 @@ const customStyles = {
         style: {
 
         },
-        pageButtonsStyle: {
-            border: '1px solid #135846',
-            borderRadius: '10%',
-            margin: '4px',
+        // pageButtonsStyle: {
+        //     border: '1px solid #135846',
+        //     borderRadius: '10%',
+        //     margin: '4px',
 
-        }
+        // }
     }
 };
 

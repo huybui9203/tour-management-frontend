@@ -27,11 +27,13 @@ const columns = [
         name: "Ngày đặt",
         selector: (row) => row.orderDate,
         sortable: true,
+        cell: (row) => <div><p className='font-bold'>{row.orderDate.slice(0,10)}</p><p>{row.orderDate.slice(11,19)}</p></div>
     },
     {
         name: "Ngày thanh toán",
         selector: (row) => row.paymentDate,
         sortable: true,
+        cell: (row) => <div><p className='font-bold'>{row.paymentDate.slice(0,10)}</p><p>{row.paymentDate.slice(11,19)}</p></div>
     },
     {
         name: "Trạng thái",
@@ -65,8 +67,8 @@ const Booking = () => {
             if(item.status.ele_id == tab || tab == 0) {
                 const record = {
                     orderId: item.id,
-                    customerName: item.customer.name,
-                    tourName: item.tour_day.tour.name,
+                    customerName: item.customer?.name,
+                    tourName: item.tour_day.tour?.name,
                     orderDate: item.order_date,
                     paymentDate: item.pay_date,
                     orderStatus: <LabelBookingStatus label={item.status.ele_name} statusCode={item.status.ele_id}/>,
