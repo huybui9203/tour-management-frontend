@@ -1,8 +1,9 @@
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import Table from "../../../components/Table";
 import ButtonMore from "./ButtonMore";
 import CreateAccount from "./CreateEditAccount";
+import Auth, { AuthContext } from "../../../context/Auth";
 const columns = [
     {
         name: "Id",
@@ -43,10 +44,14 @@ const Account = () => {
     const [tab, setTab] = useState(0);
     const [isOpenCreateForm, setIsOpenCreateForm] = useState(false);
 
+  const {user} = useContext(AuthContext)
     const getTableData = useMemo(() => {
         const tableData = [];
         listAccounts.map((item) => {
             if (item.role.ele_id == tab || tab == 0) {
+              if(user.username == item.username) {
+                return
+              }
                 const record = {
                     id: item.id,
                     username: item.username,
@@ -99,11 +104,12 @@ const Account = () => {
                     })}
                 </ul>
                 <Table columns={columns} data={getTableData} />
-                <button onClick={() => setIsOpenCreateForm(true)}>Thêm mới</button>
+                <button className="bg-blue-500 text-white rounded-md px-4 py-2 mt-4" onClick={() => setIsOpenCreateForm(true)}>Thêm mới</button>
                 <CreateAccount open={isOpenCreateForm} onClose={() => setIsOpenCreateForm(false)} />
             </div>
         </AccountContext.Provider>
     );
+
 };
 
 export default Account;

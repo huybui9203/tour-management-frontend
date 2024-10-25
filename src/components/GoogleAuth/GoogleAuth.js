@@ -3,10 +3,11 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import app from "../../firebase/index.js";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../context/Auth";
+import { AuthContext } from "../../context/Auth.js";
 function GoogleAuth() {
-    // console.log(process.env.REACT_APP_FIREBASE_API_KEY);
     const { setUser } = useContext(AuthContext);
+    console.log(process.env.REACT_APP_FIREBASE_API_KEY);
+
     const navigate = useNavigate();
     const handleLoginWithGoogle = async () => {
         try {
@@ -14,6 +15,7 @@ function GoogleAuth() {
             const auth = getAuth(app);
             const result = await signInWithPopup(auth, provider);
             console.log(result.user.displayName, result.user.email);
+
             const res = await axios.post(
                 process.env.REACT_APP_URL + "/auth/google",
                 {

@@ -18,6 +18,15 @@ const columns = [
     selector: (row) => row.name,
     sortable: true,
   },
+
+  {
+    name: "Ảnh",
+    selector: (row) => row.img,
+    cell: (row) => {
+      return row.images?.length > 0? <img className="max-h-14 rounded-sm my-2" src={row.images[0].img_url.split(' ')[0]} alt={row.images[0].img_url}/> : 'no image'
+    }
+  },
+
   {
     name: "Số ngày",
     selector: (row) => row.totalDay,
@@ -73,7 +82,7 @@ const Tour = () => {
   const getTableData = useMemo(() => {
     const tableData = [];
     listTours.map((item) => {
-      if (item.status == tab || tab == 0) {
+      if (item.status+1 == tab || tab == 0) {
         const record = {
             id: item.id,
             name: item.name,
@@ -82,7 +91,8 @@ const Tour = () => {
             destination: item.destination,
             departurePoint: item.departure_point,
             status: Number(item.status),
-            price: item.price
+            price: item.price,
+            images: item.images
         };
         tableData.push(record);
       }
@@ -111,10 +121,10 @@ const Tour = () => {
   }, [stale]);
 
   return (
-    <TourContext.Provider value={[setStale, getTableData]}>
+    <TourContext.Provider value={[setStale, listTours]}>
       <div className="relative">
         <ul className="flex absolute left-0 top-1">
-          {["Tất cả", "Đang hoạt động", "Dừng hoạt động"].map((label, index) => {
+          {["Tất cả", "Dừng hoạt động", "Đang hoạt động"].map((label, index) => {
             return (
               <li
                 key={index}
@@ -131,7 +141,7 @@ const Tour = () => {
           })}
         </ul>
         <Table columns={columns} data={getTableData} />
-        <button onClick={() => setIsOpenCreateForm(true)}>Thêm mới</button>
+        <button className="px-2 py-2 rounded-md bg-blue-600 mt-6 text-white" onClick={() => setIsOpenCreateForm(true)}>Thêm mới</button>
         <CreateTour open={isOpenCreateForm}
           onClose={() => setIsOpenCreateForm(false)}/>
       </div>

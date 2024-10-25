@@ -15,6 +15,7 @@ import Signup from "./pages/Signup/Signup";
 import BookingAdmin from "./pages/Admin/Booking/Booking";
 import Account from "./pages/Admin/Account/Account";
 import TourAdmin from "./pages/Admin/Tour/Tour";
+import LoginAdmin from "./pages/Admin/Login";
 import VnPay from "./pages/VnPay/VnPay";
 import Success from "./pages/VnPay/Success";
 import Failed from "./pages/VnPay/Failed";
@@ -27,12 +28,10 @@ function App() {
                 </Route>
                 <Route path="/" element={<MainLayout />}>
                     <Route path="/tour" element={<Tour />} />
-                    <Route path="/payment-success" element={<Success />} />
-                    <Route path="/payment-failed" element={<Failed />} />
                     <Route path="/destinations" element={<h1>List destinations page</h1>} />
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route
-                        path="/booking/:title"
+                        path="/booking/:id"
                         element={
                             <AuthGuard>
                                 <Booking />
@@ -54,6 +53,7 @@ function App() {
                     <Route path="bookings" element={<BookingAdmin />}></Route>
                     <Route path="accounts" element={<Account />}></Route>
                 </Route>
+                <Route path="/admin/login" element={<LoginAdmin />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<Signup />} />
                 <Route path="/*" element={<NotFound />} />

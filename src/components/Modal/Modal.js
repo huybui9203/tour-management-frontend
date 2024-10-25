@@ -11,6 +11,7 @@ const sizeClasses = {
   "m-4xl": "max-w-4xl",
   "m-5xl": "max-w-5xl",
   "m-6xl": "max-w-6xl",
+
 };
 
 const Modal = ({ children, open, onClose, size }) => {
