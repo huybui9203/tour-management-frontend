@@ -9,6 +9,7 @@ const TourDetail = () => {
     const { title } = useParams();
     const [tour, setTour] = useState({});
     const [tourRelated, setTourRelated] = useState([]);
+    
     const fetchData = async () => {
         const res = await axios.get(`${process.env.REACT_APP_URL}/tour/get-details/${title}`);
         if (res.status !== 200) {
@@ -21,7 +22,6 @@ const TourDetail = () => {
     useEffect(() => {
         fetchData();
     }, []);
-    console.log(tour, tourRelated);
 
     return (
         <div className="flex justify-center flex-col">

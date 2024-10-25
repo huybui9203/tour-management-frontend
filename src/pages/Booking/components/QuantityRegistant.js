@@ -12,10 +12,6 @@ function QuantityRegistant({ type, onIncrease, onDecrease, quantity, onHandleDat
         infor.heading = "Trẻ em";
         infor.ages = "Từ 2 - 11 tuổi";
     }
-    // if (type === "baby") {
-    //     infor.heading = "Em bé";
-    //     infor.ages = "Dưới 2 tuổi";
-    // }
 
     return (
         <div className="flex flex-col p-3 border border-blue-300 rounded-lg">

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { FaArrowLeftLong, FaCircleUser, FaRightLong } from "react-icons/fa6";
 import FormIcon from "./svg/FormIcon";
 import PayIcon from "./svg/PayIcon";
 import ConfirmIcon from "./svg/ConfirmIcon";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import FormBooking from "./components/FormBooking";
+import { AuthContext } from "../../context/Auth";
 
 function Booking() {
     const navigate = useNavigate();
     const { title } = useParams();
-   
-
+    const { user } = useContext(AuthContext);
     return (
         <div>
             <div className="flex justify-start items-center gap-2" onClick={() => navigate(-1)}>
@@ -51,19 +51,19 @@ function Booking() {
             </div>
 
             <div className="mt-20">
-                <div className="flex items-center p-3 bg-gray-200 rounded-lg gap-3">
-                    <FaCircleUser size={30} />
-                    <p className="text-blue-600 text-sm md:text-base leading-6">
-                        <Link to={"/login"} className="font-bold text-blue-800 underline">
-                            Đăng nhập
-                        </Link>{" "}
-                        để nhận ưu đãi, tích điểm và quản lý đơn hàng dễ dàng hơn!
-                    </p>
-                </div>
+                    <div className="flex items-center p-3 bg-gray-200 rounded-lg gap-3" hidden={!user}>
+                        <FaCircleUser size={30} />
+                        <p className="text-blue-600 text-sm md:text-base leading-6">
+                            <Link to={"/login"} className="font-bold text-blue-800 underline">
+                                Đăng nhập
+                            </Link>{" "}
+                            để nhận ưu đãi, tích điểm và quản lý đơn hàng dễ dàng hơn!
+                        </p>
+                    </div>
+               
                 <h3 className="text-sm font-bold mt-4">THÔNG TIN LIÊN LẠC</h3>
 
                 <FormBooking title={title} />
-                
             </div>
         </div>
     );

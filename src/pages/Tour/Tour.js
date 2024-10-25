@@ -9,6 +9,8 @@ import axios from "axios";
 const Tour = () => {
     const [showFilter, setShowFilter] = useState(false);
     const [list, setList] = useState([]);
+    console.log(list);
+    
     const fetchData = async () => {
         const res = await axios.get(`${process.env.REACT_APP_URL}/tour/get-list`);
         console.log(res.data.list);

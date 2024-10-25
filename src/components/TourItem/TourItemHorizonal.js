@@ -74,7 +74,7 @@ const TourItemH = ({ tour }) => {
                             <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
                                 <PiAirplaneTakeoffLight className="text-xl mr-1" />
                                 <span className="lg:text-base md:text-sm">Phương tiện:</span>
-                                <span className="ml-1 lg:text-base md:text-sm">{tour?.veh?.ele_name}</span>
+                                <span className="ml-1 lg:text-base md:text-sm">{tour?.list_veh?.ele_name}</span>
                             </div>
                         </div>
                         <div className="flex items-center">

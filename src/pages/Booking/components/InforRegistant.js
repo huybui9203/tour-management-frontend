@@ -11,11 +11,12 @@ function InforRegistant({ age, index, handleSetInforRegistant, price }) {
         index: index,
         name: "",
         type: age,
-        price: price,
         sex: "",
-        birthday: "",
+        price: price,
+        birthday: maxDay,
         isBookingSingleRoom: false,
     });
+    
     const [formError, setFormError] = useState({
         name: "",
         birthday: "",
@@ -78,7 +79,6 @@ function InforRegistant({ age, index, handleSetInforRegistant, price }) {
             </h1>
 
             <div
-                
                 className={`border border-gray-200 p-3 rounded-lg mt-3 grid grid-cols-1 ${
                     age === "ADULT" ? "md:grid-cols-2 xl:grid-cols-3" : "xl:grid-cols-2"
                 } items-center gap-3`}
@@ -147,7 +147,7 @@ function InforRegistant({ age, index, handleSetInforRegistant, price }) {
                                     onChange={(e) =>
                                         setFormData((prev) => ({
                                             ...prev,
-                                            price: e.target.checked ? prev.price + 300 : prev.price - 300,
+                                            price: e.target.checked ? prev.price + 1500000 : prev.price - 1500000,
                                             [e.target.id]: e.target.checked,
                                         }))
                                     }

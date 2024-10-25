@@ -8,26 +8,23 @@ import { MdOutlineDiscount } from "react-icons/md";
 import { SlLocationPin } from "react-icons/sl";
 import { TiGroupOutline } from "react-icons/ti";
 import formatPrice from "../../../utils/formatPrice";
+import { useNavigate, useParams } from "react-router-dom";
 
-function BookingSummary({ formData, handleShowModal, title }) {
+function BookingSummary({ formData, tour }) {
     const [isHidden, setHidden] = useState(true);
-    const [tour, setTour] = useState({});
     const [singleRoom, setSingleRoom] = useState(0);
-    const fetchData = async () => {
-        const res = await axios.get(`${process.env.REACT_APP_URL}/tour/get-details/${title}`);
-        if (res.status !== 200) {
-            console.log(res.data.message);
-            return;
-        }
-        setTour(res.data.tour);
-    };
+    const navigate = useNavigate();
+    const { title } = useParams();
     const handleCreateOrder = async () => {
-        handleShowModal();
+        const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${title}`, formData, {
+            withCredentials: true,
+        });
+        if (res.status === 200) {
+            navigate(`/payments/${res.data.idOrder}`, { state: formData });
+        } else {
+            alert("Error");
+        }
     };
-
-    useEffect(() => {
-        fetchData();
-    }, []);
 
     useEffect(() => {
         setSingleRoom(() => {
@@ -92,7 +89,7 @@ function BookingSummary({ formData, handleShowModal, title }) {
                         <BsTrainFront className="text-2xl" />
                         <span className="font-bold text-sm">Phương tiện di chuyển</span>
                     </h1>
-                    <h1 className="flex gap-1 items-center">{tour?.veh?.ele_name}</h1>
+                    <h1 className="flex gap-1 items-center">{tour?.list_veh?.ele_name}</h1>
                 </div>
                 <div className="border-b pb-3">
                     <h1 className="flex items-center gap-1 mt-3">

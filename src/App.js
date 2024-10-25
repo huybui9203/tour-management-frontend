@@ -15,6 +15,9 @@ import Signup from "./pages/Signup/Signup";
 import BookingAdmin from "./pages/Admin/Booking/Booking";
 import Account from "./pages/Admin/Account/Account";
 import TourAdmin from "./pages/Admin/Tour/Tour";
+import VnPay from "./pages/VnPay/VnPay";
+import Success from "./pages/VnPay/Success";
+import Failed from "./pages/VnPay/Failed";
 function App() {
     return (
         <BrowserRouter>
@@ -24,6 +27,8 @@ function App() {
                 </Route>
                 <Route path="/" element={<MainLayout />}>
                     <Route path="/tour" element={<Tour />} />
+                    <Route path="/payment-success" element={<Success />} />
+                    <Route path="/payment-failed" element={<Failed />} />
                     <Route path="/destinations" element={<h1>List destinations page</h1>} />
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route
@@ -31,6 +36,14 @@ function App() {
                         element={
                             <AuthGuard>
                                 <Booking />
+                            </AuthGuard>
+                        }
+                    />
+                    <Route
+                        path="/payments/:id"
+                        element={
+                            <AuthGuard>
+                                <VnPay />
                             </AuthGuard>
                         }
                     />

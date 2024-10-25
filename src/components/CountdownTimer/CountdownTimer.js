@@ -11,7 +11,8 @@ const CountdownTimer = ({ initialMinutes }) => {
 
     return (
         <div className="flex justify-center items-center">
-            <div className="text-xl bg-gray-200 px-8 py-2 rounded-md">
+            <div className="text-2xl text-red-700 font-bold px-8 py-2 rounded-md">
+                <span>Thời gian còn lại: </span>
                 {`${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`}
             </div>
         </div>
