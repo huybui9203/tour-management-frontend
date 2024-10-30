@@ -1,6 +1,8 @@
 import BookingPanel from "../../components/BookingPanel/BookingPanel";
 import Slider from "../../components/Slider/Slider";
 import Ltinerary from "../../components/Ltinerary/Ltinerary";
+import InfomationTour from "../../components/InformationTour/Information";
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -28,8 +30,9 @@ const TourDetail = () => {
             <h1 className="font-bold text-3xl py-4">{tour.name}</h1>
             <div className="block lg:flex">
                 <div className="w-full lg:w-3/5 mr-8">
-                    <Slider />
+                    <Slider listImages={tour.images || []}/>
                     <h1 className="text-center font-bold text-3xl py-4">Lịch khởi hành</h1>
+                    <InfomationTour tour={tour}/>
                     <h1 className="text-center font-bold text-3xl py-4">Lịch trình</h1>
                     <Ltinerary tour={tour} />
                 </div>

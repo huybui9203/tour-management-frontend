@@ -34,10 +34,10 @@ const TourItemH = ({ tour }) => {
         <div>
             <div className="flex py-4">
                 {/* <div className="md:w-1/3"> left</div> */}
-                <div className="md:flex border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                <div className="md:flex border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 flex-1">
                     <div className="md:w-5/12 h-44 md:h-full flex items-center">
                         <img
-                            src="https://vnpay.vn/s1/statics.vnpay.vn/2023/11/0d79ij9ruoja1698812184967.jpg"
+                            src={tour.images.length > 0 ? tour.images[0].img_url.split(' ')[0] : undefined}
                             className="w-full h-full  "
                             alt="Tour"
                         />
@@ -68,7 +68,7 @@ const TourItemH = ({ tour }) => {
                                 <GiAlarmClock className="text-xl mr-1" />
                                 <span className="lg:text-base md:text-sm">Thời gian:</span>
                                 <span className="ml-1 lg:text-base md:text-sm">
-                                    {tour.total_day}N{tour.total_day - 1}D
+                                    {tour.total_day}
                                 </span>
                             </div>
                             <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
@@ -90,36 +90,10 @@ const TourItemH = ({ tour }) => {
                                         className="flex transition-transform duration-300 mx-auto"
                                         style={{ transform: `translateX(${scrollPosition}px)` }}
                                     >
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            10/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            11/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            12/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            13/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            14/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            10/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            11/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            12/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            13/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            14/11
-                                        </button>
+                                        
+                                        {tour.date.map(item => <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
+                                            {item.start_date?.slice(8,10)+'/'+item.start_date?.slice(5,7)}
+                                        </button>)}
                                     </div>
                                 </div>
                                 <button

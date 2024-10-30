@@ -1,18 +1,25 @@
 import { useState } from 'react';
 
-export default function Information() {
+export default function Information({tour}) {
   const [selectedMonth, setSelectedMonth] = useState('9/2024');
   const [selectedDay, setSelectedDay] = useState(null);
+  const listDate = tour.date ? tour.date.map(item => item.start_date.slice(5,7)+'/'+item.start_date.slice(8, 10) + '/' + item.start_date.slice(0, 4)) : []
+  console.log('<>', listDate)
+  const months = Array.from(new Set(listDate.map(item => item.slice(0, 2) + item.slice(5)).sort()));
   
-  const months = ['9/2024', '10/2024', '11/2024', '12/2024'];
   const today = new Date(); // Lấy ngày hiện tại
   const todayDate = today.getDate();
   const todayMonth = today.getMonth() + 1; // Tháng bắt đầu từ 0
   const todayYear = today.getFullYear();
 
   // Thông tin cho các ngày đã cài đặt
-  const availableDays = ['21', '22', '23']; // Danh sách ngày có thông tin
-
+  
+  const availableDays = (month) => {
+    return listDate.filter(item=>item.slice(0, 2) == month).map(item => item.slice(3, 5).startsWith('0') ? item.slice(4, 5) : item.slice(3, 5)  )
+    
+  }
+  // Danh sách ngày có thông tin
+  console.log('>>', availableDays(10))
   const getDaysInMonth = (monthYear) => {
     const [month, year] = monthYear.split('/');
     const date = new Date(year, month, 0);
@@ -26,6 +33,7 @@ export default function Information() {
   const daysInSelectedMonth = getDaysInMonth(selectedMonth);
 
   // Thông tin cho ngày đã chọn
+// const travelInfo = 
   const travelInfo = {
     '21': {
       transportation: {
@@ -141,8 +149,8 @@ export default function Information() {
               <div className="md:border-r border-gray-300 pr-4">
                 <p className="font-semibold text-black text-rose-600">Ngày đi - {selectedDay}/{selectedMonth}</p>
                 <div className="flex justify-between mt-2 text-gray-600">
-                  <span>{travelInfo[selectedDay]?.transportation?.depart.time || 'N/A'}</span>
-                  <span>{travelInfo[selectedDay]?.transportation?.return.time || 'N/A'}</span>
+                  <span>{new Date(tour.date[0]?.start_date).toTimeString().slice(0, 5) || 'N/A'}</span>
+                  <span>{new Date(tour.date[0]?.end_date).toTimeString().slice(0, 5)|| 'N/A'}</span>
                 </div>
                 <div className="flex items-center justify-between my-2">
                   <div className="flex-1 border-t border-gray-300 relative">
@@ -152,15 +160,15 @@ export default function Information() {
                   </div>
                 </div>
                 <div className="flex justify-between mt-1 text-gray-700">
-                  <span>{travelInfo[selectedDay]?.transportation?.depart.from || 'N/A'}</span>
-                  <span>{travelInfo[selectedDay]?.transportation?.depart.to || 'N/A'}</span>
+                  <span>{tour.departure_point || 'N/A'}</span>
+                  <span>{tour.destination|| 'N/A'}</span>
                 </div>
               </div>
               <div className="md:pl-4">
                 <p className="font-semibold text-black text-rose-600">Ngày về - {selectedDay}/{selectedMonth}</p>
                 <div className="flex justify-between mt-2 text-gray-600">
-                  <span>{travelInfo[selectedDay]?.transportation?.return.time || 'N/A'}</span>
-                  <span>{travelInfo[selectedDay]?.transportation?.depart.time || 'N/A'}</span>
+                  <span>{new Date(tour.date[0]?.end_date).toTimeString().slice(0, 5)|| 'N/A'}</span>
+                  <span>{new Date(tour.date[0]?.start_date).toTimeString().slice(0, 5) || 'N/A'}</span>
                 </div>
                 <div className="flex items-center justify-between my-2">
                   <div className="flex-1 border-t border-gray-300 relative">
@@ -170,8 +178,8 @@ export default function Information() {
                   </div>
                 </div>
                 <div className="flex justify-between mt-1 text-gray-700">
-                  <span>{travelInfo[selectedDay]?.transportation?.return.from || 'N/A'}</span>
-                  <span>{travelInfo[selectedDay]?.transportation?.return.to || 'N/A'}</span>
+                  <span>{tour.destination || 'N/A'}</span>
+                  <span>{tour.departure_point || 'N/A'}</span>
                 </div>
               </div>
             </div>
@@ -183,21 +191,21 @@ export default function Information() {
                 <div className="mb-4">
                   <div className="flex justify-between items-center">
                     <p className="font-semibold text-gray-800">Người lớn</p>
-                    <p className="font-bold text-red-600">{travelInfo[selectedDay]?.price.adult || 'N/A'}</p>
+                    <p className="font-bold text-red-600">{tour.price || 'N/A'}</p>
                   </div>
                   <p className="text-sm text-gray-500">(Từ 12 tuổi trở lên)</p>
                 </div>
                 <div className="mb-4">
                   <div className="flex justify-between items-center">
                     <p className="font-semibold text-gray-800">Trẻ em</p>
-                    <p className="font-bold text-red-600">{travelInfo[selectedDay]?.price.child || 'N/A'}</p>
+                    <p className="font-bold text-red-600">{tour.price || 'N/A'}</p>
                   </div>
                   <p className="text-sm text-gray-500">(Từ 5 - 11 tuổi)</p>
                 </div>
                 <div>
                   <div className="flex justify-between items-center">
                     <p className="font-semibold text-gray-800">Trẻ nhỏ</p>
-                    <p className="font-bold text-red-600">{travelInfo[selectedDay]?.price.infant || 'N/A'}</p>
+                    <p className="font-bold text-red-600">{tour.price || 'N/A'}</p>
                   </div>
                   <p className="text-sm text-gray-500">(Từ 2 - 4 tuổi)</p>
                 </div>
@@ -206,7 +214,7 @@ export default function Information() {
                 <div className="mb-4">
                   <div className="flex justify-between items-center">
                     <p className="font-semibold text-gray-800">Em bé</p>
-                    <p className="font-bold text-red-600">{travelInfo[selectedDay]?.price.baby || 'N/A'}</p>
+                    <p className="font-bold text-red-600">{tour.price|| 'N/A'}</p>
                   </div>
                   <p className="text-sm text-gray-500">(Dưới 2 tuổi)</p>
                 </div>
@@ -243,13 +251,13 @@ export default function Information() {
             </div>
 
             <div className="grid grid-cols-7 gap-2">
-              {daysInSelectedMonth.map((day) => {
+              {daysInSelectedMonth.map((day, index) => {
                 const date = new Date(todayYear, parseInt(selectedMonth.split('/')[0]) - 1, day);
                 const dayOfWeek = date.getDay(); // Lấy ngày trong tuần
                 const isPast =
                   (selectedMonth.split('/')[0] == todayMonth && day < todayDate) ||
                   selectedMonth.split('/')[0] < todayMonth;
-                const isAvailable = availableDays.includes(day.toString());
+                const isAvailable = availableDays(selectedMonth.slice(0, 2)).includes(day.toString());
 
                 return (
                     <div
@@ -269,7 +277,7 @@ export default function Information() {
                     </div>
                     {isAvailable && (
                       <span className="text-sm text-red-600 mt-1">
-                        {travelInfo[day].price.adult} {/* Hiển thị giá cho người lớn */}
+                        {tour.price} {/* Hiển thị giá cho người lớn */}
                       </span>
                     )}
                   </div>

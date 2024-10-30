@@ -10,7 +10,6 @@ function GoogleAuth() {
 
     const navigate = useNavigate();
     const handleLoginWithGoogle = async () => {
-        alert(1)
         try {
             const provider = new GoogleAuthProvider();
             const auth = getAuth(app);
