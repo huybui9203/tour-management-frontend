@@ -38,7 +38,7 @@ const TourItemH = ({ tour }) => {
                 <div className="md:flex border border-red-500 rounded-lg overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 flex-1">
                     <div className="md:w-5/12 h-44 md:h-full flex items-center">
                         <img
-                            src={tour.images.length > 0 ? tour.images[0].img_url.split(' ')[0] : undefined}
+                            src={tour.images?.length > 0 ? tour.images[0].img_url.split(' ')[0] : undefined}
                             className="w-full h-full  "
                             alt="Tour"
                         />
@@ -91,18 +91,13 @@ const TourItemH = ({ tour }) => {
                                         className="flex transition-transform duration-300 mx-auto"
                                         style={{ transform: `translateX(${scrollPosition}px)` }}
                                     >
-<<<<<<< HEAD
                                         {tour?.date?.map((item) => (
                                             <button key={item.id} className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
                                                 {formatDate(item?.start_date)}
                                             </button>
                                         ))}
-=======
                                         
-                                        {tour.date.map(item => <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            {item.start_date?.slice(8,10)+'/'+item.start_date?.slice(5,7)}
-                                        </button>)}
->>>>>>> 1fe6a431bf3fd4f6e931ebe2ab3a9b94c3491b19
+                                       
                                     </div>
                                 </div>
                                 <button
