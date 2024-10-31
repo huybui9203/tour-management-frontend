@@ -4,13 +4,17 @@ import Filter from "../../components/Filter/Filter";
 import Pagination from "../../components/Pagination/Pagination";
 import Sort from "../../components/Filter/Sort";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
-const Tour = () => {
+const Search = () => {
     const [showFilter, setShowFilter] = useState(false);
     const [list, setList] = useState([]);
+    const [total, setTotal] = useState();
     const [backupList, setBackupList] = useState([]);
     const [currPage, setCurrPage] = useState(1);
     const [sortQuery, setSortQuery] = useState("all");
+    const query = new URLSearchParams(window.location.search);
+    
     const [filterQuery, setFilterQuery] = useState({
         destination: "",
         place: "",
@@ -22,9 +26,14 @@ const Tour = () => {
     });
 
     const fetchData = async () => {
-        const res = await axios.get(`${process.env.REACT_APP_URL}/tour/get-list`);
+        const res = await axios.get(
+            `${process.env.REACT_APP_URL}/tour/filter-by-field?keyword=${query.get("keyword")}&destination=${query.get(
+                "destination"
+            )}&duration=${query.get("duration")}`
+        );
         setList(res.data.list);
         setBackupList(res.data.list);
+        setTotal(res.data.total);
     };
 
     const toggleFilter = () => {
@@ -166,4 +175,4 @@ const Tour = () => {
     );
 };
 
-export default Tour;
+export default Search;

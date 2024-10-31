@@ -1,11 +1,32 @@
 import { useState } from "react";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const SearchBar = () => {
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState({
+        keyword: "",
+        destination: "",
+        duration: "",
+    });
+    console.log(inputValue);
+
+    const navigate = useNavigate();
+    const handleNavigate = (e) => {
+        e.preventDefault();
+        if (inputValue.destination === "" && inputValue.duration === "" && inputValue.keyword === "") {
+            alert("Nhap day du thong tin");
+        } else {
+            navigate(
+                `/search?keyword=${inputValue.keyword}&destination=${inputValue.destination}&duration=${inputValue.duration}`
+            );
+        }
+    };
 
     // Hàm xử lý khi input thay đổi
     const handleInputChange = (e) => {
-        setInputValue(e.target.value);
+        setInputValue((prev) => ({
+            ...prev,
+            [e.target.id]: e.target.value,
+        }));
     };
     return (
         <div className="">
@@ -17,8 +38,9 @@ const SearchBar = () => {
                                 className="w-full h-16 py-3 px-6 pr-12 border border-gray-300"
                                 name="tour-search"
                                 type="text"
+                                id="keyword"
                                 placeholder="Keywords"
-                                value={inputValue}
+                                value={inputValue.keyword}
                                 onChange={handleInputChange}
                             />
                             <div className="absolute inset-y-0 right-0 pr-3 flex items-center ">
@@ -30,9 +52,12 @@ const SearchBar = () => {
                             <select
                                 className="w-full h-16 py-3 px-6 border border-gray-300 appearance-none "
                                 name="tax-tour-destination"
+                                onChange={handleInputChange}
+                                id="destination"
+                                value={inputValue.destination}
                             >
-                                <option value={inputValue}>Destination</option>
-                                <option value="africa-adventure">Africa Adventure</option>
+                                <option value="">Điểm đến</option>
+                                <option value="đà nẵng">Africa Adventure</option>
                                 <option value="africa-wild">Africa Wild</option>
                                 <option value="america">America</option>
                                 <option value="asia">Asia</option>
@@ -47,9 +72,12 @@ const SearchBar = () => {
                             <select
                                 className="w-full h-16 py-3 px-6 pr-10 border border-gray-300  appearance-none"
                                 name="duration"
+                                id="duration"
+                                value={inputValue.duration}
+                                onChange={handleInputChange}
                             >
-                                <option className="hover:bg-red-300" value={inputValue}>
-                                    Duration
+                                <option className="hover:bg-red-300" value="">
+                                    Thời gian
                                 </option>
                                 <option value="1">1 Day Tour</option>
                                 <option value="2">2-4 Days Tour</option>
@@ -61,11 +89,12 @@ const SearchBar = () => {
                             </div>
                         </div>
 
-                        <div className="md:w-1/4  mt-1">
+                        <div className="md:w-1/4 mt-1">
                             <input
                                 className="h-16 w-full  py-3 px-6 bg-red-500 text-white  cursor-pointer"
                                 type="submit"
                                 value="Search"
+                                onClick={handleNavigate}
                             />
                         </div>
                     </form>

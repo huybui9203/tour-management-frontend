@@ -1,11 +1,21 @@
-import style from "./Filter.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
-const StarRatingOption = ({ id, starsFilled, totalStars = 5 }) => {
+const StarRatingOption = ({ id, starsFilled, totalStars = 5, handleFilterQuery }) => {
     return (
         <div className="flex items-center">
-            <input type="radio" name="rating" className="form-checkbox text-blue-600 h-4 w-4" id={id} />
+            <input
+                type="radio"
+                name="rating"
+                className="form-checkbox text-blue-600 h-4 w-4"
+                id={id}
+                onClick={(prev) => {
+                    handleFilterQuery((prev) => ({
+                        ...prev,
+                        rating: starsFilled,
+                    }));
+                }}
+            />
             <label className="ml-2" htmlFor={id}>
                 <p className="flex items-center">
                     <span className="text-yellow-400 flex">
@@ -28,9 +38,7 @@ const StarRatingOption = ({ id, starsFilled, totalStars = 5 }) => {
     );
 };
 
-const Filter = () => {
-    const [minValue, setMinValue] = useState(2500000);
-    const [maxValue, setMaxValue] = useState(5000000);
+const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList }) => {
     const rangeRef = useRef(null);
 
     useEffect(() => {
@@ -81,72 +89,81 @@ const Filter = () => {
                                         type="text"
                                         className="form-control w-full px-4 py-2 border border-gray-300 rounded outline-none text-black"
                                         placeholder="Điểm đến, Thành phố"
+                                        value={filterQuery.destination}
+                                        id="destination"
+                                        onChange={(e) =>
+                                            handleFilterQuery((prev) => ({
+                                                ...prev,
+                                                [e.target.id]: e.target.value,
+                                            }))
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
                                     <div className="relative">
-                                        <select className="form-control border border-gray-300 rounded block outline-none w-full p-2.5 text-black">
+                                        <select
+                                            value={filterQuery.place}
+                                            id="place"
+                                            onChange={(e) =>
+                                                handleFilterQuery((prev) => ({
+                                                    ...prev,
+                                                    [e.target.id]: e.target.value,
+                                                }))
+                                            }
+                                            className="form-control border border-gray-300 rounded block outline-none w-full p-2.5 text-black"
+                                        >
                                             <option value="">Chọn địa điểm</option>
-                                            <option value="">San Francisco USA</option>
-                                            <option value="">Berlin Germany</option>
-                                            <option value="">London United Kingdom</option>
-                                            <option value="">Paris Italy</option>
+                                            <option value="đà nẵng">San Francisco USA</option>
+                                            <option value="Ber">Berlin Germany</option>
+                                            <option value="Lon">London United Kingdom</option>
+                                            <option value="Pari">Paris Italy</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <input
                                         type="date"
-                                        name="departure"
+                                        id="start_date"
                                         className="w-full px-4 py-2 border border-gray-300 rounded outline-none"
                                         placeholder="Ngày khởi hành"
                                         data-toggle="datepicker"
+                                        value={filterQuery.start_date || ""}
+                                        onChange={(e) =>
+                                            handleFilterQuery((prev) => ({
+                                                ...prev,
+                                                [e.target.id]:
+                                                    e.target.value &&
+                                                    new Date(e.target.value).toISOString().split("T")[0],
+                                            }))
+                                        }
                                     />
                                 </div>
                                 <div className="form-group">
                                     <input
                                         type="date"
-                                        name="arrival"
+                                        id="end_date"
                                         className="w-full px-4 py-2 border border-gray-300 rounded outline-none"
                                         placeholder="Ngày đến"
                                         data-toggle="datepicker"
+                                        value={filterQuery.end_date || ""}
+                                        onChange={(e) =>
+                                            handleFilterQuery((prev) => ({
+                                                ...prev,
+                                                [e.target.id]:
+                                                    e.target.value &&
+                                                    new Date(e.target.value).toISOString().split("T")[0],
+                                            }))
+                                        }
                                     />
-                                </div>
-                                <div className="!mt-3">
-                                    <label>Chọn phương tiện</label>
-                                </div>
-                                <div className="form-group flex space-x-4 !mt-2">
-                                    <div className="flex items-center space-x-2">
-                                        <input
-                                            type="radio"
-                                            id="radio01"
-                                            name="radio"
-                                            className="form-radio h-4 w-4 text-blue-600 outline-none"
-                                        />
-                                        <label htmlFor="radio01" className="ml-2">
-                                            Xe bus
-                                        </label>
-                                    </div>
-                                    <div className="flex items-center space-x-2">
-                                        <input
-                                            type="radio"
-                                            id="radio02"
-                                            name="radio"
-                                            className="form-radio h-4 w-4 text-blue-600 outline-none"
-                                        />
-                                        <label htmlFor="radio02" className="ml-2">
-                                            Máy bay
-                                        </label>
-                                    </div>
                                 </div>
                                 <div className="form-group range-slider" ref={rangeRef}>
                                     <div className="flex space-x-2">
                                         <input
                                             id="minValueInput"
                                             type="number"
-                                            value={minValue}
-                                            min="0"
-                                            max="20000000"
+                                            value={filterQuery.min}
+                                            min={1000000}
+                                            max={20000000}
                                             readOnly
                                             className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-0 py-1 rounded outline-none"
                                             style={{ backgroundColor: "#f8faff" }}
@@ -155,9 +172,9 @@ const Filter = () => {
                                         <input
                                             id="maxValueInput"
                                             type="number"
-                                            value={maxValue}
-                                            min="0"
-                                            max="20000000"
+                                            value={filterQuery.max}
+                                            min={1000000}
+                                            max={20000000}
                                             readOnly
                                             className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-4 py-1 rounded outline-none"
                                             style={{ backgroundColor: "#f8faff" }}
@@ -165,19 +182,31 @@ const Filter = () => {
                                     </div>
                                     <div className="mt-4 relative mb-14">
                                         <input
-                                            id="minRange"
+                                            id="min"
                                             type="range"
-                                            defaultValue={minValue}
-                                            min="0"
+                                            defaultValue={filterQuery.min}
+                                            onChange={(e) => {
+                                                handleFilterQuery((prev) => ({
+                                                    ...prev,
+                                                    [e.target.id]: e.target.value,
+                                                }));
+                                            }}
+                                            min="1000000"
                                             max="20000000"
                                             step="500000"
                                             className="w-full h-2 bg-blue-300 rounded outline-none absolute ml-0 top-0 left-0"
                                         />
                                         <input
-                                            id="maxRange"
+                                            id="max"
                                             type="range"
-                                            defaultValue={maxValue}
-                                            min="0"
+                                            defaultValue={filterQuery.max}
+                                            onChange={(e) => {
+                                                handleFilterQuery((prev) => ({
+                                                    ...prev,
+                                                    [e.target.id]: e.target.value,
+                                                }));
+                                            }}
+                                            min="1000000"
                                             max="20000000"
                                             step="500000"
                                             className="w-full h-2 bg-blue-500 rounded outline-none absolute top-0 left-0"
@@ -188,6 +217,11 @@ const Filter = () => {
                                     <input
                                         type="submit"
                                         value="Tìm kiếm"
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            const filterList = handleFilter();
+                                            handleList(filterList);
+                                        }}
                                         className="w-full bg-red-500 border text-white py-3 px-5 rounded hover:bg-white hover:text-red-500 border-red-500 outline-none cursor-pointer"
                                     />
                                 </div>
@@ -201,11 +235,11 @@ const Filter = () => {
                     >
                         <h3 className="text-lg font-semibold mb-4">Đánh giá</h3>
                         <form method="post" className="space-y-1 md:space-y-2 form-group">
-                            <StarRatingOption id="star1" starsFilled={5} />
-                            <StarRatingOption id="star2" starsFilled={4} />
-                            <StarRatingOption id="star3" starsFilled={3} />
-                            <StarRatingOption id="star4" starsFilled={2} />
-                            <StarRatingOption id="star5" starsFilled={1} />
+                            <StarRatingOption id="star1" starsFilled={5} handleFilterQuery={handleFilterQuery} />
+                            <StarRatingOption id="star2" starsFilled={4} handleFilterQuery={handleFilterQuery} />
+                            <StarRatingOption id="star3" starsFilled={3} handleFilterQuery={handleFilterQuery} />
+                            <StarRatingOption id="star4" starsFilled={2} handleFilterQuery={handleFilterQuery} />
+                            <StarRatingOption id="star5" starsFilled={1} handleFilterQuery={handleFilterQuery} />
                         </form>
                     </div>
                 </div>

@@ -6,6 +6,7 @@ import { PiAirplaneTakeoffLight } from "react-icons/pi";
 import { LuCalendarDays } from "react-icons/lu";
 import { useNavigate } from "react-router-dom";
 import formatPrice from "../../utils/formatPrice";
+import formatDate from "../../utils/formatDate";
 
 const TourItemH = ({ tour }) => {
     const [scrollPosition, setScrollPosition] = useState(0);
@@ -90,36 +91,11 @@ const TourItemH = ({ tour }) => {
                                         className="flex transition-transform duration-300 mx-auto"
                                         style={{ transform: `translateX(${scrollPosition}px)` }}
                                     >
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            10/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            11/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            12/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            13/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            14/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            10/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            11/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            12/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            13/11
-                                        </button>
-                                        <button className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
-                                            14/11
-                                        </button>
+                                        {tour?.date?.map((item) => (
+                                            <button key={item.id} className="bg-white text-red-500 hover:text-white px-2 m-1  lg:text-base md:text-sm rounded border border-red-500 hover:bg-red-500">
+                                                {formatDate(item?.start_date)}
+                                            </button>
+                                        ))}
                                     </div>
                                 </div>
                                 <button
