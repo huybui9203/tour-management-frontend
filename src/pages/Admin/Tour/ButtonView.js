@@ -15,6 +15,7 @@ const ButtonView = ({ id, label }) => {
   const [tourData, setTourData] = useState(null);
   const [listDates, setListDate] = useState([]);
   const [img, setImg] = useState(null);
+  const [description, setDescription] = useState("");
 
   const [reloadData] = useContext(TourContext);
 
@@ -117,6 +118,26 @@ const ButtonView = ({ id, label }) => {
                 <ul style={{ margin: 0 }}>
                   {listDates.map((item, index) => (
                     <div className="flex justify-start items-center">
+                      <button
+                        disabled={tourData.schedules.length <= 0}
+                        className="bg-red-500 text-white rounded-md px-1 mr-2"
+                        onClick={async () => {
+                          try {
+                            await axios.delete(
+                              process.env.REACT_APP_URL +
+                                "/admin/tours/dates/" +
+                                item.id,
+                              { withCredentials: true }
+                            );
+                            await fetchTour();
+                            reloadData(true);
+                          } catch (error) {
+                            alert("Đã xảy ra lỗi!");
+                          }
+                        }}
+                      >
+                        Xóa
+                      </button>
                       <p className=" text-base text-gray-900 font-bold">
                         {item.start_date.slice(0, 10)}
                       </p>
@@ -178,6 +199,77 @@ const ButtonView = ({ id, label }) => {
                 </span>
               </p>
 
+              <p className="text-base text-gray-600">Lịch trình:</p>
+              <ul style={{ margin: 0 }}>
+                {tourData.schedules
+                  .map((item, index) => (
+                    <div className="flex justify-start items-center">
+                      <p className=" text-base text-gray-900 font-bold">
+                        {"Ngày " + item.day}
+                      </p>
+                      <p className="mx-1 text-xs">:</p>
+                      <p className=" text-base text-gray-900 font-bold">
+                        {item.description}
+                      </p>
+                    </div>
+                  ))
+                  .reverse()}
+              </ul>
+              <div className="flex items-center">
+                <button
+                  disabled={tourData.schedules.length <= 0}
+                  className="bg-red-500 text-white rounded-md px-2 py-1 mr-2"
+                  onClick={async () => {
+                    try {
+                      await axios.delete(
+                        process.env.REACT_APP_URL +
+                          "/admin/tours/schedules/" +
+                          tourData.schedules[0]?.id,
+                        { withCredentials: true }
+                      );
+                      await fetchTour();
+                      reloadData(true);
+                    } catch (error) {
+                      alert("Đã xảy ra lỗi!");
+                    }
+                  }}
+                >
+                  Xóa
+                </button>
+                <button
+                  disabled={!description}
+                  className="bg-blue-500 text-white rounded-md px-2 py-1"
+                  onClick={async () => {
+                    try {
+                      await axios.post(
+                        process.env.REACT_APP_URL +
+                          "/admin/tours/" +
+                          id +
+                          "/schedule",
+                        { day: tourData.schedules.length + 1, description },
+
+                        { withCredentials: true }
+                      );
+                      await fetchTour();
+                      reloadData(true);
+                    } catch (error) {
+                      alert("Đã xảy ra lỗi!");
+                    }
+                  }}
+                >
+                  Thêm lịch trình
+                </button>
+
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="lịch trình"
+                  className="block rounded-md border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                />
+              </div>
               <div className="">
                 <p className="text-base text-gray-600">
                   Ảnh:{" "}
@@ -214,7 +306,7 @@ const ButtonView = ({ id, label }) => {
 
                               const desertRef = ref(
                                 storage,
-                                `images/${img.img_url.split(' ')[1]}`
+                                `images/${img.img_url.split(" ")[1]}`
                               );
                               deleteObject(desertRef)
                                 .then(() => {
@@ -235,19 +327,18 @@ const ButtonView = ({ id, label }) => {
                   })}
 
                 <button
-                disabled={!img}
+                  disabled={!img}
                   className="bg-blue-500 text-white rounded-md px-2 py-1 mt-4"
                   onClick={async () => {
-                    if(!img) {
-                      return
+                    if (!img) {
+                      return;
                     }
-                    
-                    const  imgURL = await uploadImage(img);
 
-                      if (!imgURL) {
-                        return;
-                      }
-                    
+                    const imgURL = await uploadImage(img);
+
+                    if (!imgURL) {
+                      return;
+                    }
 
                     try {
                       await axios.post(

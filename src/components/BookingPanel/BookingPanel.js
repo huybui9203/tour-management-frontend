@@ -57,13 +57,13 @@ const BookingPanel = ({ tour }) => {
                 </div>
 
                 <div className="flex space-x-4 mt-6">
-                    <button
-                        className="bg-white border  sm:text-base text-sm border-red-500 text-red-500 sm:rounded-lg rounded-md px-2 py-1 sm:px-4 sm:py-2"
-                        type="button"
-                        aria-label="Ngày khác"
-                    >
-                        Ngày khác
-                    </button>
+                        {/* <button
+                            className="bg-white border  sm:text-base text-sm border-red-500 text-red-500 sm:rounded-lg rounded-md px-2 py-1 sm:px-4 sm:py-2"
+                            type="button"
+                            aria-label="Ngày khác"
+                        >
+                            Ngày khác
+                        </button> */}
                     <button
                         onClick={() => navigate(`/booking/${tour.id}`)}
                         className="bg-red-500  sm:text-base text-sm text-white sm:rounded-lg rounded-md hover:bg-red-600  px-2 py-1 sm:px-4 sm:py-2"

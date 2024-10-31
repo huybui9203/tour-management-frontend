@@ -12,15 +12,15 @@ const Ltinerary = ({ tour }) => {
 
     return (
         <div className="">
-            {tour?.Schedules?.map((item) => (
+            {tour?.schedules?.map((item) => (
                 <div key={item.id} className="cursor-pointer mb-1">
                     <h4
                         className="px-6 py-5 font-semibold rounded-sm transition-all duration-300 ease-in-out"
                         style={{ backgroundColor: "#f3f3f3", marginBottom: "10px" }}
                         onClick={() => toggleExpand(item.id)}
                     >
-                        <span className="mr-3">{item.day}</span>
-                        {item.description}
+                        <span className="mr-3">{'Ngày ' +item.day }</span>
+                    
                     </h4>
 
                     <div
@@ -34,7 +34,7 @@ const Ltinerary = ({ tour }) => {
                         <p className="mb-4">{item.description}</p>
                     </div>
                 </div>
-            ))}
+            )).reverse()}
         </div>
     );
 };

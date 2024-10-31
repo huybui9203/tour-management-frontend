@@ -19,6 +19,7 @@ import LoginAdmin from "./pages/Admin/Login";
 import VnPay from "./pages/VnPay/VnPay";
 import Success from "./pages/VnPay/Success";
 import Failed from "./pages/VnPay/Failed";
+import Destination from "./pages/Destination/Destination";
 import History from "./pages/History/History";
 import Search from "./pages/Search/Search";
 function App() {
@@ -32,7 +33,7 @@ function App() {
                     <Route path="/tour" element={<Tour />} />
                     <Route path="/payment-success" element={<Success />} />
                     <Route path="/payment-failed" element={<Failed />} />
-                    <Route path="/destinations" element={<h1>List destinations page</h1>} />
+                    <Route path="/destinations" element={<Destination />} />
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route path="/search" element={<Search />} />
                     <Route

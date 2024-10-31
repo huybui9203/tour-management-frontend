@@ -6,8 +6,9 @@ import bg3 from '../../assets/images/bg_3.jpg';
 import bg4 from '../../assets/images/bg_4.jpg';
 import bg5 from '../../assets/images/bg_5.jpg';
 
-const Slider = () => {
-    const images = [bg1, bg2, bg3, bg4, bg5];
+const Slider = ({listImages}) => {
+    const images = listImages.map(item => item.img_url)
+    // const images = [bg1, bg2, bg3, bg4, bg5];
 
     const [currentIndex, setCurrentIndex] = useState(1); // Bắt đầu từ 1 vì ta sẽ clone thêm ảnh đầu và cuối
     const [isTransitioning, setIsTransitioning] = useState(false);
