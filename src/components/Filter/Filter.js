@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import styles from './Filter.module.css'
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 const StarRatingOption = ({ id, starsFilled, totalStars = 5, handleFilterQuery }) => {
@@ -39,43 +40,6 @@ const StarRatingOption = ({ id, starsFilled, totalStars = 5, handleFilterQuery }
 };
 
 const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList }) => {
-    const rangeRef = useRef(null);
-
-    useEffect(() => {
-        const rangeS = rangeRef.current.querySelectorAll('input[type="range"]');
-        const numberS = rangeRef.current.querySelectorAll('input[type="number"]');
-
-        rangeS.forEach((el) => {
-            el.addEventListener("input", () => {
-                let slide1 = parseFloat(rangeS[0].value),
-                    slide2 = parseFloat(rangeS[1].value);
-
-                if (slide1 > slide2) {
-                    [slide1, slide2] = [slide2, slide1];
-                }
-
-                numberS[0].value = slide1;
-                numberS[1].value = slide2;
-            });
-        });
-
-        numberS.forEach((el) => {
-            el.addEventListener("input", () => {
-                let number1 = parseFloat(numberS[0].value),
-                    number2 = parseFloat(numberS[1].value);
-
-                if (number1 > number2) {
-                    let tmp = number1;
-                    numberS[0].value = number2;
-                    numberS[1].value = tmp;
-                }
-
-                rangeS[0].value = number1;
-                rangeS[1].value = number2;
-            });
-        });
-    }, []);
-
     return (
         <div className="container mx-auto ">
             <div className="flex flex-wrap">
@@ -85,10 +49,11 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                         <form action="#">
                             <div className="space-y-4">
                                 <div className="form-group">
+                                    <label className="">Chọn điểm khởi hành:</label>
                                     <input
                                         type="text"
                                         className="form-control w-full px-4 py-2 border border-gray-300 rounded outline-none text-black"
-                                        placeholder="Điểm đến, Thành phố"
+                                        placeholder="Điểm khởi hành"
                                         value={filterQuery.destination}
                                         id="destination"
                                         onChange={(e) =>
@@ -100,6 +65,7 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                     />
                                 </div>
                                 <div className="form-group">
+                                    <label className="">Chọn điểm đến:</label>
                                     <div className="relative">
                                         <select
                                             value={filterQuery.place}
@@ -112,15 +78,16 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                             }
                                             className="form-control border border-gray-300 rounded block outline-none w-full p-2.5 text-black"
                                         >
-                                            <option value="">Chọn địa điểm</option>
-                                            <option value="đà nẵng">San Francisco USA</option>
-                                            <option value="Ber">Berlin Germany</option>
-                                            <option value="Lon">London United Kingdom</option>
-                                            <option value="Pari">Paris Italy</option>
+                                            <option value="">Chọn điểm đến</option>
+                                            <option value="đà nẵng">Đà Nẵng</option>
+                                            <option value="hà nội">Hà Nội</option>
+                                            <option value="hồ chí minh">Hồ Chí Minh</option>
+                                            <option value="nha trang">Nha Trang</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group">
+                                    <label className="">Ngày bắt đầu:</label>
                                     <input
                                         type="date"
                                         id="start_date"
@@ -139,6 +106,7 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                     />
                                 </div>
                                 <div className="form-group">
+                                    <label className="">Ngày kết thúc:</label>
                                     <input
                                         type="date"
                                         id="end_date"
@@ -156,35 +124,18 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                         }
                                     />
                                 </div>
-                                <div className="form-group range-slider" ref={rangeRef}>
-                                    <div className="flex space-x-2">
-                                        <input
-                                            id="minValueInput"
-                                            type="number"
-                                            value={filterQuery.min}
-                                            min={1000000}
-                                            max={20000000}
-                                            readOnly
-                                            className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-0 py-1 rounded outline-none"
-                                            style={{ backgroundColor: "#f8faff" }}
-                                        />{" "}
-                                        -
-                                        <input
-                                            id="maxValueInput"
-                                            type="number"
-                                            value={filterQuery.max}
-                                            min={1000000}
-                                            max={20000000}
-                                            readOnly
-                                            className="lg:w-1/2 sm:w-1/4 w-1/3 md:w-1/5 px-4 py-1 rounded outline-none"
-                                            style={{ backgroundColor: "#f8faff" }}
-                                        />
-                                    </div>
-                                    <div className="mt-4 relative mb-14">
+                                <div className="form-group range-slider">
+                                    <label className="">Chọn giá tiền:</label>
+                                    <h1 className="flex items-center justify-between">
+                                        <span>{filterQuery.min}</span>
+                                        <span className="flex-1 text-center">-</span>
+                                        <span>{filterQuery.max}</span>
+                                    </h1>
+                                    <div className="mb-10 mt-4 relative">
                                         <input
                                             id="min"
                                             type="range"
-                                            defaultValue={filterQuery.min}
+                                            value={parseInt(filterQuery.min)}
                                             onChange={(e) => {
                                                 handleFilterQuery((prev) => ({
                                                     ...prev,
@@ -193,13 +144,13 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                             }}
                                             min="1000000"
                                             max="20000000"
-                                            step="500000"
+                                            step="1000000"
                                             className="w-full h-2 bg-blue-300 rounded outline-none absolute ml-0 top-0 left-0"
                                         />
                                         <input
                                             id="max"
                                             type="range"
-                                            defaultValue={filterQuery.max}
+                                            value={parseInt(filterQuery.max)}
                                             onChange={(e) => {
                                                 handleFilterQuery((prev) => ({
                                                     ...prev,
@@ -208,8 +159,8 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                             }}
                                             min="1000000"
                                             max="20000000"
-                                            step="500000"
-                                            className="w-full h-2 bg-blue-500 rounded outline-none absolute top-0 left-0"
+                                            step="1000000"
+                                            className="w-full h-2 bg-blue-300 rounded outline-none absolute top-0 left-0"
                                         />
                                     </div>
                                 </div>

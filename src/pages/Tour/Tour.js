@@ -52,7 +52,6 @@ const Tour = () => {
             setList(tempList);
         }
     }, [sortQuery]);
-    console.log(list);
 
     const handleFilter = () => {
         let tempList = [...backupList];
@@ -101,7 +100,6 @@ const Tour = () => {
 
         return tempList;
     };
-    console.log(filterQuery);
 
     useEffect(() => {
         // Kiểm tra kích thước màn hình khi tải trang
@@ -145,11 +143,13 @@ const Tour = () => {
                 </div>
                 <div className="lg:w-3/4">
                     <div>
-                        {list &&
-                            list.length > 0 &&
+                        {list && list.length > 0 ? (
                             list
                                 .slice((currPage - 1) * 3, 3 * currPage)
-                                .map((tour) => <TourItemH key={tour.id} tour={tour} />)}
+                                .map((tour) => <TourItemH key={tour.id} tour={tour} />)
+                        ) : (
+                            <h1>Không tìm thấy tour nào</h1>
+                        )}
                     </div>
                     <div className="flex justify-center py-4">
                         <Pagination currPage={currPage} handleCurrPage={setCurrPage} total={list.length} />
