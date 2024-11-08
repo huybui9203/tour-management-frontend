@@ -11,7 +11,7 @@ const TourDetail = () => {
     const { title } = useParams();
     const [tour, setTour] = useState({});
     const [tourRelated, setTourRelated] = useState([]);
-    
+    const [tourdayID, setTourdayID] = useState();
     const fetchData = async () => {
         const res = await axios.get(`${process.env.REACT_APP_URL}/tour/get-details/${title}`);
         if (res.status !== 200) {
@@ -21,6 +21,7 @@ const TourDetail = () => {
         setTour(res.data.tour);
         setTourRelated(res.data.listTourRelated);
     };
+
     useEffect(() => {
         fetchData();
     }, []);
@@ -30,13 +31,13 @@ const TourDetail = () => {
             <h1 className="font-bold text-3xl py-4">{tour.name}</h1>
             <div className="block lg:flex">
                 <div className="w-full lg:w-3/5 mr-8">
-                    <Slider listImages={tour.images || []}/>
+                    <Slider listImages={tour.images || []} />
                     <h1 className="text-center font-bold text-3xl py-4">Lịch khởi hành</h1>
-                    <InfomationTour tour={tour}/>
+                    <InfomationTour tour={tour} tourdayID={tourdayID} handleSetTourDay={setTourdayID} />
                     <h1 className="text-center font-bold text-3xl py-4">Lịch trình</h1>
                     <Ltinerary tour={tour} />
                 </div>
-                <BookingPanel tour={tour} />
+                <BookingPanel tour={tour} tourdayID={tourdayID} handleSetTourDay={setTourdayID} />
             </div>
         </div>
     );

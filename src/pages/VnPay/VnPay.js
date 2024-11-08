@@ -80,8 +80,8 @@ function VnPay() {
             <CountdownTimer initialMinutes={15} />
             <div className="p-4 rounded">
                 <h1 className="text-xl font-semibold">
-                    Tổng tiền cần thanh toán:{" "}
-                    <span className="text-2xl font-bold text-red-700">{formatPrice(total_price)} VNĐ</span>
+                    Tổng tiền cần đặt cọc:{" "}
+                    <span className="text-2xl font-bold text-red-700">{formatPrice(Math.round(total_price * 0.2))} VNĐ</span>
                 </h1>
 
                 <h1 className="text-sm my-2">Vui lòng chọn một phương thức để thanh toán</h1>

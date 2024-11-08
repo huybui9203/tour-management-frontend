@@ -16,13 +16,19 @@ function BookingSummary({ formData, tour }) {
     const navigate = useNavigate();
     const { id } = useParams();
     const handleCreateOrder = async () => {
-        const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${id}`, formData, {
-            withCredentials: true,
-        });
-        if (res.status === 200) {
-            navigate(`/payments/${res.data.idOrder}`, { state: formData });
-        } else {
-            alert("Error");
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${id}`, formData, {
+                withCredentials: true,
+            });
+            if (res.status === 200) {
+                navigate(`/payments/${res.data.idOrder}`, { state: formData });
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data.message);
+            } else {
+                alert("Đã xảy ra lỗi, vui lòng thử lại.");
+            }
         }
     };
 

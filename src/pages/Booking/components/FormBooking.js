@@ -11,7 +11,6 @@ function FormBooking({ title }) {
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({
         id: title,
-        deposit: 0,
         name: "",
         phone: "",
         email: "",
