@@ -14,10 +14,10 @@ function BookingSummary({ formData, tour }) {
     const [isHidden, setHidden] = useState(true);
     const [singleRoom, setSingleRoom] = useState(0);
     const navigate = useNavigate();
-    const { id } = useParams();
+    const { id, tourday_id } = useParams();
     const handleCreateOrder = async () => {
         try {
-            const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${id}`, formData, {
+            const res = await axios.post(`${process.env.REACT_APP_URL}/order/create-order/${tourday_id}`, formData, {
                 withCredentials: true,
             });
             if (res.status === 200) {

@@ -37,7 +37,7 @@ function App() {
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route path="/search" element={<Search />} />
                     <Route
-                        path="/booking/:id"
+                        path="/booking/:id/:tourday_id"
                         element={
                             <AuthGuard>
                                 <Booking />
