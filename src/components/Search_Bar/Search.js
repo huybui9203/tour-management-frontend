@@ -33,7 +33,7 @@ const SearchBar = () => {
             <div className="pb-0 container mx-auto">
                 <div className="">
                     <form className="w-full md:flex md:space-x-2 mb-2" action="#" method="GET">
-                        <div className=" relative mt-1">
+                        {/* <div className=" relative mt-1">
                             <input
                                 className="w-full h-16 py-3 px-6 pr-12 border border-gray-300"
                                 name="tour-search"
@@ -46,9 +46,9 @@ const SearchBar = () => {
                             <div className="absolute inset-y-0 right-0 pr-3 flex items-center ">
                                 <FaSearch className="h-5 w-5 text-gray-400" />
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className=" relative mt-1">
+                        <div className="w-full relative mt-1">
                             <select
                                 className="w-full h-16 py-3 px-6 border border-gray-300 appearance-none "
                                 name="tax-tour-destination"
@@ -56,7 +56,7 @@ const SearchBar = () => {
                                 id="destination"
                                 value={inputValue.destination}
                             >
-                                <option value="">Điểm đến</option>
+                                <option value="">Bạn muốn đi đâu?</option>
                                 <option value="đà nẵng">Đà Nẵng</option>
                                 <option value="africa-wild">Africa Wild</option>
                                 <option value="america">America</option>
@@ -68,7 +68,7 @@ const SearchBar = () => {
                                 <FaChevronDown className="h-5 w-5 text-gray-400" />
                             </div>
                         </div>
-                        <div className=" relative  mt-1">
+                        {/* <div className=" relative  mt-1">
                             <select
                                 className="w-full h-16 py-3 px-6 pr-10 border border-gray-300  appearance-none"
                                 name="duration"
@@ -87,7 +87,7 @@ const SearchBar = () => {
                             <div className="absolute inset-y-0 right-0 pr-3 flex items-center ">
                                 <FaChevronDown className="h-5 w-5 text-gray-400" />
                             </div>
-                        </div>
+                        </div> */}
 
                         <div className="mt-1">
                             <input

@@ -3,6 +3,7 @@ import Modal from "../../../components/Modal/Modal";
 import axios from "axios";
 import { TourContext } from "./Tour";
 import { storage } from "../../../firebase";
+import { BsFillTrash3Fill } from "react-icons/bs";
 import {
   ref,
   uploadBytes,
@@ -15,7 +16,11 @@ const ButtonView = ({ id, label }) => {
   const [tourData, setTourData] = useState(null);
   const [listDates, setListDate] = useState([]);
   const [img, setImg] = useState(null);
-  const [description, setDescription] = useState("");
+  const [schedule, setSchedules] = useState({
+    day: "",
+    name: "",
+    description: "",
+  });
 
   const [reloadData] = useContext(TourContext);
 
@@ -82,8 +87,8 @@ const ButtonView = ({ id, label }) => {
       >
         {"#" + label}
       </button>
-      <Modal open={isShowView} onClose={() => setShowView(false)} size="m-xl">
-        <div className="bg-white p-6 rounded-lg shadow-lg mx-auto max-w-4xl max-h-screen overflow-auto">
+      <Modal open={isShowView} onClose={() => setShowView(false)} size="m-4xl">
+        <div className="bg-white p-6 rounded-lg shadow-lg mx-auto max-h-screen overflow-auto">
           <h1 className="font-bold text-2xl text-gray-800 mb-4">
             Chi tiết tour #{id}
           </h1>
@@ -117,10 +122,13 @@ const ButtonView = ({ id, label }) => {
                 </div>
                 <ul style={{ margin: 0 }}>
                   {listDates.map((item, index) => (
-                    <div className="flex justify-start items-center">
+                    <div
+                      key={index}
+                      className="flex justify-start items-center"
+                    >
                       <button
-                        disabled={tourData.schedules.length <= 0}
-                        className="bg-red-500 text-white rounded-md px-1 mr-2"
+                        // disabled={tourData.schedules.length <= 0}
+                        className="text-red-500 p-1 mr-2 cursor-pointer"
                         onClick={async () => {
                           try {
                             await axios.delete(
@@ -136,7 +144,7 @@ const ButtonView = ({ id, label }) => {
                           }
                         }}
                       >
-                        Xóa
+                        <BsFillTrash3Fill />
                       </button>
                       <p className=" text-base text-gray-900 font-bold">
                         {item.start_date.slice(0, 10)}
@@ -145,6 +153,9 @@ const ButtonView = ({ id, label }) => {
                       <p className=" text-base text-gray-900 font-bold">
                         {item.end_date.slice(0, 10)}
                       </p>
+
+                      <p className=" text-base text-gray-900 ml-2">Khuyến mãi: {Math.floor(item.promo)}%</p>
+                      <p className=" text-base text-gray-900 ml-2">Số chỗ còn: {item.remain_seats}</p>
                     </div>
                   ))}
                 </ul>
@@ -181,16 +192,16 @@ const ButtonView = ({ id, label }) => {
               {/* <p className="text-base text-gray-600">Giá người lớn: <span className="font-semibold text-gray-900">{tourData.adultPrice}</span></p>
                         <p className="text-base text-gray-600">Giá trẻ em: <span className="font-semibold text-gray-900">{tourData.childPrice}</span></p> */}
               <p className="text-base text-gray-600">
-                Khuyến mãi:
-                <span className="ml-1 font-semibold text-gray-900">
-                  {tourData.promo}%
-                </span>
-              </p>
-              <p className="text-base text-gray-600">
                 Trạng thái:
-                <span className="ml-1 font-semibold text-gray-900">
-                  {tourData.status ? "Đang hoạt động" : "Dừng hoạt động"}
-                </span>
+                {tourData.status ? (
+                  <span className="ml-1 font-semibold text-green-500">
+                    Đang hoạt động
+                  </span>
+                ) : (
+                  <span className="ml-1 font-semibold text-gray-900">
+                    Dừng hoạt động
+                  </span>
+                )}
               </p>
               <p className="text-base text-gray-600">
                 Mô tả:
@@ -202,51 +213,115 @@ const ButtonView = ({ id, label }) => {
               <p className="text-base text-gray-600">Lịch trình:</p>
               <ul style={{ margin: 0 }}>
                 {tourData.schedules
+                  .sort((a, b) => b.day - a.day)
                   .map((item, index) => (
-                    <div className="flex justify-start items-center">
-                      <p className=" text-base text-gray-900 font-bold">
-                        {"Ngày " + item.day}
+                    <div className="">
+                      <p className=" text-base w-fit text-gray-900 font-bold">
+                        <button
+                          className="text-red-500 p-1 mr-2 cursor-pointer"
+                          onClick={async () => {
+                            try {
+                              await axios.delete(
+                                process.env.REACT_APP_URL +
+                                  "/admin/tours/schedules/" +
+                                  item.id,
+                                { withCredentials: true }
+                              );
+                              await fetchTour();
+                              reloadData(true);
+                            } catch (error) {
+                              alert("Đã xảy ra lỗi!");
+                            }
+                          }}
+                        >
+                          <BsFillTrash3Fill />
+                        </button>
+                        {"Ngày " + item.day} : {item.ten}
                       </p>
-                      <p className="mx-1 text-xs">:</p>
-                      <p className=" text-base text-gray-900 font-bold">
+                      <p className=" text-base text-gray-800">
                         {item.description}
                       </p>
                     </div>
                   ))
                   .reverse()}
               </ul>
+
+              <div>
+                <label className="font-bold">Ngày thứ: </label>
+                <input
+                  type="number"
+                  name=""
+                  id=""
+                  value={schedule.day}
+                  onChange={(e) =>
+                    setSchedules((prev) => ({ ...prev, day: e.target.value }))
+                  }
+                  placeholder="Ngày thứ"
+                  className="w-full block rounded-md border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                />
+              </div>
+              <div>
+                <label className="font-bold">Tên</label>
+                <input
+                  type="text"
+                  name=""
+                  id=""
+                  value={schedule.name}
+                  onChange={(e) =>
+                    setSchedules((prev) => ({ ...prev, name: e.target.value }))
+                  }
+                  placeholder="Tên"
+                  className="w-full block rounded-md border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                />
+              </div>
+
+              <div>
+                <label className="font-bold">Mô tả</label>
+                <textarea
+                  className="w-full min-h-20 outline-0 block rounded-md border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
+                  name=""
+                  id=""
+                  value={schedule.description}
+                  onChange={(e) =>
+                    setSchedules((prev) => ({
+                      ...prev,
+                      description: e.target.value,
+                    }))
+                  }
+                ></textarea>
+              </div>
               <div className="flex items-center">
                 <button
-                  disabled={tourData.schedules.length <= 0}
-                  className="bg-red-500 text-white rounded-md px-2 py-1 mr-2"
+                  disabled={!schedule.name || !schedule.description}
+                  className="bg-blue-500 text-white rounded-md px-2 py-1 mr-2"
                   onClick={async () => {
                     try {
-                      await axios.delete(
-                        process.env.REACT_APP_URL +
-                          "/admin/tours/schedules/" +
-                          tourData.schedules[0]?.id,
-                        { withCredentials: true }
+                      const existDays = tourData?.schedules?.map((item) =>
+                        item.day.toString()
                       );
-                      await fetchTour();
-                      reloadData(true);
-                    } catch (error) {
-                      alert("Đã xảy ra lỗi!");
-                    }
-                  }}
-                >
-                  Xóa
-                </button>
-                <button
-                  disabled={!description}
-                  className="bg-blue-500 text-white rounded-md px-2 py-1"
-                  onClick={async () => {
-                    try {
+                      console.log(
+                        existDays,
+                        schedule.day,
+                        existDays.includes(schedule.day)
+                      );
+                      if (existDays.includes(schedule.day)) {
+                        alert(
+                          "Lịch trình ngày thứ " +
+                            schedule.day +
+                            " đã được thêm trước đó"
+                        );
+                        return;
+                      }
                       await axios.post(
                         process.env.REACT_APP_URL +
                           "/admin/tours/" +
                           id +
                           "/schedule",
-                        { day: tourData.schedules.length + 1, description },
+                        {
+                          day: schedule.day,
+                          ten: schedule.name,
+                          description: schedule.description,
+                        },
 
                         { withCredentials: true }
                       );
@@ -259,17 +334,8 @@ const ButtonView = ({ id, label }) => {
                 >
                   Thêm lịch trình
                 </button>
-
-                <input
-                  type="text"
-                  name=""
-                  id=""
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="lịch trình"
-                  className="block rounded-md border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
-                />
               </div>
+
               <div className="">
                 <p className="text-base text-gray-600">
                   Ảnh:{" "}
@@ -320,15 +386,20 @@ const ButtonView = ({ id, label }) => {
                             }
                           }}
                         >
-                          Xóa
+                          Delete
                         </button>
                       </div>
                     );
                   })}
 
+                <input
+                className="w-full"
+                  type="file"
+                  onChange={(e) => setImg(e.target.files[0])}
+                />
                 <button
                   disabled={!img}
-                  className="bg-blue-500 text-white rounded-md px-2 py-1 mt-4"
+                  className="bg-blue-500 text-white rounded-md px-2 py-1 my-4"
                   onClick={async () => {
                     if (!img) {
                       return;
@@ -359,10 +430,6 @@ const ButtonView = ({ id, label }) => {
                 >
                   Thêm ảnh
                 </button>
-                <input
-                  type="file"
-                  onChange={(e) => setImg(e.target.files[0])}
-                />
               </div>
             </div>
           )}

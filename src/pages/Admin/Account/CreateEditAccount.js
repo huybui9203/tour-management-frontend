@@ -63,11 +63,16 @@ const CreateEditAccount = ({ open, onClose, id }) => {
       return;
     }
 
+    if (formData.password && formData.password.length < 6) {
+      alert("password phải ít nhất 6 ký tự");
+      return;
+    }
+
   
     try {
       await axios.put(
         process.env.REACT_APP_URL + "/admin/accounts/" + id,
-        { username: formData.username, role: formData.role },
+        { username: formData.username, role: formData.role, password: formData.password },
         {
           withCredentials: true,
         }
@@ -112,7 +117,7 @@ const CreateEditAccount = ({ open, onClose, id }) => {
           </>
         )}
 
-        {!id && (
+        {/* {!id && ( */}
           <>
             <label className="block mb-2">Password</label>{" "}
             <input
@@ -125,7 +130,7 @@ const CreateEditAccount = ({ open, onClose, id }) => {
               className="block w-full rounded-md  border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </>
-        )}
+        {/* )} */}
 
         <label className="block mt-2">Quyền</label>
         <div className="mt-1">
@@ -161,22 +166,22 @@ const CreateEditAccount = ({ open, onClose, id }) => {
         </div>
         <div className="text-right">
           <button
-            className="px-2 py-2 bg-gray-400 text-white rounded-md min-w-8"
+            className="px-4 py-0.5 bg-gray-400 text-white rounded-md min-w-8"
             onClick={() => onClose()}
           >
             Hủy
           </button>
           {id ? (
             <button
-              className="px-2 ml-1 py-2 bg-blue-600 text-white rounded-md disabled:opacity-75"
-              disabled={!formData.username}
+              className="px-2 py-0.5 ml-1 bg-blue-600 text-white rounded-md disabled:opacity-75"
+              disabled={!formData.username && !formData.password}
               onClick={handleUpdate}
             >
               Update
             </button>
           ) : (
             <button
-              className="px-2 ml-1 py-2 bg-blue-600 text-white rounded-md disabled:opacity-75"
+              className="px-2 ml-1 py-0.5 bg-blue-600 text-white rounded-md disabled:opacity-75"
               disabled={!formData.email || !formData.password}
               onClick={handleCreate}
             >

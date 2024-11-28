@@ -39,7 +39,10 @@ const StarRatingOption = ({ id, starsFilled, totalStars = 5, handleFilterQuery }
     );
 };
 
-const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList }) => {
+const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list,backupList, handleList }) => {
+    const departures = Array.from(new Set(backupList?.length ? backupList.map(item=>item.departure_point) : []))
+    const destinations = Array.from(new Set(backupList?.length ? backupList.map(item=>item.destination):[]))
+    console.log(departures, destinations)
     return (
         <div className="container mx-auto ">
             <div className="flex flex-wrap">
@@ -50,19 +53,22 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                             <div className="space-y-4">
                                 <div className="form-group">
                                     <label className="">Chọn điểm khởi hành:</label>
-                                    <input
-                                        type="text"
-                                        className="form-control w-full px-4 py-2 border border-gray-300 rounded outline-none text-black"
-                                        placeholder="Điểm khởi hành"
-                                        value={filterQuery.destination}
-                                        id="destination"
-                                        onChange={(e) =>
-                                            handleFilterQuery((prev) => ({
-                                                ...prev,
-                                                [e.target.id]: e.target.value,
-                                            }))
-                                        }
-                                    />
+                                    <div className="relative">
+                                        <select
+                                            value={filterQuery.destination}
+                                            id="destination"
+                                            onChange={(e) =>
+                                                handleFilterQuery((prev) => ({
+                                                    ...prev,
+                                                    [e.target.id]: e.target.value,
+                                                }))
+                                            }
+                                            className="form-control border border-gray-300 rounded block outline-none w-full p-2.5 text-black"
+                                        >
+                                            <option value="">Chọn điểm khởi hành</option>
+                                            {departures.map((item, index) => <option key={index} value={item}>{item}</option>)}
+                                        </select>
+                                    </div>
                                 </div>
                                 <div className="form-group">
                                     <label className="">Chọn điểm đến:</label>
@@ -79,15 +85,12 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                             className="form-control border border-gray-300 rounded block outline-none w-full p-2.5 text-black"
                                         >
                                             <option value="">Chọn điểm đến</option>
-                                            <option value="đà nẵng">Đà Nẵng</option>
-                                            <option value="hà nội">Hà Nội</option>
-                                            <option value="hồ chí minh">Hồ Chí Minh</option>
-                                            <option value="nha trang">Nha Trang</option>
+                                            {destinations.map((item, index) => <option key={index} value={item}>{item}</option>)}
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label className="">Ngày bắt đầu:</label>
+                                    <label className="">Ngày khởi hành:</label>
                                     <input
                                         type="date"
                                         id="start_date"
@@ -105,25 +108,7 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                         }
                                     />
                                 </div>
-                                <div className="form-group">
-                                    <label className="">Ngày kết thúc:</label>
-                                    <input
-                                        type="date"
-                                        id="end_date"
-                                        className="w-full px-4 py-2 border border-gray-300 rounded outline-none"
-                                        placeholder="Ngày đến"
-                                        data-toggle="datepicker"
-                                        value={filterQuery.end_date || ""}
-                                        onChange={(e) =>
-                                            handleFilterQuery((prev) => ({
-                                                ...prev,
-                                                [e.target.id]:
-                                                    e.target.value &&
-                                                    new Date(e.target.value).toISOString().split("T")[0],
-                                            }))
-                                        }
-                                    />
-                                </div>
+                                
                                 <div className="form-group range-slider">
                                     <label className="">Chọn giá tiền:</label>
                                     <h1 className="flex items-center justify-between">
@@ -175,6 +160,7 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                                         }}
                                         className="w-full bg-red-500 border text-white py-3 px-5 rounded hover:bg-white hover:text-red-500 border-red-500 outline-none cursor-pointer"
                                     />
+                                    
                                 </div>
                             </div>
                         </form>
@@ -184,14 +170,14 @@ const Filter = ({ filterQuery, handleFilterQuery, handleFilter, list, handleList
                         className="sidebar-wrap bg-gray-100 p-6 animate__animated animate__fadeIn border hidden lg:block"
                         style={{ backgroundColor: "#f8faff" }}
                     >
-                        <h3 className="text-lg font-semibold mb-4">Đánh giá</h3>
+                        {/* <h3 className="text-lg font-semibold mb-4">Đánh giá</h3>
                         <form method="post" className="space-y-1 md:space-y-2 form-group">
                             <StarRatingOption id="star1" starsFilled={5} handleFilterQuery={handleFilterQuery} />
                             <StarRatingOption id="star2" starsFilled={4} handleFilterQuery={handleFilterQuery} />
                             <StarRatingOption id="star3" starsFilled={3} handleFilterQuery={handleFilterQuery} />
                             <StarRatingOption id="star4" starsFilled={2} handleFilterQuery={handleFilterQuery} />
                             <StarRatingOption id="star5" starsFilled={1} handleFilterQuery={handleFilterQuery} />
-                        </form>
+                        </form> */}
                     </div>
                 </div>
 

@@ -3,10 +3,15 @@ import { FcAlarmClock } from "react-icons/fc";
 import { GiAlarmClock } from "react-icons/gi";
 import { useTimer } from "react-timer-hook";
 
-const CountdownTimer = ({ initialMinutes }) => {
+const CountdownTimer = ({ initialMinutes, handleTimeOut }) => {
     const { seconds, minutes, start, pause, resume, reset } = useTimer({
         expiryTimestamp: new Date().getTime() + initialMinutes * 60 * 1000, // Thời gian đếm ngược (phút)
-        onExpire: () => console.warn("Hết thời gian!"),
+        onExpire: async () => {
+            console.warn("Hết thời gian!")
+            //cancel service
+            handleTimeOut()
+
+        }
     });
 
     return (

@@ -20,9 +20,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
     countDay: "",
     coutNights: "",
     countGuess: "",
-    adultsPrice: "",
-    childrenPrice: "",
-    promo: "",
+    price: "",
     status: 1,
     description: "",
   });
@@ -40,9 +38,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
         countDay: tour.total_day.slice(0, tour.total_day.indexOf("N")),
         coutNights: tour.total_day.slice(tour.total_day.indexOf("N") + 1, -1),
         countGuess: tour.number_of_guests,
-        adultsPrice: tour.price,
-        childrenPrice: tour.price,
-        promo: tour.promo,
+        price: tour.price,
         status: tour.status,
         description: tour.description,
       });
@@ -56,18 +52,16 @@ const CreateEditTour = ({ open, onClose, id }) => {
     }
 
     if (
-      (formData.countDay && formData.countDay <= 0 )||
+      (formData.countDay && formData.countDay <= 0) ||
       (formData.coutNights && formData.coutNights <= 0) ||
       (formData.countGuess && formData.countGuess <= 0) ||
-      (formData.adultsPrice && formData.adultsPrice <= 0) ||
-      (formData.childrenPrice && formData.childrenPrice) < 0 ||
-      (formData.promo && formData.promo) < 0
+      (formData.price && formData.price <= 0)
     ) {
       alert("Số phải lớn hơn 0");
       return;
     }
 
-    if(formData.coutNights > formData.countDay) {
+    if (formData.coutNights > formData.countDay) {
       alert("Số đêm không được lớn hơn số ngày");
       return;
     }
@@ -79,12 +73,8 @@ const CreateEditTour = ({ open, onClose, id }) => {
       isNaN(formData.coutNights) ||
       !formData.countGuess ||
       isNaN(formData.countGuess) ||
-      !formData.adultsPrice ||
-      isNaN(formData.adultsPrice) ||
-      !formData.childrenPrice ||
-      isNaN(formData.childrenPrice) ||
-      !formData.promo ||
-      isNaN(formData.promo)
+      !formData.price ||
+      isNaN(formData.price)
     ) {
       alert("Một số thông tin yêu cầu nhập số nhưng bạn đã nhập chuỗi");
       return;
@@ -117,9 +107,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
       countDay: "",
       coutNights: "",
       countGuess: "",
-      adultsPrice: "",
-      childrenPrice: "",
-      promo: "",
+      price: "",
       status: 1,
       description: "",
     });
@@ -133,18 +121,16 @@ const CreateEditTour = ({ open, onClose, id }) => {
     }
 
     if (
-      (formData.countDay && formData.countDay <= 0 )||
+      (formData.countDay && formData.countDay <= 0) ||
       (formData.coutNights && formData.coutNights <= 0) ||
       (formData.countGuess && formData.countGuess <= 0) ||
-      (formData.adultsPrice && formData.adultsPrice <= 0) ||
-      (formData.childrenPrice && formData.childrenPrice) < 0 ||
-      (formData.promo && formData.promo) < 0
+      (formData.price && formData.price <= 0)
     ) {
       alert("Số phải lớn hơn 0");
       return;
     }
 
-    if(formData.coutNights > formData.countDay) {
+    if (formData.coutNights > formData.countDay) {
       alert("Số đêm không được lớn hơn số ngày");
       return;
     }
@@ -156,12 +142,8 @@ const CreateEditTour = ({ open, onClose, id }) => {
       isNaN(formData.coutNights) ||
       !formData.countGuess ||
       isNaN(formData.countGuess) ||
-      !formData.adultsPrice ||
-      isNaN(formData.adultsPrice) ||
-      !formData.childrenPrice ||
-      isNaN(formData.childrenPrice) ||
-      !formData.promo ||
-      isNaN(formData.promo)
+      !formData.price ||
+      isNaN(formData.price)
     ) {
       alert("Một số thông tin yêu cầu nhập số nhưng bạn đã nhập chuỗi");
       return;
@@ -195,39 +177,50 @@ const CreateEditTour = ({ open, onClose, id }) => {
         ) : (
           <h1 className="font-bold text-lg mb-4">Thêm mới Tour</h1>
         )}
-
-        <input
-          type="text"
-          placeholder="Name"
-          value={formData.name}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, name: e.target.value }))
-          }
-          className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        />
+        <div>
+          <label>Tên:</label>
+          <input
+            type="text"
+            placeholder="Name"
+            value={formData.name}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, name: e.target.value }))
+            }
+            className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </div>
 
         <div className="flex space-x-2">
-          <input
-            type="text"
-            placeholder="Điểm khởi hành"
-            value={formData.departurePoint}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                departurePoint: e.target.value,
-              }))
-            }
-            className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            placeholder="Điểm đến"
-            value={formData.destination}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, destination: e.target.value }))
-            }
-            className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
+          <div className="w-full">
+            <label>Điểm khởi hành:</label>
+            <input
+              type="text"
+              placeholder="Điểm khởi hành"
+              value={formData.departurePoint}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  departurePoint: e.target.value,
+                }))
+              }
+              className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+          <div className="w-full">
+            <label>Điểm đến:</label>
+            <input
+              type="text"
+              placeholder="Điểm đến"
+              value={formData.destination}
+              onChange={(e) =>
+                setFormData((prev) => ({
+                  ...prev,
+                  destination: e.target.value,
+                }))
+              }
+              className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
         </div>
 
         <select
@@ -242,69 +235,57 @@ const CreateEditTour = ({ open, onClose, id }) => {
         </select>
 
         <div className="flex space-x-2">
+          <div className="w-full">
+            <label>Số ngày:</label>{" "}
+            <input
+              type="text"
+              placeholder="Số ngày"
+              value={formData.countDay}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, countDay: e.target.value }))
+              }
+              className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+          <div className="w-full">
+            <label>Số đêm:</label>
+            <input
+              type="text"
+              placeholder="Số đêm"
+              value={formData.coutNights}
+              onChange={(e) =>
+                setFormData((prev) => ({ ...prev, coutNights: e.target.value }))
+              }
+              className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label>Số người tối đa:</label>
           <input
             type="text"
-            placeholder="Số ngày"
-            value={formData.countDay}
+            placeholder="Số người tối đa"
+            value={formData.countGuess}
             onChange={(e) =>
-              setFormData((prev) => ({ ...prev, countDay: e.target.value }))
+              setFormData((prev) => ({ ...prev, countGuess: e.target.value }))
             }
-            className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            placeholder="Số đêm"
-            value={formData.coutNights}
-            onChange={(e) =>
-              setFormData((prev) => ({ ...prev, coutNights: e.target.value }))
-            }
-            className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
 
-        <input
-          type="text"
-          placeholder="Số người tối đa"
-          value={formData.countGuess}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, countGuess: e.target.value }))
-          }
-          className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        />
-
-        <div className="flex space-x-2">
+        <div className="">
+          <label>Giá:</label>
           <input
             type="text"
-            placeholder="Giá người lớn"
-            value={formData.adultsPrice}
+            placeholder="Giá"
+            value={formData.price}
             onChange={(e) =>
-              setFormData((prev) => ({ ...prev, adultsPrice: e.target.value }))
+              setFormData((prev) => ({ ...prev, price: e.target.value }))
             }
-            className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-          />
-          <input
-            type="text"
-            placeholder="Giá trẻ em"
-            value={formData.childrenPrice}
-            onChange={(e) =>
-              setFormData((prev) => ({
-                ...prev,
-                childrenPrice: e.target.value,
-              }))
-            }
-            className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+            className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
           />
         </div>
-
-        <input
-          type="text"
-          placeholder="Khuyến mãi"
-          value={formData.promo}
-          onChange={(e) =>
-            setFormData((prev) => ({ ...prev, promo: e.target.value }))
-          }
-          className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-        />
 
         <div className="flex items-center my-2">
           <label className="mr-2">Hoạt động</label>

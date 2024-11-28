@@ -44,7 +44,7 @@ const ButtonMore = ({
         </button>
         <ul className="w-[140px] group-hover:block hidden absolute bg-white shadow-lg rounded-xl right-3 bottom-3 z-[10] overflow-hidden">
           {options.map((option, index) => {
-            if(user.role == ROLES.ADMIN && option.type === 'delete') {
+            if(user?.role == ROLES.ADMIN && option.type === 'delete') {
               return
             }
             return <li

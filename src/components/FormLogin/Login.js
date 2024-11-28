@@ -133,7 +133,7 @@ const Login = () => {
                                                 </p>
                                             )}
                                         </div>
-                                        <div className="flex items-center justify-between py-2 ">
+                                        {/* <div className="flex items-center justify-between py-2 ">
                                             <label className="inline-flex items-center text-gray-600 cursor-pointer text-sm">
                                                 <input type="checkbox" name="remember" className="mr-2 size-4" />
                                                 Nhớ đăng nhập
@@ -141,7 +141,7 @@ const Login = () => {
                                             <a href="#" className=" font-extrabold text-red-500 text-sm">
                                                 Quên mật khẩu?
                                             </a>
-                                        </div>
+                                        </div> */}
                                         <button
                                             type="submit"
                                             className="text-lg w-full text-white font-bold py-3 rounded-full mt-4 bg-red-500 hover:bg-white transition-colors duration-300 border border-red-400 hover:text-red-400"

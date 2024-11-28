@@ -9,9 +9,11 @@ const CreateMoreStartDate = ({ open, onClose, id }) => {
     endDate: "",
   });
 
+  const [promo, setPromo] = useState(0)
   const [reloadData, listTours] = useContext(TourContext);
-
+  
   const listDates = listTours.find((item) => item.id === id).date;
+  const currTour = listTours.find((item) => item.id === id)
 
   console.log(listDates);
 
@@ -43,10 +45,14 @@ const CreateMoreStartDate = ({ open, onClose, id }) => {
       alert("Ngày khởi hành không được lớn hơn ngày kết thúc");
       return;
     }
+    if(promo && (promo < 0 || promo > 100)) {
+      alert("Khuyến mãi có giá trị không hợp lệ");
+      return;
+    }
     try {
       await axios.post(
         process.env.REACT_APP_URL + "/admin/tours/" + id + "/dates",
-        { ...date, id },
+        { ...date, id, remainSeats: currTour.number_of_guests, promo },
         {
           withCredentials: true,
         }
@@ -68,7 +74,7 @@ const CreateMoreStartDate = ({ open, onClose, id }) => {
         <p className="my-2">Danh sách ngày khởi hành và ngày kết thúc:</p>
         <ul style={{ margin: 0 }}>
           {listDates.map((item, index) => (
-            <div className="flex justify-start items-center">
+            <div key={index} className="flex justify-start items-center">
               <p className=" text-base text-gray-900 font-bold">
                 {item.start_date.slice(0, 10)}
               </p>
@@ -104,6 +110,21 @@ const CreateMoreStartDate = ({ open, onClose, id }) => {
               value={date.endDate}
               onChange={(e) =>
                 setDate((prev) => ({ ...prev, endDate: e.target.value }))
+              }
+              className="block w-full rounded-md border-0 py-2 pl-4 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label className="text-gray-700 font-medium mb-2">
+              Khuyến mãi
+            </label>
+            <input
+              required
+              type="number"
+              value={promo}
+              onChange={(e) =>
+                setPromo(e.target.value)
               }
               className="block w-full rounded-md border-0 py-2 pl-4 pr-4 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm"
             />

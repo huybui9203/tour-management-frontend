@@ -22,6 +22,7 @@ import Failed from "./pages/VnPay/Failed";
 import Destination from "./pages/Destination/Destination";
 import History from "./pages/History/History";
 import Search from "./pages/Search/Search";
+import BookingCancel from "./pages/BookingCancel/BookingCancel";
 function App() {
     return (
         <BrowserRouter>
@@ -32,12 +33,12 @@ function App() {
                 <Route path="/" element={<MainLayout />}>
                     <Route path="/tour" element={<Tour />} />
                     <Route path="/payment-success" element={<Success />} />
-                    <Route path="/payment-failed" element={<Failed />} />
+                    <Route path="/payment-failed/:id" element={<Failed />} />
                     <Route path="/destinations" element={<Destination />} />
                     <Route path="/tour/:title" element={<TourDetail />} />
                     <Route path="/search" element={<Search />} />
                     <Route
-                        path="/booking/:id/:tourday_id"
+                        path="/booking/:id"
                         element={
                             <AuthGuard>
                                 <Booking />
@@ -51,7 +52,10 @@ function App() {
                                 <History />
                             </AuthGuard>
                         }
-                    />
+                    >
+                        <Route path="booking/:id/cancel" element={<BookingCancel />} />
+                    </Route>
+                    
                     <Route
                         path="/payments/:id"
                         element={

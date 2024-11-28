@@ -5,6 +5,7 @@ import ButtonMore from "./ButtonMore";
 import CreateTour from "./CreateEditTour";
 import ListDateStart from "./ListDateStart";
 import ButtonView from "./ButtonView";
+import { FaHeart } from "react-icons/fa";
 const columns = [
   {
     name: "Id",
@@ -65,6 +66,13 @@ const columns = [
   },
 
   {
+    name: "Số lượt thích",
+    selector: (row) => row.likeCount || 0,
+    cell: (row) => <div className="flex items-center">{row.likeCount || 0}<span className="ml-1 text-red-500"><FaHeart /></span></div>,
+    sortable: true,
+  },
+
+  {
     name: "More",
     button: true,
     cell: (row) => <ButtonMore id={row.id} />,
@@ -92,7 +100,8 @@ const Tour = () => {
             departurePoint: item.departure_point,
             status: Number(item.status),
             price: item.price,
-            images: item.images
+            images: item.images,
+            likeCount: item?.liked_users?.length || 0
         };
         tableData.push(record);
       }

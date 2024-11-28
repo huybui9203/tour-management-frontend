@@ -11,10 +11,10 @@ function InforRegistant({ age, index, handleSetInforRegistant, price }) {
         index: index,
         name: "",
         type: age,
-        sex: "",
+        sex: 0,
         price: price,
         birthday: maxDay,
-        isBookingSingleRoom: false,
+        isBookingSingleRoom: index === 0 ? true: false,
     });
     
     const [formError, setFormError] = useState({
@@ -112,7 +112,7 @@ function InforRegistant({ age, index, handleSetInforRegistant, price }) {
                             <label className="font-bold">
                                 Giới tính <span className="text-red-600">*</span>
                             </label>
-                            <select id="sex" className="text-sm font-semibold outline-none">
+                            <select id="sex" className="text-sm font-semibold outline-none" onChange={(e) => setFormData(prev=>({...prev, sex: e.target.value === "MALE" ? 0 : 1}))}>
                                 <option value={"MALE"}>Nam</option>
                                 <option value={"FEMALE"}>Nữ</option>
                             </select>

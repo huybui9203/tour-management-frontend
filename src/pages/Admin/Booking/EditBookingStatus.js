@@ -11,7 +11,7 @@ const EditBookingStatus = ({open, onClose, orderId}) => {
     console.log(status)
     const handleUpDate = async () => {
         
-        if(status == ORDER_STATUS_CODE.NONE) {
+        if(status == ORDER_STATUS_CODE.NONE || status == ORDER_STATUS_CODE.CANCELED) {
             onClose()
             return
         }

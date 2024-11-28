@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Modal from "../../../components/Modal/Modal";
 import axios from "axios";
+import formatPrice from "../../../utils/formatPrice";
 
 const ButtonView = ({ orderId, label }) => {
   const [isShowView, setShowView] = useState(false);
@@ -61,6 +62,24 @@ const ButtonView = ({ orderId, label }) => {
                 </span>
               </p>
               <p className="text-base text-gray-600">
+                Số điện thoại:{" "}
+                <span className="font-semibold text-gray-900">
+                {bookingData?.customer?.phone_number}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Email:{" "}
+                <span className="font-semibold text-gray-900">
+                {bookingData?.customer?.email}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Địa chỉ:{" "}
+                <span className="font-semibold text-gray-900">
+                {bookingData?.customer?.address}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
                 Đặt tour:{" "}
                 <span className="font-semibold text-gray-900">
                 {bookingData?.tour_day.tour.name}
@@ -69,7 +88,7 @@ const ButtonView = ({ orderId, label }) => {
               <p className="text-base text-gray-600">
                 Ngày đặt:{" "}
                 <span className="font-semibold text-gray-900">
-                {bookingData.order_date.slice(0,10) + ' ' + bookingData.order_date.slice(11,19) }
+                {bookingData?.order_date?.slice(0,10) + ' ' + bookingData?.order_date?.slice(11,19) }
                 </span>
               </p>
               
@@ -82,24 +101,17 @@ const ButtonView = ({ orderId, label }) => {
 
               
 
-              <p className="text-base text-gray-600">
-              Số người lớn::
-                <span className="ml-1 font-semibold text-gray-900">
-                {bookingData.adults_count}
-                </span>
-              </p>
-              {/* <p className="text-base text-gray-600">Giá người lớn: <span className="font-semibold text-gray-900">{tourData.adultPrice}</span></p>
-                        <p className="text-base text-gray-600">Giá trẻ em: <span className="font-semibold text-gray-900">{tourData.childPrice}</span></p> */}
-              <p className="text-base text-gray-600">
-                Số trẻ em:
-                <span className="ml-1 font-semibold text-gray-900">
-                {bookingData.children_count}
-                </span>
-              </p>
+              
               <p className="text-base text-gray-600">
                 Số phòng đơn:
                 <span className="ml-1 font-semibold text-gray-900">
                 {bookingData.rooms_count}
+                </span>
+              </p>
+              <p className="text-base text-gray-600">
+                Ghi chú:
+                <span className="ml-1 font-semibold text-gray-900">
+                {bookingData.note || ''}
                 </span>
               </p>
               <p className="text-base text-gray-600">
@@ -111,14 +123,15 @@ const ButtonView = ({ orderId, label }) => {
               <p className="text-base text-gray-600">
                 Tổng tiền:
                 <span className="ml-1 font-semibold text-gray-900">
-                {bookingData.total_price} VNĐ
+                {formatPrice(bookingData.total_price)} VNĐ
                 </span>
               </p>
               <p className="text-base text-gray-600">
               Ngày thanh toán: 
-                <span className="ml-1 font-semibold text-gray-900">
-                {bookingData.pay_date.slice(0,10) + ' ' + bookingData.pay_date.slice(11,19) }
-                </span>
+              {bookingData?.pay_date ? <span className="ml-1 font-semibold text-gray-900">
+                {bookingData?.pay_date?.slice(0,10) + ' ' + bookingData?.pay_date?.slice(11,19) }
+                </span> : <span className="font-bold text-orange-500">Chưa thanh toán</span>}
+                
               </p>
 
               

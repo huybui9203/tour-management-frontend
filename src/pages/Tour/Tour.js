@@ -76,18 +76,22 @@ const Tour = () => {
                 item.destination.toLowerCase().includes(filterQuery.place.toLowerCase())
             );
         }
-        if (filterQuery.end_date !== "") {
-            tempList = tempList.filter((item) => {
-                const result = item.date.find(
-                    (tour) => new Date(tour.start_date).getTime() <= new Date(filterQuery.end_date).getTime()
-                );
-                return result ? true : false;
-            });
-        }
+        // if (filterQuery.end_date !== "") {
+        //     tempList = tempList.filter((item) => {
+        //         const result = item.date.find(
+        //             (tour) => new Date(tour.start_date).getTime() <= new Date(filterQuery.end_date).getTime()
+        //         );
+        //         return result ? true : false;
+        //     });
+        // }
         if (filterQuery.start_date !== "") {
             tempList = tempList.filter((item) => {
-                const result = item.date.find(
-                    (tour) => new Date(tour.start_date).getTime() >= new Date(filterQuery.start_date).getTime()
+                console.log('>>',item?.date)
+                const result = item?.date?.find(
+                    (tour) => {
+                       
+                       return new Date(tour.start_date).toLocaleDateString() == new Date(filterQuery.start_date).toLocaleDateString()
+                    }
                 );
                 return result ? true : false;
             });
@@ -121,6 +125,7 @@ const Tour = () => {
 
     return (
         <div className="sm:container relative">
+            
             <Sort sortQuery={sortQuery} handleSortQuery={setSortQuery} />
 
             {showFilter && (
@@ -128,12 +133,14 @@ const Tour = () => {
             )}
 
             <div className="lg:flex gap-4">
+               
                 <div
                     className={`lg:w-1/4 lg:static lg:z-0 lg:top-auto lg:left-auto lg:transform-none z-30 w-full px-2 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 ${
                         showFilter ? "block" : "hidden"
                     } lg:block`}
                 >
                     <Filter
+                        backupList={backupList}
                         list={list}
                         handleList={setList}
                         filterQuery={filterQuery}
@@ -148,7 +155,7 @@ const Tour = () => {
                                 .slice((currPage - 1) * 3, 3 * currPage)
                                 .map((tour) => <TourItemH key={tour.id} tour={tour} />)
                         ) : (
-                            <h1>Không tìm thấy tour nào</h1>
+                            <h1 className="text-center font-bold text-xl pt-4">Không tìm thấy tour nào</h1>
                         )}
                     </div>
                     <div className="flex justify-center py-4">

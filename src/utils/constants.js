@@ -24,3 +24,5 @@ export const PAGES = {
     BOOKING: 'Booking',
     ACCOUNT: 'Account'
 }
+
+export const PROMO_FOR_CHILD = 50

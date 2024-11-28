@@ -5,6 +5,8 @@ import LabelBookingStatus from '../../../components/LabelBookingStatus';
 import Table from '../../../components/Table'
 import ButtonMore from './ButtonMore';
 import ButtonView from './ButtonView';
+import formatLocalDate from '../../../utils/formatLocalDate';
+import CreateBooking from './CreateBooking';
 const columns = [
     {
         name: "Id đơn đặt",
@@ -27,13 +29,13 @@ const columns = [
         name: "Ngày đặt",
         selector: (row) => row.orderDate,
         sortable: true,
-        cell: (row) => <div><p className='font-bold'>{row.orderDate.slice(0,10)}</p><p>{row.orderDate.slice(11,19)}</p></div>
+        cell: (row) => <div><p className='font-bold'>{formatLocalDate(row.orderDate)?.slice(0,10)}</p><p>{formatLocalDate(row.orderDate)?.slice(11,19)}</p></div>
     },
     {
         name: "Ngày thanh toán",
         selector: (row) => row.paymentDate,
         sortable: true,
-        cell: (row) => <div><p className='font-bold'>{row.paymentDate.slice(0,10)}</p><p>{row.paymentDate.slice(11,19)}</p></div>
+        cell: (row) => <div><p className='font-bold'>{formatLocalDate(row.paymentDate)?.slice(0,10)}</p><p>{formatLocalDate(row.paymentDate)?.slice(11,19)}</p></div>
     },
     {
         name: "Trạng thái",
@@ -60,6 +62,7 @@ const Booking = () => {
     const [listBookings, setListBookings] = useState([])
     const [stale, setStale] = useState(false)
     const [tab, setTab] = useState(0)
+    const [isOpenCreateForm, setIsOpenCreateForm] = useState(false);
 
     const getTableData = useMemo(() => {
         const tableData = []
@@ -90,6 +93,7 @@ const Booking = () => {
             setListBookings(data)
             if(stale) {
                 setStale(false)
+
             }
         }
 
@@ -100,11 +104,13 @@ const Booking = () => {
         <BookingContext.Provider value={setStale}>
             <div className='relative'>
                 <ul className='flex absolute left-0 top-1'>
-                    {['Tất cả', 'Đang chờ', 'Đã thanh toán', 'Đã hủy', 'Đền bù'].map((label, index) => {
+                    {['Tất cả', 'Đang chờ', 'Đã thanh toán', 'Đã hủy'].map((label, index) => {
                         return <li key={index} className={`mx-2 font-bold cursor-pointer border-neutral-950  ${tab == index ? 'border-b-2 text-neutral-950' : 'text-neutral-500'}`} onClick={() => setTab(index)}>{label}</li>
                     })}
                 </ul>
                 <Table columns={columns} data={getTableData} />
+                <button className="bg-blue-500 text-white rounded-md px-4 py-2 mt-4" onClick={() => setIsOpenCreateForm(true)}>Thêm mới</button>
+                <CreateBooking open={isOpenCreateForm} onClose={() => setIsOpenCreateForm(false)} />
             </div>
         </BookingContext.Provider>
     )

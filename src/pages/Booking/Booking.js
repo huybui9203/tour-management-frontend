@@ -51,7 +51,7 @@ function Booking() {
             </div>
 
             <div className="mt-20">
-                    <div className="flex items-center p-3 bg-gray-200 rounded-lg gap-3" hidden={!user}>
+                    {/* <div className="flex items-center p-3 bg-gray-200 rounded-lg gap-3" hidden={!user}>
                         <FaCircleUser size={30} />
                         <p className="text-blue-600 text-sm md:text-base leading-6">
                             <Link to={"/login"} className="font-bold text-blue-800 underline">
@@ -59,7 +59,7 @@ function Booking() {
                             </Link>{" "}
                             để nhận ưu đãi, tích điểm và quản lý đơn hàng dễ dàng hơn!
                         </p>
-                    </div>
+                    </div> */}
                
                 <h3 className="text-sm font-bold mt-4">THÔNG TIN LIÊN LẠC</h3>
 

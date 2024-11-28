@@ -7,17 +7,18 @@ import { useNavigate } from "react-router-dom";
 import formatPrice from "../../utils/formatPrice";
 import formatDate from "../../utils/formatDate";
 
-const BookingPanel = ({ tour, tourdayID }) => {
+const BookingPanel = ({ tour, dayId }) => {
     const navigate = useNavigate();
-    console.log(tour);
-    
+    const date = tour.date?.find(item => item.id === dayId)
+    const priceAfterPromo = Math.floor(tour?.price * (100 - date?.promo)/ 100)
+
     return (
         <div className="w-full lg:max-w-[350px] mx-auto md:max-w-none flex flex-col sticky right-0 top-20 self-start ">
             <div className="animate-slideInUp shadow-xl hover:shadow-2xl transition-shadow duration-300 p-6 rounded-lg">
                 <div className="mb-4">
                     <h4 className="text-lg font-semibold">Giá:</h4>
                     <p className="sm:text-3xl text-xl  font-bold text-red-600">
-                        {tour.price && formatPrice(tour.price)} đ <span className="text-sm">/ Khách</span>
+                        {tour.price ? priceAfterPromo ? formatPrice(priceAfterPromo) : formatPrice(tour.price) : ''} đ <span className="text-sm">/ Khách</span>
                     </p>
                 </div>
 
@@ -25,7 +26,7 @@ const BookingPanel = ({ tour, tourdayID }) => {
                     <div className="flex items-center sm:text-base text-sm ">
                         <IoTicketOutline className="w-5 h-5 mr-2" />
                         <p>
-                            Mã tour: <span className="font-bold">NDCTH804-003-210924TAU-H</span>
+                            Mã tour: <span className="font-bold">#{tour.id}</span>
                         </p>
                     </div>
 
@@ -36,13 +37,12 @@ const BookingPanel = ({ tour, tourdayID }) => {
                         </p>
                     </div>
 
-                    <div className="flex items-center sm:text-base text-sm ">
+                    {date && <div className="flex items-center sm:text-base text-sm ">
                         <LuCalendarDays className="w-5 h-5 mr-2" />
                         <p>
-                            Ngày khởi hành:{" "}
-                            <span className="font-bold">{tour.date.length > 0 && formatDate(tour.date[0].start_date)}</span>
+                            Ngày khởi hành: <span className="font-bold">{date && formatDate(date.start_date)}</span>
                         </p>
-                    </div>
+                    </div>}
 
                     <div className="flex items-center sm:text-base text-sm ">
                         <FaRegClock className="w-5 h-5 mr-2" />
@@ -51,12 +51,12 @@ const BookingPanel = ({ tour, tourdayID }) => {
                         </p>
                     </div>
 
-                    <div className="flex items-center sm:text-base text-sm ">
+                    {date && <div className="flex items-center sm:text-base text-sm ">
                         <FiUsers className="w-5 h-5 mr-2" />
                         <p>
-                            Số chỗ còn: <span className="font-bold">{tour.number_of_guests} chỗ</span>
+                            Số chỗ còn: <span className="font-bold">{date?.remain_seats} chỗ</span>
                         </p>
-                    </div>
+                    </div>}
                 </div>
 
                 <div className="flex space-x-4 mt-6">
@@ -67,17 +67,15 @@ const BookingPanel = ({ tour, tourdayID }) => {
                         >
                             Ngày khác
                         </button> */}
-                    <button
-                        onClick={() => {
-                            if (!tourdayID) alert("Vui long chon mot ngay ");
-                            else navigate(`/booking/${tour.id}/${tourdayID}`);
-                        }}
+                    {date ? <button
+                        onClick={() => navigate(`/booking/${tour.id}?d=${date?.id}`)}
                         className="bg-red-500  sm:text-base text-sm text-white sm:rounded-lg rounded-md hover:bg-red-600  px-2 py-1 sm:px-4 sm:py-2"
                         type="button"
                         aria-label="Đặt tour"
+                        disabled={!date}
                     >
                         Đặt tour
-                    </button>
+                    </button> : <p className="italic text-md">Vui lòng chọn ngày khởi hành</p>}
                 </div>
             </div>
         </div>

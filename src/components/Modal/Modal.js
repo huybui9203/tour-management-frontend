@@ -25,12 +25,12 @@ const Modal = ({ children, open, onClose, size }) => {
           tabIndex="-1"
           className="cursor-default fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
         >
-          <div className={`relative p-4 w-full ${modalClass} max-w-  max-h-full`}>
+          <div className={`relative p-4 w-full ${modalClass} max-h-full`}>
             <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 overflow-hidden">
               <button
                 type="button"
                 onClick={onClose}
-                className="absolute right-0 top-0 text-red-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-red-400 dark:hover:text-white"
+                className="mr-4 absolute right-0 top-0 text-red-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-red-400 dark:hover:text-white"
               >
                 <svg
                   className="w-3 h-3"

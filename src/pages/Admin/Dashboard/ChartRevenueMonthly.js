@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Bar } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { CategoryScale } from "chart.js";
+import formatPrice from "../../../utils/formatPrice";
 Chart.register(CategoryScale);
 
 const ChartRevenueMonthly = ({ month, year }) => {
@@ -72,7 +73,7 @@ const ChartRevenueMonthly = ({ month, year }) => {
         </div>
         <div className="mx-2">
           <h1>Tổng doanh thu</h1>
-          <p>{statistics.totalAmount}</p>
+          <p>{formatPrice(statistics.totalAmount)} VNĐ</p>
         </div>
       </div>
       <div className="min-h-full">

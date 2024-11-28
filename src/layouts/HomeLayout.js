@@ -14,9 +14,9 @@ const HomeLayout = () => {
             <div className="main flex flex-col items-center mt-[68px]">
                 <div className="relative">
                     <img src={banner} alt="banner" />
-                    <div className=" sm:absolute bottom-16 left-2/4 sm:translate-x-[-50%] translate-x-[0]  sm:w-4/5 xl:w-auto w-full">
+                    {/* <div className=" sm:absolute bottom-16 left-2/4 sm:translate-x-[-50%] translate-x-[0]  sm:w-4/5 xl:w-[500px] w-full">
                         <SearchBar />
-                    </div>
+                    </div> */}
                 </div>
                 <main className="w-[1156px] max-w-full max-xl:px-16 max-md:px-8 max-sm:px-2">
                     <Outlet />

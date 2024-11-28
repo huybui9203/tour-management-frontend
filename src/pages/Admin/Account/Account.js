@@ -49,7 +49,7 @@ const Account = () => {
         const tableData = [];
         listAccounts.map((item) => {
             if (item.role.ele_id == tab || tab == 0) {
-              if(user.username == item.username) {
+              if(user?.username == item.username) {
                 return
               }
                 const record = {
@@ -89,7 +89,7 @@ const Account = () => {
         <AccountContext.Provider value={[setStale, getTableData]}>
             <div className="relative">
                 <ul className="flex absolute left-0 top-1">
-                    {["Tất cả", "Amin", "Khách hàng"].map((label, index) => {
+                    {["Tất cả", "Admin", "Khách hàng"].map((label, index) => {
                         return (
                             <li
                                 key={index}

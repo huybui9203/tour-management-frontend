@@ -6,6 +6,7 @@ import { PAGES, ROLES } from "../../utils/constants";
 import { AuthContext } from "../../context/Auth";
 import { useContext } from "react";
 
+import avt from '../../assets/images/user.webp'
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profile, setProfile] = useState(null);
@@ -90,7 +91,7 @@ const Header = () => {
                   >
                     Booking
                   </NavLink>
-                  {user && user.role == ROLES.S_ADMIN && (
+                  {user && user?.role == ROLES.S_ADMIN && (
                     <NavLink
                       to="/admin/accounts"
                       onClick={() => setPage(PAGES.ACCOUNT)}
@@ -117,14 +118,14 @@ const Header = () => {
                 <div className="relative ml-3">
                   <button
                     type="button"
-                    className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                    className="relative flex max-w-xs items-center rounded-full text-sm"
                     onClick={toggleMenu}
                   >
                     <span className="sr-only">Open user menu</span>
                     <img
-                      className="h-8 w-8 rounded-full"
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      alt=""
+                      className="h-6 w-6 rounded-full bg-white"
+                      src={avt}
+                      alt='avt-admin'
                     />
                   </button>
                   {isMenuOpen && (
