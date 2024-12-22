@@ -2,7 +2,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer/Footer";
 import Header from "../components/Header/Header";
 import AuthGuard from "../components/Guard/AuthGuard";
-import banner from "../assets/images/bgtravel.jpg";
+import banner from "../assets/images/banner_stolen.jpg";
 import SearchBar from "../components/Search_Bar/Search";
 import Toast from "../components/Toast/Toast";
 

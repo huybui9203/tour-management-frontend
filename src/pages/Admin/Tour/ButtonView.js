@@ -247,7 +247,7 @@ const ButtonView = ({ id, label }) => {
               </ul>
 
               <div>
-                <label className="font-bold">Ngày thứ: </label>
+                <label className="font-bold">Ngày thứ <span className="text-red-500">*</span></label>
                 <input
                   type="number"
                   name=""
@@ -261,7 +261,7 @@ const ButtonView = ({ id, label }) => {
                 />
               </div>
               <div>
-                <label className="font-bold">Tên</label>
+                <label className="font-bold">Tên <span className="text-red-500">*</span></label>
                 <input
                   type="text"
                   name=""
@@ -276,7 +276,7 @@ const ButtonView = ({ id, label }) => {
               </div>
 
               <div>
-                <label className="font-bold">Mô tả</label>
+                <label className="font-bold">Mô tả <span className="text-red-500">*</span></label>
                 <textarea
                   className="w-full min-h-20 outline-0 block rounded-md border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600"
                   name=""
@@ -293,7 +293,7 @@ const ButtonView = ({ id, label }) => {
               <div className="flex items-center">
                 <button
                   disabled={!schedule.name || !schedule.description}
-                  className="bg-blue-500 text-white rounded-md px-2 py-1 mr-2"
+                  className="bg-blue-500 text-white rounded-md px-2 py-1 mr-2 disabled:opacity-50"
                   onClick={async () => {
                     try {
                       const existDays = tourData?.schedules?.map((item) =>

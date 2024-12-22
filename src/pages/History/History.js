@@ -70,11 +70,18 @@ function History() {
   const { user } = useContext(AuthContext);
 
   const fetchData = async () => {
-    const res = await axios.get(
-      `${process.env.REACT_APP_URL}/order/get-history`,
-      { withCredentials: true }
-    );
-    setHistories(res.data.list);
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_URL}/order/get-history`,
+        { withCredentials: true }
+      );
+      setHistories(res.data.list);
+    } catch (error) {
+      if(error?.response?.status === 400) {
+        return
+      }
+      alert('Đã xảy ra lỗi')
+    }
   };
   console.log(histories);
   useEffect(() => {

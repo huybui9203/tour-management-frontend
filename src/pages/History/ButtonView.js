@@ -16,7 +16,7 @@ const ButtonView = ({ order, label }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      if (!order?.pay_date) {
+      if (!order?.payment?.bank_code) {
         const res = await axios.delete(
           process.env.REACT_APP_URL + "/order/" + order?.id + "/cancel",
           { withCredentials: true }
@@ -179,12 +179,12 @@ const ButtonView = ({ order, label }) => {
                 <p className="text-base text-gray-600">
                   Phương thức thanh toán:
                   <span className="ml-1 font-semibold text-gray-900">
-                    {order?.payment?.payment_type}
+                    {order?.payment?.payment_type || 'Tiền mặt' }
                   </span>
                 </p>
               )}
 
-              {order?.pay_date && (
+              {order?.payment?.bank_code && (
                 <p className="text-base text-gray-600">
                   Ngân hàng:
                   <span className="ml-1 font-semibold text-gray-900">
@@ -207,7 +207,7 @@ const ButtonView = ({ order, label }) => {
                 )}
               </div>
               <DeleteDialog
-                msg={"Xác nhận xóa?"}
+                msg={"Xác nhận hủy?"}
                 open={isOpenForm}
                 onClose={() => setOpenForm(false)}
                 onConfirm={handleConfirmDelete}

@@ -18,7 +18,7 @@ const LabelBookingStatus = ({label, statusCode}) => {
     }
 
     return (
-        <div className={`rounded-xl min-w-24 py-1 text-center text-sm ${bgAndColor()}`}>{label}</div>
+        <div className={`rounded-md px-1 min-w-24 py-1 text-center text-sm ${bgAndColor()}`}>{label}</div>
     )
 }
 export default LabelBookingStatus

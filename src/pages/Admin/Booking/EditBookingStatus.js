@@ -47,7 +47,7 @@ const EditBookingStatus = ({open, onClose, orderId}) => {
                     <option value={ORDER_STATUS_CODE.PENDING}>Đang chờ xử lý</option>
                     <option value={ORDER_STATUS_CODE.SUCCESSFUL}>Đã thanh toán</option>
                     <option value={ORDER_STATUS_CODE.CANCELED}>Đã hủy</option>
-                    <option value={ORDER_STATUS_CODE.REFUND}>Đền bù</option>
+                    {/* <option value={ORDER_STATUS_CODE.REFUND}>Đền bù</option> */}
                 </select>
 
                 <div className="flex justify-end space-x-3">

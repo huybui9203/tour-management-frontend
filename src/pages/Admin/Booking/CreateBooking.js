@@ -116,7 +116,7 @@ const CreateBooking = ({ open, onClose, id }) => {
         ) : (
           <h1 className="font-bold text-lg">Thêm mới Booking</h1>
         )}
-        <p>Nhập mã tour:</p>
+        <p>Nhập mã tour <span className="text-red-500">*</span></p>
         <div className="flex items-center mb-1">
           <input
             type="number"
@@ -177,7 +177,7 @@ const CreateBooking = ({ open, onClose, id }) => {
             );
           })}
         </ul>
-        <label htmlFor="">Số lượng phòng:</label>
+        <label htmlFor="">Số lượng phòng <span className="text-red-500">*</span></label>
         <input
           type="number"
           // placeholder="sđt"
@@ -188,7 +188,7 @@ const CreateBooking = ({ open, onClose, id }) => {
         <p>Nhập thông tin khách hàng</p>
         <div className="flex items-center">
           <div className="w-full mr-2">
-            <label className="mt-2 block">Tên:</label>
+            <label className="mt-2 block">Tên <span className="text-red-500">*</span></label>
             <input
               type="text"
               // placeholder="tên"
@@ -201,7 +201,7 @@ const CreateBooking = ({ open, onClose, id }) => {
           </div>
 
           <div className="w-full">
-            <label className="mt-2 block">Địa chỉ:</label>
+            <label className="mt-2 block">Địa chỉ <span className="text-red-500">*</span></label>
             <input
               type="text"
               // placeholder="địa chỉ"
@@ -216,7 +216,7 @@ const CreateBooking = ({ open, onClose, id }) => {
 
         <div className="flex items-center">
           <div className="w-full mr-2">
-            <label className="mt-2 block">Email:</label>
+            <label className="mt-2 block">Email <span className="text-red-500">*</span></label>
             <input
               type="text"
               // placeholder="email"
@@ -229,7 +229,7 @@ const CreateBooking = ({ open, onClose, id }) => {
           </div>
 
           <div className="w-full">
-            <label className="mt-2 block">Số điện thoại:</label>
+            <label className="mt-2 block">Số điện thoại <span className="text-red-500">*</span></label>
             <input
               type="number"
               // placeholder="sđt"
@@ -245,7 +245,7 @@ const CreateBooking = ({ open, onClose, id }) => {
           <p className="mt-2">Nhập thông tin hành khách</p>
           <div className="flex items-center">
             <div className="w-full mr-2">
-              <label className="mt-2 block">Họ tên:</label>
+              <label className="mt-2 block">Họ tên <span className="text-red-500">*</span></label>
               <input
                 type="text"
                 // placeholder="tên"
@@ -257,7 +257,7 @@ const CreateBooking = ({ open, onClose, id }) => {
               />
             </div>
             <div className="w-full">
-              <label className="mt-2 block">Ngày sinh:</label>
+              <label className="mt-2 block">Ngày sinh <span className="text-red-500">*</span></label>
               <input
                 type="date"
                 // placeholder="date of birth"
@@ -272,7 +272,7 @@ const CreateBooking = ({ open, onClose, id }) => {
               />
             </div>
           </div>
-          <label className="block mt-2">Giới tính:</label>
+          <label className="block mt-2">Giới tính <span className="text-red-500">*</span></label>
           <div className="flex items-center">
             <div className="mt-1">
               <input

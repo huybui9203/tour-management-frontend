@@ -6,7 +6,7 @@ import { PAGES, ROLES } from "../../utils/constants";
 import { AuthContext } from "../../context/Auth";
 import { useContext } from "react";
 
-import avt from '../../assets/images/user.webp'
+import avt from "../../assets/images/user.webp";
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [profile, setProfile] = useState(null);
@@ -107,7 +107,7 @@ const Header = () => {
                 </div>
               </div>
             </div>
-            <div className="hidden md:block">
+            <div className="">
               <div className="ml-4 flex items-center md:ml-6">
                 <div className="text-gray-300 text-sm">
                   Xin chào{" "}
@@ -125,7 +125,7 @@ const Header = () => {
                     <img
                       className="h-6 w-6 rounded-full bg-white"
                       src={avt}
-                      alt='avt-admin'
+                      alt="avt-admin"
                     />
                   </button>
                   {isMenuOpen && (
@@ -138,11 +138,11 @@ const Header = () => {
                       tabIndex="-1"
                     >
                       <span
-                        onClick={async() => {
+                        onClick={async () => {
                           await axios.delete(
                             `${process.env.REACT_APP_URL}/admin/auth/logout`
                           );
-                          setUser(null)
+                          setUser(null);
                         }}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
                         role="menuitem"
@@ -158,8 +158,56 @@ const Header = () => {
           </div>
         </div>
         {/* Mobile menu */}
-        <div className="-mr-2 flex md:hidden">
+        <div className="flex block md:hidden">
           {/* Mobile button code here */}
+          <div className="flex items-baseline space-x-4 w-full">
+            <NavLink
+              to="/admin/dashboard"
+              onClick={() => setPage(PAGES.DASHBOARD)}
+              className={({ isActive }) =>
+                isActive
+                  ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              }
+            >
+              Dashboard
+            </NavLink>
+            <NavLink
+              to="/admin/tours"
+              onClick={() => setPage(PAGES.TOUR)}
+              className={({ isActive }) =>
+                isActive
+                  ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              }
+            >
+              Tour
+            </NavLink>
+            <NavLink
+              to="/admin/bookings"
+              onClick={() => setPage(PAGES.BOOKING)}
+              className={({ isActive }) =>
+                isActive
+                  ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                  : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+              }
+            >
+              Booking
+            </NavLink>
+            {user && user?.role == ROLES.S_ADMIN && (
+              <NavLink
+                to="/admin/accounts"
+                onClick={() => setPage(PAGES.ACCOUNT)}
+                className={({ isActive }) =>
+                  isActive
+                    ? "rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white"
+                    : "rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                }
+              >
+                Account
+              </NavLink>
+            )}
+          </div>
         </div>
       </nav>
       <header className="bg-white shadow">

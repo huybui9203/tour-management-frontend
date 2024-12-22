@@ -239,7 +239,7 @@ function FormBooking({ title }) {
 
           {/* Address */}
           <div className="flex flex-col gap-2">
-            <label className="font-bold">Địa chỉ</label>
+            <label className="font-bold">Địa chỉ <span className="text-red-600">*</span></label>
             <input
               type="text"
               id="address"

@@ -1,6 +1,6 @@
 import React from "react";
 import SearchBar from "../Search_Bar/Search";
-import banner from "../../assets/images/bgtravel.jpg";
+import banner from "../../assets/images/banner.webp";
 function Banner() {
     return (
         <div className="relative w-full">

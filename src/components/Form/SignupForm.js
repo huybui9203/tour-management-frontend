@@ -65,6 +65,11 @@ const SignupForm = () => {
             }
             navigate("/login");
         } catch (error) {
+            if(error?.response?.status === 409) {
+                alert('Email hoặc username đã tồn tại')
+            } else {
+                alert('Đã xảy ra lỗi')
+            }
             console.log(error);
         }
     };
@@ -171,9 +176,9 @@ const SignupForm = () => {
                                     </form>
                                 </div>
                                 <div className="text-center py-4 border-t border-gray-400 relative my-2 mx-4">
-                                    <Suspense fallback={<div>FB</div>}>
+                                    {/* <Suspense fallback={<div>FB</div>}>
                                         <FacebookAuth />
-                                    </Suspense>
+                                    </Suspense> */}
                                     <Suspense fallback={<div>GG</div>}>
                                         <GoogleAuth />
                                     </Suspense>

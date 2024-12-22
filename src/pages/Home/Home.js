@@ -84,8 +84,8 @@ const Home = () => {
                 </div>
             </div> */}
             <div>
-                <h1 className="text-center font-bold text-2xl mt-8 mb-4">Tour mới nhất</h1>
-                <div className="grid grid-cols-3 gap-4">
+                <h1 className="relative text-left font-bold text-3xl mt-8 mb-4 after:content-[''] after:absolute after:bg-blue-600 after:bottom-[-5px] after:left-0 after:w-[100px] after:h-[4px]" style={{color: '#0b55d7'}}>Danh sách tour mới nhất</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                     {listNewTours.map(tour => {
                         return <TourItemH vertical tour={tour}/>
                     })}
@@ -93,8 +93,8 @@ const Home = () => {
             </div>
 
             <div>
-                <h1 className="text-center font-bold text-xl my-8">Đang giảm giá</h1>
-                <div className="grid grid-cols-3 gap-4">
+                <h1 className="relative text-left font-bold text-3xl my-8 after:content-[''] after:absolute after:bg-blue-600 after:bottom-[-5px] after:left-0 after:w-[100px] after:h-[4px]" style={{color: '#0b55d7'}}>Đang khuyến mại</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
                 {listDiscountTours.map(tour => {
                         return <TourItemH vertical tour={tour} />
                     })}

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import MainLayout from "./layouts/MainLayout";
 import Home from "./pages/Home/Home";
+import Favorite from "./pages/Favorite/Favorite";
 import Tour from "./pages/Tour/Tour";
 import NotFound from "./pages/NotFound/NotFound";
 import Login from "./pages/Login/Login";
@@ -42,6 +43,14 @@ function App() {
                         element={
                             <AuthGuard>
                                 <Booking />
+                            </AuthGuard>
+                        }
+                    />
+                    <Route
+                        path="/favorite"
+                        element={
+                            <AuthGuard>
+                                <Favorite />
                             </AuthGuard>
                         }
                     />

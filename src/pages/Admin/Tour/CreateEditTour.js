@@ -76,7 +76,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
       !formData.price ||
       isNaN(formData.price)
     ) {
-      alert("Một số thông tin yêu cầu nhập số nhưng bạn đã nhập chuỗi");
+      alert("Một số thông tin yêu cầu nhập số nhưng bạn đã nhập chuỗi, vui lòng nhập đúng định dạng số");
       return;
     }
 
@@ -178,7 +178,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
           <h1 className="font-bold text-lg mb-4">Thêm mới Tour</h1>
         )}
         <div>
-          <label>Tên:</label>
+          <label>Tên <span className="text-red-500">*</span></label>
           <input
             type="text"
             placeholder="Name"
@@ -192,7 +192,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
 
         <div className="flex space-x-2">
           <div className="w-full">
-            <label>Điểm khởi hành:</label>
+            <label>Điểm khởi hành <span className="text-red-500">*</span></label>
             <input
               type="text"
               placeholder="Điểm khởi hành"
@@ -207,7 +207,7 @@ const CreateEditTour = ({ open, onClose, id }) => {
             />
           </div>
           <div className="w-full">
-            <label>Điểm đến:</label>
+            <label>Điểm đến <span className="text-red-500">*</span></label>
             <input
               type="text"
               placeholder="Điểm đến"
@@ -222,33 +222,37 @@ const CreateEditTour = ({ open, onClose, id }) => {
             />
           </div>
         </div>
-
+      
+        <label>Loại phương tiện: <span className="text-red-500">*</span></label>
         <select
+          value={formData.veh}
           onChange={(e) =>
             setFormData((prev) => ({ ...prev, veh: e.target.value }))
           }
           className="block w-full rounded-md my-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
         >
-          <option value={VEH.NONE}>--Loại phương tiện--</option>
+          <option value={VEH.NONE}>--Chọn phương tiện--</option>
           <option value={VEH.PLANE}>Máy bay</option>
           <option value={VEH.BUS}>Xe ô tô</option>
         </select>
 
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 items-center">
           <div className="w-full">
-            <label>Số ngày:</label>{" "}
+            <label>Số ngày <span className="text-red-500">*</span></label>{" "}
             <input
-              type="text"
+              type="number"
               placeholder="Số ngày"
               value={formData.countDay}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, countDay: e.target.value }))
-              }
+        
+              onChange={(e) => {
+                const value = e.target.value;
+                setFormData((prev) => ({ ...prev, countDay: value, coutNights: value - 1 }));
+              }}
               className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
             />
           </div>
           <div className="w-full">
-            <label>Số đêm:</label>
+            {/* <label>Số đêm:</label>
             <input
               type="text"
               placeholder="Số đêm"
@@ -257,14 +261,19 @@ const CreateEditTour = ({ open, onClose, id }) => {
                 setFormData((prev) => ({ ...prev, coutNights: e.target.value }))
               }
               className="block w-full rounded-md mb-2 border-0 py-1 px-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
+            /> */}
+
+            <p>
+              {formData.countDay} Ngày -
+              {formData.countDay && formData.countDay - 1} Đêm
+            </p>
           </div>
         </div>
 
         <div>
-          <label>Số người tối đa:</label>
+          <label>Số người tối đa <span className="text-red-500">*</span></label>
           <input
-            type="text"
+            type="number"
             placeholder="Số người tối đa"
             value={formData.countGuess}
             onChange={(e) =>
@@ -275,9 +284,9 @@ const CreateEditTour = ({ open, onClose, id }) => {
         </div>
 
         <div className="">
-          <label>Giá:</label>
+          <label>Giá <span className="text-red-500">*</span></label>
           <input
-            type="text"
+            type="number"
             placeholder="Giá"
             value={formData.price}
             onChange={(e) =>

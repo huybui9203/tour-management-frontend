@@ -157,9 +157,9 @@ const Login = () => {
                                     </form>
                                 </div>
                                 <div className="text-center py-4 border-t border-gray-400 relative my-2 mx-4">
-                                    <Suspense fallback={<div>FB</div>}>
+                                    {/* <Suspense fallback={<div>FB</div>}>
                                         <FacebookAuth />
-                                    </Suspense>
+                                    </Suspense> */}
                                     <Suspense fallback={<div>GG</div>}>
                                         <GoogleAuth />
                                     </Suspense>

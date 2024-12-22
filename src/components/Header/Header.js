@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import styles from "./Header.module.css";
 import logo from "../../assets/images/logo-primary.png";
 import { AuthContext } from "../../context/Auth";
@@ -9,15 +9,22 @@ import axios from "axios";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const navigate = useNavigate();
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
   const { user, logoutUser } = useContext(AuthContext);
   const handleLogout = async () => {
-    const res = await axios.get(`${process.env.REACT_APP_URL}/auth/logout`);
-    if (res.status === 200) {
-      logoutUser();
+    try {
+      const res = await axios.get(`${process.env.REACT_APP_URL}/auth/logout`);
+      if (res.status === 200) {
+        logoutUser();
+        navigate("/");
+      }
+    } catch (error) {
+      alert('Đã xảy ra lỗi')
     }
   };
 
@@ -91,6 +98,14 @@ const Header = () => {
               >
                 Booking
               </NavLink>
+              <NavLink
+                to={"/favorite"}
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : styles.navLink
+                }
+              >
+                Favorite
+              </NavLink>
               <div className="group relative">
                 <div className="flex items-center">
                   <img
@@ -111,14 +126,25 @@ const Header = () => {
               </div>
             </>
           ) : (
-            <NavLink
-              to={"/login"}
-              className={({ isActive }) =>
-                isActive ? styles.activeLink : styles.navLink
-              }
-            >
-              Đăng nhập
-            </NavLink>
+            <>
+              <NavLink
+                to={"/login"}
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : styles.navLink
+                }
+              >
+                Đăng nhập
+              </NavLink>
+
+              <NavLink
+                to={"/register"}
+                className={({ isActive }) =>
+                  isActive ? styles.activeLink : styles.navLink
+                }
+              >
+                Đăng ký
+              </NavLink>
+            </>
           )}
         </div>
       </div>

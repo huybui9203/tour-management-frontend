@@ -88,7 +88,7 @@ const CreateMoreStartDate = ({ open, onClose, id }) => {
         <div className="flex flex-col space-y-4 mt-2">
           <div className="flex flex-col">
             <label className="text-gray-700 font-medium mb-2">
-              Chọn ngày khởi hành
+              Chọn ngày khởi hành <span className="text-red-500">*</span>
             </label>
             <input
               required
@@ -102,7 +102,7 @@ const CreateMoreStartDate = ({ open, onClose, id }) => {
           </div>
           <div className="flex flex-col">
             <label className="text-gray-700 font-medium mb-2">
-              Chọn ngày kết thúc
+              Chọn ngày kết thúc <span className="text-red-500">*</span>
             </label>
             <input
               required

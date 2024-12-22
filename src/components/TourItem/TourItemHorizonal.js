@@ -141,20 +141,20 @@ const unLikeTour = async () => {
               </div>
               <div className="md:w-1/2 flex items-center mt-1 md:mt-2">
                 <PiAirplaneTakeoffLight className="text-xl mr-1" />
-                <span className="lg:text-base md:text-sm">Phương tiện:</span>
-                <span className="ml-1 lg:text-base md:text-sm">
-                  {tour?.list_veh?.ele_name}
+                <span className="lg:text-base md:text-sm shrink-0">Phương tiện:</span>
+                <span className="ml-1 lg:text-base md:text-sm shrink-0">
+                  {tour?.veh?.ele_name}
                 </span>
               </div>
             </div>
             <div className="flex items-center">
-              <div className="md:flex items-center mt-2 md:mt-1">
+              <div className="flex md:flex items-center mt-2 md:mt-1">
                 <LuCalendarDays className="text-xl mr-1" />
-                <span className="lg:text-base md:text-sm hidden md:block shrink-0">
+                <span className="lg:text-base md:text-sm md:block shrink-0">
                   Ngày khởi hành:{" "}
                 </span>
               </div>
-              <div className="relative w-5/6 md:w-2/3 md:mx-auto mt-2">
+              <div className="relative w-5/6 ml-auto md:w-2/3 md:mx-auto mt-2">
                 <div className="relative overflow-hidden w-3/4 mx-auto">
                   <div
                     ref={carouselInnerRef}

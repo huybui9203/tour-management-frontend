@@ -24,8 +24,10 @@ const CreateEditAccount = ({ open, onClose, id }) => {
   }, []);
 
   const handleCreate = async () => {
-    if (!formData.username || formData.username.length < 3) {
-      alert("username phải ít nhất 3 ký tự");
+    if (!formData.username || !/^[a-zA-Z0-9_]{3,16}$/.test(formData.username)) {
+      alert(
+        "username không chứa dấu, ký tự đặc biệt, độ dài từ 3 đến 16 ký tự"
+      );
       return;
     }
 
@@ -50,16 +52,22 @@ const CreateEditAccount = ({ open, onClose, id }) => {
       );
       reloadData(true);
       alert("Thêm mới thành công!");
+      setFormData({ username: "", email: "", password: "", role: 2 });
+      onClose();
     } catch (error) {
-      alert("Đã xảy ra lỗi!");
+      if (error?.response?.status === 409) {
+        alert("Email hoặc username đã tồn tại!");
+      } else {
+        alert("Đã xảy ra lỗi!");
+      }
     }
-    setFormData({ username: "", email: "", password: "", role: 2 });
-    onClose();
   };
 
   const handleUpdate = async () => {
-    if (!formData.username || formData.username.length < 3) {
-      alert("username phải ít nhất 3 ký tự");
+    if (!formData.username || !/^[a-zA-Z0-9_]{3,16}$/.test(formData.username)) {
+      alert(
+        "username không chứa dấu, ký tự đặc biệt, độ dài từ 3 đến 16 ký tự"
+      );
       return;
     }
 
@@ -68,21 +76,28 @@ const CreateEditAccount = ({ open, onClose, id }) => {
       return;
     }
 
-  
     try {
       await axios.put(
         process.env.REACT_APP_URL + "/admin/accounts/" + id,
-        { username: formData.username, role: formData.role, password: formData.password },
+        {
+          username: formData.username,
+          role: formData.role,
+          password: formData.password,
+        },
         {
           withCredentials: true,
         }
       );
       reloadData(true);
       alert("Sửa tài khoản thành công!");
+      onClose();
     } catch (error) {
-      alert("Đã xảy ra lỗi!");
+      if (error?.response?.status === 409) {
+        alert("Username đã tồn tại!");
+      } else {
+        alert("Đã xảy ra lỗi!");
+      }
     }
-    onClose();
   };
   return (
     <Modal open={open} onClose={onClose}>
@@ -92,7 +107,9 @@ const CreateEditAccount = ({ open, onClose, id }) => {
         ) : (
           <h1 className="font-bold text-lg">Thêm mới Account</h1>
         )}
-        <label className="mt-2 block">Username</label>
+        <label className="mt-2 block">
+          Username {!id && <span className="text-red-500">*</span>}
+        </label>
         <input
           type="text"
           placeholder="username"
@@ -104,7 +121,9 @@ const CreateEditAccount = ({ open, onClose, id }) => {
         />
         {!id && (
           <>
-            <label>Email</label>{" "}
+            <label>
+              Email <span className="text-red-500">*</span>
+            </label>{" "}
             <input
               type="text"
               placeholder="email"
@@ -118,21 +137,25 @@ const CreateEditAccount = ({ open, onClose, id }) => {
         )}
 
         {/* {!id && ( */}
-          <>
-            <label className="block mb-2">Password</label>{" "}
-            <input
-              type="text"
-              placeholder="password"
-              value={formData.password}
-              onChange={(e) =>
-                setFormData((prev) => ({ ...prev, password: e.target.value }))
-              }
-              className="block w-full rounded-md  border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-            />
-          </>
+        <>
+          <label className="block mb-2">
+            Password {!id && <span className="text-red-500">*</span>}
+          </label>{" "}
+          <input
+            type="text"
+            placeholder="password"
+            value={formData.password}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, password: e.target.value }))
+            }
+            className="block w-full rounded-md  border-0 py-1.5 pl-7 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          />
+        </>
         {/* )} */}
 
-        <label className="block mt-2">Quyền</label>
+        <label className="block mt-2">
+          Quyền <span className="text-red-500">*</span>
+        </label>
         <div className="mt-1">
           <input
             type="radio"
