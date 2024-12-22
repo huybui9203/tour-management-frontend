@@ -1,6 +1,6 @@
-import RegistrationForm from "../../components/Form/RegistrationForm"
-const Login = () => {
-    return <RegistrationForm />
+import Login from '../../components/FormLogin/Login'
+const LoginPage = () => {
+    return <Login />
 }
 
-export default Login 
+export default LoginPage 

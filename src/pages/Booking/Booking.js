@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaArrowLeftLong, FaCircleUser, FaRightLong } from "react-icons/fa6";
 import FormIcon from "./svg/FormIcon";
 import PayIcon from "./svg/PayIcon";
 import ConfirmIcon from "./svg/ConfirmIcon";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import FormBooking from "./components/FormBooking";
-import BookingSummary from "./components/BookingSummary";
+import { AuthContext } from "../../context/Auth";
 
 function Booking() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { id } = useParams();
+    const { user } = useContext(AuthContext);
     return (
         <div>
-            <div className="flex justify-start items-center gap-2">
+            <div className="flex justify-start items-center gap-2" onClick={() => navigate(-1)}>
                 <FaArrowLeftLong />
-                <h3 className="cursor-pointer py-4" onClick={() => navigate(-1)}>Quay lại</h3>
+                <h3 className="cursor-pointer py-4">Quay lại</h3>
             </div>
 
             <h1 className="font-bold text-center text-2xl uppercase text-blue-800 py-5">Đặt tour</h1>
@@ -48,10 +50,8 @@ function Booking() {
                 </div>
             </div>
 
-            <div className="md:grid md:grid-cols-5 md:gap-6 mt-20">
-                <div className="md:col-span-3">
-                    <h3 className="text-sm font-bold">THÔNG TIN LIÊN LẠC</h3>
-                    <div className="flex items-center p-3 bg-gray-200 rounded-lg mt-4 gap-3">
+            <div className="mt-20">
+                    {/* <div className="flex items-center p-3 bg-gray-200 rounded-lg gap-3" hidden={!user}>
                         <FaCircleUser size={30} />
                         <p className="text-blue-600 text-sm md:text-base leading-6">
                             <Link to={"/login"} className="font-bold text-blue-800 underline">
@@ -59,11 +59,11 @@ function Booking() {
                             </Link>{" "}
                             để nhận ưu đãi, tích điểm và quản lý đơn hàng dễ dàng hơn!
                         </p>
-                    </div>
+                    </div> */}
+               
+                <h3 className="text-sm font-bold mt-4">THÔNG TIN LIÊN LẠC</h3>
 
-                    <FormBooking />
-                </div>
-                <BookingSummary />
+                <FormBooking title={id} />
             </div>
         </div>
     );
